@@ -11,8 +11,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import AppRoute from 'containers/AppRoute';
 import PublicLayout from 'layouts/PublicLayout';
+import MainLayout from 'layouts/MainLayout';
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+import PrivatePage from 'containers/PrivatePage';
 import CallbackPage from 'containers/CallbackPage';
 import PopupCallback from 'containers/PopupCallback';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -30,7 +31,7 @@ export default function App() {
       </Helmet>
       <Switch>
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
-        <AppRoute path="/features" layout={PublicLayout} component={FeaturePage} />
+        <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />
         <Route path="/popupcallback" component={PopupCallback} />
