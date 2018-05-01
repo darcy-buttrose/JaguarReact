@@ -23,29 +23,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <div className="container" >
             <div className="row">
               <div className="twelve columns">
-                <div className="banner-heading"><FormattedMessage {...messages.header} /></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="second-row">
-          <div className="container" >
-            <div className="row">
-              <div className="four columns">
-                <ul>
-                  <li><FormattedMessage {...messages.listitem} /></li>
-                </ul>
-              </div>
-              <div className="four columns">
-                <ul>
-                  <li><FormattedMessage {...messages.listitem} /></li>
-                </ul>
-              </div>
-              <div className="four columns">
-                <ul>
-                  <li><FormattedMessage {...messages.listitem} /></li>
-                </ul>
+                <h1><FormattedMessage {...messages.header} /></h1>
               </div>
             </div>
           </div>
