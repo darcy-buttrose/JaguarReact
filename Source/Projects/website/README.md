@@ -1,1 +1,1 @@
-connect.web
+jaguar.web
