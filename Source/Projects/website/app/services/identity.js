@@ -23,8 +23,7 @@ const create = (baseURL = appConfig.clientAppSettings.apiScheme + appConfig.clie
     return headers;
   };
 
-  const registerUser = (user) => api.post('/account/register', user, { headers: getHeaders('token') });
-  // const getSomething = (token) => api.get('/lookup/getcountries', {}, { headers: getHeaders(token) });
+  const registerUser = (user) => api.post('/api/authorize/register', user, { headers: getHeaders('token') });
 
   return {
       // a list of the API functions

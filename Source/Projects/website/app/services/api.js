@@ -23,14 +23,13 @@ const create = (baseURL = appConfig.clientAppSettings.apiScheme + appConfig.clie
     return headers;
   };
 
-  const getCountries = () => api.get('/lookup/getcountries', {}, { headers: getHeaders('token') });
-  const getSchoolQuote = (quoteModel) => api.post('/registration/getschoolprice', quoteModel, { headers: getHeaders('token') });
-  // const getSomething = (token) => api.get('/lookup/getcountries', {}, { headers: getHeaders(token) });
+  const getSomething = () => api.get('/api/getSomething', {}, { headers: getHeaders('token') });
+  const sendSomething = (somethingModel) => api.post('/api/addSomething', somethingModel, { headers: getHeaders('token') });
 
   return {
       // a list of the API functions
-    getCountries,
-    getSchoolQuote,
+    getSomething,
+    sendSomething,
   };
 };
 

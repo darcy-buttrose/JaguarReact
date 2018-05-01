@@ -43,7 +43,6 @@ import '!file-loader?name=[name].[ext]!./images/mstile-144x144.png';
 import '!file-loader?name=[name].[ext]!./images/mstile-150x150.png';
 import '!file-loader?name=[name].[ext]!./images/mstile-310x150.png';
 import '!file-loader?name=[name].[ext]!./images/mstile-310x310.png';
-import '!file-loader?name=[name].[ext]!./manifest.json';
 // eslint-disable-line import/extensions
 /* eslint-enable import/no-webpack-loader-syntax */
 

@@ -3,7 +3,7 @@ import config from 'config/config.json';
 
 const appConfig = {
   authority: config.clientAppSettings.apiScheme + config.clientAppSettings.identityUrl,
-  client_id: 'connect_implicit',
+  client_id: 'jaguar_implicit',
   response_type: 'id_token token',
   scope: 'openid profile email',
   post_logout_redirect_uri: config.clientAppSettings.apiScheme + config.clientAppSettings.thisUrl,

@@ -17,7 +17,7 @@ export class AboutPage extends React.PureComponent { // eslint-disable-line reac
             <main>
               <Helmet>
                 <title>About</title>
-                <meta name="About" content="The easiest way to find your next teaching job overseas. Search our database of top international schools seeking qualified teachers." />
+                <meta name="About" content="." />
               </Helmet>
               <div>
                 <h1>About</h1>

@@ -1,5 +1,5 @@
 {
-    "ProjectSetting": "connect-website",
+    "ProjectSetting": "jaguar-website",
     "clientAppSettings": {
     "apiUrl": "REPLACE_WITH_HOSTIP:64510/api/",
     "identityUrl": "REPLACE_WITH_HOSTIP:22530/",
