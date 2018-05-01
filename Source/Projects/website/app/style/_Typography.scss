@@ -1,0 +1,92 @@
+@import 'Variables';
+/* Headers */
+%base-header {
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-align: left;
+}
+
+h1 {
+  @extend %base-header;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: $dark;
+}
+
+h2 {
+  @extend %base-header;
+  font-size: 2.8rem;
+  line-height: 1.21;
+  color: $dark;
+}
+
+h3 {
+  @extend %base-header;
+  font-size: 2.2rem;
+  line-height: 1.23;
+  color: $header-blue;
+}
+
+h4 {
+  @extend %base-header;
+  font-size: 1.6rem;
+  line-height: 1.19;
+  color: $header-blue;
+}
+
+a {
+  text-decoration: none;
+  & .textlink {
+    color: $header-blue;
+  }
+}
+
+.herowhite {
+  font-size: 2rem;
+  line-height: 1.4;
+  text-align: center;
+  color: $white !important;
+  > span {
+    color: $white !important;
+  }
+}
+
+.hero {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+
+p {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: $dark;
+  white-space: pre-line;
+
+  &.hero {
+    font-size: 2rem;
+    line-height: 1.4;
+  }
+
+  &.centered {
+    text-align: center !important;
+  }
+
+  a {
+    color: $header-blue;
+  }
+}
+
+.form-label {
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: left;
+  color: $header-blue;
+}

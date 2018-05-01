@@ -1,0 +1,100 @@
+@import 'Variables';
+
+.quote-heading {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.quote-loading {
+  height: 8rem;
+  text-align: center;
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.quote-box {
+  padding: 0;
+  border: solid 1px $light3;
+  display: flex;
+  flex-direction: column;
+  min-height: 59rem;
+
+  .quote-selection {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .quote-value-text {
+    color: $white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .quote-header {
+    flex: 2 0 0;
+    img {
+      height: 100%;
+      width: auto;
+      max-height: 4rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .quote-value {
+    background-color: $header-dark-blue;
+    flex: 2 0 0;
+  }
+
+  .quote-details {
+    padding: 1rem;
+    background-color: $light2;
+    flex: 5 0 0;
+
+    .quote-details-heading {
+      font-weight: 700;
+    }
+
+    .quote-subscription {
+      line-height: 1.0 !important;
+
+      >span {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+}
+
+.quote-confirmation-header{
+  margin-top: 2rem;
+}
+
+.quote-confirmation-box {
+  min-height: 16rem;
+  background-color: $light3;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+
+  .confirm-label {
+    display: inline-block;
+    width: 10rem;
+  }
+
+  .confirm-value {
+    margin-left: 3rem;
+    font-size: 2rem;
+  }
+}
+
+.quote-confirmation-entry {
+  text-align: center;
+}

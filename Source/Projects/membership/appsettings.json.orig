@@ -1,0 +1,15 @@
+﻿{
+
+    "ConnectionStrings": {
+        "DefaultConnection": "server=docker-provided-apiServerBaseAddress;userid=usmob;password=Pa55word;database=UsMembership;"
+    },
+
+    "Logging": {
+        "IncludeScopes": false,
+        "LogLevel": {
+            "Default": "Debug",
+            "System": "Information",
+            "Microsoft": "Information"
+        }
+    }
+}

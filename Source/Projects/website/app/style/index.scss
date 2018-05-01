@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
+@import 'skeleton/skeleton';
+@import 'hamburgers/hamburgers';
+@import 'Variables';
+@import 'Layout';
+@import 'Header';
+@import 'Navbar';
+@import 'Typography';
+@import 'Footer';
+@import 'Packages';
+@import 'Buttons';
+@import 'Forms';
+@import 'Banner';
+@import 'SchoolQuote';
+
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: $page-background;
+  position: relative;
+  & .fontLoaded {
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+#app {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+a {
+  text-decoration: none;
+  color: $header-blue;
+}
+
+.connect-container {
+  width: 85%;
+}
+
+.connect-hidden {
+  display : none;
+}
+
+.connect-hiddenMobileOnly {
+  display : block;
+}
+
+@media (max-width: 768px) {
+  .connect-hiddenMobileOnly {
+    display : none !important;
+  }
+}
+
+@media (min-width: 550px) {
+  .container {
+    width: 85%;
+  }
+}

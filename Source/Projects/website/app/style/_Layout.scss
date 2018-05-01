@@ -1,0 +1,92 @@
+@import 'Variables';
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.second-row {
+  min-height: 20rem;
+  padding-top: 1.2rem;
+}
+
+.mid-page-content {
+  background-color: $white;
+  min-height: 46rem;
+  margin-top: -6rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15rem;
+  z-index: 1;
+  width: 70vw;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+  .container {
+    width: 95%;
+  }
+}
+
+.push-down-one {
+  margin-top: 1rem;
+}
+
+.push-down-two {
+  margin-top: 2rem;
+}
+
+.push-down-three {
+  margin-top: 3rem;
+}
+
+.push-down-four {
+  margin-top: 4rem;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1500px) {
+  .mid-page-content {
+    width: 85vw;
+    .container {
+        .column, .columns {
+          //margin-left: 0;
+        }
+        .four.columns {
+          //width: 100%;
+      }
+      .eight.columns {
+        //width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .mid-page-content {
+    .container {
+        .column, .columns {
+          margin-left: 0;
+        }
+        .four.columns {
+          width: 100%;
+      }
+      .eight.columns {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .mid-page-content {
+    margin-top: -4rem;
+  }
+}
+
+@media (max-width: 590px) {
+  .mid-page-content {
+    margin-top: 0;
+    min-width: 280px;
+    width: 80vw;
+  }
+}

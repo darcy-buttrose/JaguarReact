@@ -1,0 +1,101 @@
+@import 'Variables';
+
+button {
+  height: 3.1rem;
+}
+
+%button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  color: $header-blue;
+  background-color: $white;
+}
+
+.button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  color: $header-blue;
+  background-color: $white;
+}
+
+.default-button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  color: $header-blue;
+  background-color: $white;
+  & :hover {
+    color: lighten($header-blue, 50%);
+  }
+}
+
+.quote-button {
+  @extend %button;
+  color: $white;
+  background-color: $header-blue;
+  width: 100%;
+  & :hover {
+    color: $light;
+  }
+}
+
+.quote-button-iss {
+  @extend %button;
+  color: $white;
+  background-color: $header-light;
+  width: 100%;
+  & :hover {
+    color: $light;
+  }
+}
+
+.signin-button {
+  @extend .default-button;
+}
+
+.signout-button {
+  @extend .default-button;
+  color: $white;
+  background-color: transparent;
+  border-color: $white;
+  border-width: medium;
+  & :hover {
+    color: lighten($header-blue, 50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .signin-button {
+    color: transparent;
+    font-size: 0;
+    border: 0;
+    background-color: transparent;
+    background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAACuCAMAAADuzSN+AAACNFBMVEX///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////93P+/CAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfiAwYKIiRjtRICAAAEC0lEQVR42u2dW08bMRCF/ZcLqKASCkQVJYBSoEBUrqUh4Z5wzWXnz1GpL0hs0l3v2J7x8XklEJ2PY6931js2JpS+bJ3cPAyy1/71YWPeIOnbA+Xrtha/+Rb9R9lWxO57VEzdKN1fUBn9is3+mMrqNSL3X8lKWST258laGWb43+tJu/0rqqpDzfZniUPI/37dISA2DTXarxOn9PlvE692lPl/JG5dAF388/UIOf3pvDsgRxqB+9dCgBxqoMB/5hIAPYv3/0pudSXc/w25Vku0/x1yrznUCVDDfYEX/4ILZc9+AFBHqP9t8qVPyANA7jQw8AhA4mpglQg7Al79C7wSnPoFQHXsAMgbBJfeAWyCB0BYBP4EAFAHD4CoCKyjAwjin17QAciJwFUgAGvgAZATAXQA58EALIIHQMrj0nAAKAGQoHZAAEvgAZCxayQkAEoAEoDgaqADuAwKYBV8BNApOoAROgBKABKABCABSAASgAQgAUgAEoAEABKAgBcoRkEBHIQHcBYUwEJ4AMupKJoAJADYALKA/kW8Ur6XHo8nAAlAIN3IANAED0DaJhcMgJieGvvgAUibpQPVBCS1HgUPQBgAojqsNcADECICwl6ebYIHwH8ExL09vQIeAN+Fob48AAY8AMZ0PPqX2YPfn3+pbfWgB4DPx4RrUgE46aX6UT0jV9ADwBcB0f7NJrh/9xPhd+kAzK1T/xo67fcd+v9tNOjJmf+O0aEHR/7bRovunfg/MXp04cC/riMWdtn9Lxpd+gy2/nG8Kh4YjeLrM35sdKoGE//mv0NlPja04Dhs5nJC2eFuXYT31vQtGwsO/v3vfzoOWx69LVCtPKpkf6PA5HoeyP1G0fF6zTr55X4wwLnFh2VmLLvrQV5zhLVJH274td8ou2Q94Cn9Tmva5PPkiZFN1falhPv7/D8xnPpL3roq/bS9cM8UO4Kmb722XBZT/D8odtn8qCmXtW6B7/VwRusMxw6mVh7EwTbHrYVr/8WP0Sh4ePZMsY8V71bk9kW6bpglfKntJ3sO/Zc8RoZrM3PJzSfuSqe9IM8xBywrKA5Z9U/uebf/V/tO/Nt2z62wncP6XtLF6QtVtkLanRBXpVmpuBJfVrbv3Q9pVSSvhf3j6l/G/TrNHU91b9wsV2LyPuwmibdJwFl+/WKpy/otYmv8vsS5nbqtEQDnbjrSKTb/Q6UAuuABYItAphZADzwATBHIFAO4Aw8ASwTGqgFcgweAIQId5QDq4AGoHIEaOgD1/ic9Z8UBUC0C++gAIvBfre9qDAAIfARUAhCF/ypjIA4A9hFYQQcwjATAKfgIsI8AOoCjaADMggfAdvtgPAAoAbDRLjqALCIAHfARYBcBdABz6ADaUQGoTfT5Bnvtm+kXJo+nAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-size: 3rem 3rem;
+    background-position: center;
+    padding-left: 2rem;
+    height: 5rem;
+    width: 5rem;
+    border: 0;
+    border-radius: 0;
+    border-left-color: $light;
+    border-left-style: groove;
+    border-left-width: 0.2rem;
+    border-right-color: $light;
+    border-right-style: groove;
+    border-right-width: 0.2rem;
+    //background-size: contain;
+    & :hover {
+      color: transparent !important;
+      border-color: $light !important;
+    }
+  }
+}

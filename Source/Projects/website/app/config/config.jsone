@@ -1,0 +1,10 @@
+{
+    "ProjectSetting": "connect-website",
+    "clientAppSettings": {
+    "apiUrl": "REPLACE_WITH_HOSTIP:64510/api/",
+    "identityUrl": "REPLACE_WITH_HOSTIP:22530/",
+    "thisUrl": "REPLACE_WITH_HOSTIP:3000/",
+    "apiScheme": "http://",
+    "trackMetrics": false
+    }
+}
