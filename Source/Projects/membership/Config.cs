@@ -68,7 +68,8 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                      "http://10.1.1.110:3000/callback"
+                      "http://10.1.1.110:3000/callback",
+                      "http://10.1.1.110:3000/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {
@@ -100,7 +101,8 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                    "http://10.1.1.110:3000/callback"
+                    "http://10.1.1.110:3000/callback",
+                    "http://10.1.1.110:3000/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {

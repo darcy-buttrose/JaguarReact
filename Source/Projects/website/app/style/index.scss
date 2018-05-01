@@ -1,17 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700');
 @import 'skeleton/skeleton';
-@import 'hamburgers/hamburgers';
 @import 'Variables';
 @import 'Layout';
 @import 'Header';
-@import 'Navbar';
 @import 'Typography';
 @import 'Footer';
-@import 'Packages';
 @import 'Buttons';
 @import 'Forms';
-@import 'Banner';
-@import 'SchoolQuote';
 
 
 body,
@@ -30,6 +25,27 @@ body {
 }
 
 #app {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+
+  > [data-reactroot] {
+    height: 70%;
+    width:100%;
+  }
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.connect-layout {
+  height: 100%;
+  width: 100%;
   min-height: 100%;
   min-width: 100%;
 }
@@ -42,10 +58,6 @@ img {
 a {
   text-decoration: none;
   color: $header-blue;
-}
-
-.connect-container {
-  width: 85%;
 }
 
 .connect-hidden {

@@ -88,8 +88,8 @@ function mapDispatchToProps(dispatch) {
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (user) => dispatch(loginSuccess(user)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
-    onSchoolRedirect: () => dispatch(push('/schools')),
-    onTeacherRedirect: () => dispatch(push('/teachers')),
+    onSchoolRedirect: () => dispatch(push('/')),
+    onTeacherRedirect: () => dispatch(push('/')),
     dispatch,
   };
 }
