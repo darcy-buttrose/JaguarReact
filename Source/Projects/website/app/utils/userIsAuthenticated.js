@@ -6,7 +6,7 @@ const userIsAuthenticated = connectedReduxRedirect({
   redirectPath: '/noauth',
    // If selector is true, wrapper will not redirect
    // For example let's check that state contains user data
-  authenticatedSelector: (state) => state.isAuthenticated === true,
+  authenticatedSelector: (state) => state.get('auth').get('isAuthenticated') === true,
   // A nice display name for this check
   wrapperDisplayName: 'UserIsAuthenticated',
 

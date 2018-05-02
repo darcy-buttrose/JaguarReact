@@ -26,8 +26,8 @@ export class AuthConnect extends React.PureComponent { // eslint-disable-line re
     mgr.events.addUserLoaded((loadedUser) => {
       if (loadedUser) {
         this.props.onLoginSuccess(loadedUser);
-        // examine token for School or Teacher here - then redirect based on value
-        this.props.onSchoolRedirect();
+        // examine token for User or Admin here - then redirect based on value
+        this.props.onUserRedirect();
       } else {
         this.props.onLoginFailure('login failed'); // replace with intl message
       }
@@ -46,8 +46,8 @@ AuthConnect.propTypes = {
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
-  onSchoolRedirect: PropTypes.func,
-  // onTeacherRedirect: PropTypes.func,
+  onUserRedirect: PropTypes.func,
+  // onAdminRedirect: PropTypes.func,
   auth: PropTypes.shape({
     user: PropTypes.shape({
       id_token: PropTypes.string,
@@ -68,7 +68,7 @@ AuthConnect.propTypes = {
         email_verified: PropTypes.bool,
         given_name: PropTypes.string,
         role: PropTypes.array,
-        scope: PropTypes.array,
+        scope: PropTypes.string,
       }),
     }),
     userName: PropTypes.string,
@@ -88,8 +88,8 @@ function mapDispatchToProps(dispatch) {
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (user) => dispatch(loginSuccess(user)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
-    onSchoolRedirect: () => dispatch(push('/')),
-    onTeacherRedirect: () => dispatch(push('/')),
+    onUserRedirect: () => dispatch(push('/private')),
+    onAdminRedirect: () => dispatch(push('/')),
     dispatch,
   };
 }
