@@ -68,7 +68,7 @@ AuthConnect.propTypes = {
         email_verified: PropTypes.bool,
         given_name: PropTypes.string,
         role: PropTypes.array,
-        scope: PropTypes.array,
+        scope: PropTypes.string,
       }),
     }),
     userName: PropTypes.string,
