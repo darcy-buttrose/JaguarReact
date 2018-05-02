@@ -17,9 +17,9 @@ $HOSTIP = Get-IpAddress
 
 # update configs with Host Machine IP
 (get-content "docker-compose-orig.yml") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content "docker-compose.yml"
-
-(get-content ".\membership\appsettings.json.orig") | foreach-object {$_ -replace "docker-provided-apiServerBaseAddress", $HOSTIP} | set-content ".\membership\appsettings.json"
-(get-content ".\membership\hosting.json.orig") | foreach-object {$_ -replace "docker-provided-apiServerBaseAddress", $HOSTIP} | set-content ".\membership\hosting.json"
-(get-content ".\membership\Config.orig") | foreach-object {$_ -replace "docker-provided-apiServerBaseAddress", $HOSTIP} | set-content ".\membership\Config.cs"
-(get-content ".\membership\Startup.orig") | foreach-object {$_ -replace "docker-provided-apiServerBaseAddress", $HOSTIP} | set-content ".\membership\Startup.cs"
+(get-content ".\membership\appsettings.json.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\appsettings.json"
+(get-content ".\membership\hosting.json.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\hosting.json"
+(get-content ".\membership\Config.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\Config.cs"
+(get-content ".\membership\Startup.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\Startup.cs"
+(get-content ".\website\app\config\config.jsone") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\config\config.json"
 write-output (docker-compose build)
