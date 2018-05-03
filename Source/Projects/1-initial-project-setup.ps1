@@ -1,14 +1,3 @@
-Set-Location website
-write-output (npm install)
-
-Set-Location ..
-
-Set-Location membership
-write-output (dotnet restore)
-write-output (dotnet build)
-
-Set-Location ..
-
 function Get-IpAddress {
     # Script to return current IPv4 addresses for Linux, MacOS, or Windows
     if ($IsLinux -or $IsOSX) {
@@ -33,3 +22,15 @@ $HOSTIP = Get-IpAddress
 (get-content ".\membership\Config.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\Config.cs"
 (get-content ".\membership\Startup.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\Startup.cs"
 (get-content ".\website\app\config\config.jsone") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\config\config.json"
+
+Set-Location website
+write-output (npm install)
+
+Set-Location ..
+
+Set-Location membership
+write-output (dotnet restore)
+write-output (dotnet build)
+
+Set-Location ..
+

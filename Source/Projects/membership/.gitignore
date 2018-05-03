@@ -5,3 +5,6 @@ obj/**
 
 appsettings.json
 hosting.json
+
+Config.cs
+Startup.cs
