@@ -9,10 +9,7 @@ function Get-IpAddress {
     elseif ($IsMacOS){
       $ipInfo = ifconfig | Select-String 'inet' | Select-String -Pattern '0.0.0.0' -NotMatch
       if($ipInfo) {
-        $ipInfo = [regex]::matches($ipInfo,"addr:\b(?:\d{1,3}\.){3}\d{1,3}\b") | ForEach-Object value
-        foreach ($ip in $ipInfo) {
-            $ip.Replace('addr:','')
-        }
+        $ipInfo = [regex]::matches($ipInfo,"\b(?:\d{1,3}\.){3}\d{1,3}\b") | ForEach-Object value
       }
     }else{
       $ipInfo = Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | ForEach-Object IPAddress
@@ -32,7 +29,7 @@ $HOSTIP = Get-IpAddress
 (get-content ".\membership\Startup.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\Startup.cs"
 (get-content ".\website\app\config\config.jsone") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\config\config.json"
 
-Set-Location website
-write-output (npm install)
+#Set-Location website
+#write-output (npm install)
 
-Set-Location ..
+#Set-Location ..

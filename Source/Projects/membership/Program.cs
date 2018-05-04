@@ -14,17 +14,10 @@ namespace Membership
         public static void Main(string[] args)
         {
             Console.Title = "Membership";
-            var seed = args.Contains("/seed");
-            if (seed)
-            {
-                args = args.Except(new[] { "/seed" }).ToArray();
-            }
+
             var host = BuildWebHost(args);
 
-            if (seed)
-            {
-                SeedData.EnsureSeedData(host.Services);
-            }
+            SeedData.EnsureSeedData(host.Services);
 
             host.Run();
         }

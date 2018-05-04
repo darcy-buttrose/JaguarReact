@@ -10,4 +10,5 @@ RUN ["dotnet", "build"]
 
 EXPOSE 22530/tcp
 
-CMD ["dotnet", "watch", "run", "--server.urls", "http://*:22530"]
+RUN chmod +x ./entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
