@@ -1,9 +1,18 @@
 function Get-IpAddress {
     # Script to return current IPv4 addresses for Linux, MacOS, or Windows
-    if ($IsLinux -or $IsOSX) {
+    if ($IsLinux) {
       $ipInfo = ip -4 a | Select-String 'inet' | Select-String -Pattern '0.0.0.0' -NotMatch
       if($ipInfo) {
         $ipInfo = [regex]::matches($ipInfo,"\b(?:\d{1,3}\.){3}\d{1,3}\b") | ForEach-Object value
+      }
+    }
+    elseif ($IsMacOS){
+      $ipInfo = ifconfig | Select-String 'inet' | Select-String -Pattern '0.0.0.0' -NotMatch
+      if($ipInfo) {
+        $ipInfo = [regex]::matches($ipInfo,"addr:\b(?:\d{1,3}\.){3}\d{1,3}\b") | ForEach-Object value
+        foreach ($ip in $ipInfo) {
+            $ip.Replace('addr:','')
+        }
       }
     }else{
       $ipInfo = Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | ForEach-Object IPAddress
@@ -33,4 +42,3 @@ write-output (dotnet restore)
 write-output (dotnet build)
 
 Set-Location ..
-
