@@ -114,7 +114,7 @@ namespace Membership
                 {
                     policy.WithOrigins(new string[]
                     {
-                      "http://10.0.75.1 10.1.2.11:3000"
+                      "http://10.1.1.23:3000"
                        })
                         .AllowAnyHeader()
                         .AllowAnyMethod();
