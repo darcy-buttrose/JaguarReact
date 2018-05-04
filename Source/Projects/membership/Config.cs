@@ -58,7 +58,7 @@ namespace Membership
                 {
                   ClientId = "jaguar_auth",
                   ClientName = "Jaguar Auth Membership",
-                  ClientUri = "http://10.1.1.110:3000",
+                  ClientUri = "http://10.0.75.1 10.1.2.11:3000",
                   ClientSecrets = new List<Secret> {
                     new Secret("sKokvgCOnjCe96j4G2TH062X5xEuimhYn".Sha256())
                   },
@@ -68,15 +68,16 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                      "http://10.1.1.110:3000/callback"
+                      "http://10.0.75.1 10.1.2.11:3000/callback",
+                      "http://10.0.75.1 10.1.2.11:3000/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {
-                    "http://10.1.1.110:3000"
+                    "http://10.0.75.1 10.1.2.11:3000"
                   },
                   AllowedCorsOrigins = new List<string>
                   {
-                    "http://10.1.1.110:3000"
+                    "http://10.0.75.1 10.1.2.11:3000"
                   },
 
                   AllowedScopes = new List<string>
@@ -92,7 +93,7 @@ namespace Membership
               {
                   ClientId = "jaguar_implicit",
                   ClientName = "Jaguar Implicit Membership Flow",
-                  ClientUri = "http://10.1.1.110:3000",
+                  ClientUri = "http://10.0.75.1 10.1.2.11:3000",
                   AllowedGrantTypes = GrantTypes.Implicit,
                   RequireConsent = true,
                   AllowRememberConsent = true,
@@ -100,15 +101,16 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                    "http://10.1.1.110:3000/callback"
+                    "http://10.0.75.1 10.1.2.11:3000/callback",
+                    "http://10.0.75.1 10.1.2.11:3000/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {
-                    "http://10.1.1.110:3000"
+                    "http://10.0.75.1 10.1.2.11:3000"
                   },
                   AllowedCorsOrigins = new List<string>
                   {
-                    "http://10.1.1.110:3000"
+                    "http://10.0.75.1 10.1.2.11:3000"
                   },
 
                   AllowedScopes = new List<string>

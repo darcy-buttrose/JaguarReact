@@ -26,8 +26,8 @@ export class AuthConnect extends React.PureComponent { // eslint-disable-line re
     mgr.events.addUserLoaded((loadedUser) => {
       if (loadedUser) {
         this.props.onLoginSuccess(loadedUser);
-        // examine token for School or Teacher here - then redirect based on value
-        this.props.onSchoolRedirect();
+        // examine token for User or Admin here - then redirect based on value
+        this.props.onUserRedirect();
       } else {
         this.props.onLoginFailure('login failed'); // replace with intl message
       }
@@ -46,37 +46,37 @@ AuthConnect.propTypes = {
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
-  onSchoolRedirect: PropTypes.func,
-  // onTeacherRedirect: PropTypes.func,
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id_token: PropTypes.string,
-      session_state: PropTypes.string,
-      access_token: PropTypes.string,
-      token_type: PropTypes.string,
-      scope: PropTypes.string,
-      expires_at: PropTypes.number,
-      profile: PropTypes.shape({
-        sid: PropTypes.string,
-        sub: PropTypes.string,
-        auth_time: PropTypes.number,
-        idp: PropTypes.string,
-        amr: PropTypes.array,
-        preferred_username: PropTypes.string,
-        name: PropTypes.string,
-        email: PropTypes.string,
-        email_verified: PropTypes.bool,
-        given_name: PropTypes.string,
-        role: PropTypes.array,
-        scope: PropTypes.array,
-      }),
-    }),
-    userName: PropTypes.string,
-    isAuthenticated: PropTypes.bool,
-    isAuthenticating: PropTypes.bool,
-    showError: PropTypes.bool,
-    errorMessage: PropTypes.string,
-  }),
+  onUserRedirect: PropTypes.func,
+  // onAdminRedirect: PropTypes.func,
+  // auth: PropTypes.shape({
+  //   user: PropTypes.shape({
+  //     id_token: PropTypes.string,
+  //     session_state: PropTypes.string,
+  //     access_token: PropTypes.string,
+  //     token_type: PropTypes.string,
+  //     scope: PropTypes.string,
+  //     expires_at: PropTypes.number,
+  //     profile: PropTypes.shape({
+  //       sid: PropTypes.string,
+  //       sub: PropTypes.string,
+  //       auth_time: PropTypes.number,
+  //       idp: PropTypes.string,
+  //       amr: PropTypes.array,
+  //       preferred_username: PropTypes.string,
+  //       name: PropTypes.string,
+  //       email: PropTypes.string,
+  //       email_verified: PropTypes.bool,
+  //       given_name: PropTypes.string,
+  //       role: PropTypes.array,
+  //       scope: PropTypes.string,
+  //     }),
+  //   }),
+  //   userName: PropTypes.string,
+  //   isAuthenticated: PropTypes.bool,
+  //   isAuthenticating: PropTypes.bool,
+  //   showError: PropTypes.bool,
+  //   errorMessage: PropTypes.string,
+  // }),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -88,8 +88,8 @@ function mapDispatchToProps(dispatch) {
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (user) => dispatch(loginSuccess(user)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
-    onSchoolRedirect: () => dispatch(push('/schools')),
-    onTeacherRedirect: () => dispatch(push('/teachers')),
+    onUserRedirect: () => dispatch(push('/private')),
+    onAdminRedirect: () => dispatch(push('/')),
     dispatch,
   };
 }

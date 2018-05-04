@@ -6,7 +6,7 @@ import Footer from 'components/Footer';
 
 function PublicLayout(props) {
   return (
-    <div>
+    <div className="connect-layout">
       <Header />
       {props.children}
       <Footer />

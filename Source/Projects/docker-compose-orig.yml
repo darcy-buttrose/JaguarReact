@@ -19,3 +19,10 @@ services:
      -  ASPNETCORE_ENVIRONMENT=Development
      -  Application_BaseURI=REPLACE_WITH_HOSTIP
      -  Application_STS_URL=http://0.0.0.0:22530
+  website:
+    build:
+      context: ./website
+    volumes:
+      - ./website:/usr/src/app
+    ports:
+     - "3000:3000"

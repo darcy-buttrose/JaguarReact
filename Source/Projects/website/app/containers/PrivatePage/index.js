@@ -8,7 +8,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import userIsAuthenticated from 'utils/userIsAuthenticated';
 
-export class Teacher extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class PrivatePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
@@ -17,11 +17,11 @@ export class Teacher extends React.PureComponent { // eslint-disable-line react/
           <div className="twelve columns">
             <main>
               <Helmet>
-                <title>Teacher</title>
-                <meta name="Teacher" content="The easiest way to find your next teaching job overseas. Search our database of top international schools seeking qualified teachers." />
+                <title>Private Page</title>
+                <meta name="Private Page" content="." />
               </Helmet>
               <div>
-                <h1>Teacher</h1>
+                <h1>This is a private page.</h1>
               </div>
             </main>
           </div>
@@ -31,4 +31,4 @@ export class Teacher extends React.PureComponent { // eslint-disable-line react/
   }
 }
 
-export default userIsAuthenticated(Teacher);
+export default userIsAuthenticated(PrivatePage);

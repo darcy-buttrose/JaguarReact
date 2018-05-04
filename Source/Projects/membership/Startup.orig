@@ -114,7 +114,7 @@ namespace Membership
                 {
                     policy.WithOrigins(new string[]
                     {
-                      "http://docker-provided-apiServerBaseAddress:3000"
+                      "http://REPLACE_WITH_HOSTIP:3000"
                        })
                         .AllowAnyHeader()
                         .AllowAnyMethod();

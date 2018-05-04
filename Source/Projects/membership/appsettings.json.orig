@@ -1,7 +1,7 @@
 ﻿{
 
     "ConnectionStrings": {
-        "DefaultConnection": "server=docker-provided-apiServerBaseAddress;userid=usmob;password=Pa55word;database=UsMembership;"
+        "DefaultConnection": "server=REPLACE_WITH_HOSTIP;userid=usmob;password=Pa55word;database=UsMembership;"
     },
 
     "Logging": {

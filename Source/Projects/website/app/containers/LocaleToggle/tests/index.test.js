@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import LocaleToggle, { mapDispatchToProps } from '../index';
 import { changeLocale } from '../../LanguageProvider/actions';
@@ -26,17 +26,6 @@ describe('<LocaleToggle />', () => {
       </Provider>
     );
     expect(renderedComponent.contains(<LocaleToggle />)).toBe(true);
-  });
-
-  it('should present the default `en` english language option', () => {
-    const renderedComponent = mount(
-      <Provider store={store}>
-        <LanguageProvider messages={translationMessages}>
-          <LocaleToggle />
-        </LanguageProvider>
-      </Provider>
-    );
-    expect(renderedComponent.contains(<option value="en">en</option>)).toBe(true);
   });
 
   describe('mapDispatchToProps', () => {
