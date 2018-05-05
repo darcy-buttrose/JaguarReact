@@ -16,7 +16,7 @@ services:
     ports:
      - "22530:22530"
     environment:
-     -  ASPNETCORE_ENVIRONMENT=Production
+     -  ASPNETCORE_ENVIRONMENT=BuildServer
      -  Application_STS_URL=http://0.0.0.0:22530
   website:
     build:
@@ -24,4 +24,4 @@ services:
     ports:
      - "3000:3000"
     environment:
-     -  NODE_ENV=production
+     -  NODE_ENV=BuildServer
