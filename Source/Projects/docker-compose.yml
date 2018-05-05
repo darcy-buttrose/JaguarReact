@@ -1,0 +1,25 @@
+version: '2'
+services:
+  mariadb-server:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Maria
+      MYSQL_DATABASE: JaguarMembership
+      MYSQL_USER: jaguar
+      MYSQL_PASSWORD: Pa55word
+    ports:
+      - 3306:3306
+  membership:
+    build:
+      context: ./membership
+    ports:
+     - "22530:22530"
+    environment:
+     -  ASPNETCORE_ENVIRONMENT=Development
+     -  Application_STS_URL=http://0.0.0.0:22530
+  website:
+    build:
+      context: ./website
+    ports:
+     - "3000:3000"

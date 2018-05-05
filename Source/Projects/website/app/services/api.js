@@ -1,12 +1,13 @@
 import apisauce from 'apisauce';
 import appConfig from '../config/config.json';
+import { apiServer } from 'utils/getConfig';
 
 /*
  * apisauce is supported by reactotron.
  */
 
 // Create a base for API.
-const create = (baseURL = appConfig.clientAppSettings.apiScheme + appConfig.clientAppSettings.apiUrl) => {
+const create = (baseURL = apiServer()) => {
   const api = apisauce.create({
     // base URL is read from the "constructor"
     baseURL,

@@ -16,8 +16,7 @@ services:
     ports:
      - "22530:22530"
     environment:
-     -  ASPNETCORE_ENVIRONMENT=Development
-     -  Application_BaseURI=REPLACE_WITH_HOSTIP
+     -  ASPNETCORE_ENVIRONMENT=Production
      -  Application_STS_URL=http://0.0.0.0:22530
   website:
     build:

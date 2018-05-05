@@ -22,7 +22,6 @@ function Get-IpAddress {
 $HOSTIP = Get-IpAddress
 
 # update configs with Host Machine IP
-(get-content ".\docker-compose-orig.yml") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content "docker-compose.yml"
 (get-content ".\membership\appsettings.json.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\appsettings.Development.json"
 (get-content ".\website\app\config\config.jsone") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\config\config.json"
 
