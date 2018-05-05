@@ -13,5 +13,7 @@
         }
     },
 
-    "HostIP": "http://REPLACE_WITH_HOSTIP:3000"
+    "ClientSettings": {
+      "ClientWebsite": "http://REPLACE_WITH_HOSTIP:3000"
+    }
 }
