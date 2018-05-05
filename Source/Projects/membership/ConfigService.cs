@@ -4,15 +4,22 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using Membership;
 
 namespace Membership
 {
-    public class Config
+    public class ConfigService : IConfigService
     {
+      private readonly ClientSettings _clientSettings;
 
-        public static IEnumerable<IdentityResource> GetIdentityResources()
+      public ConfigService(IOptions<ClientSettings> clientSettings)
+      {
+          _clientSettings = clientSettings.Value;
+      }
+
+        public IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
             {
@@ -24,7 +31,7 @@ namespace Membership
             };
         }
 
-        public static IEnumerable<ApiResource> GetApiResources()
+        public IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
             {
@@ -49,7 +56,7 @@ namespace Membership
         }
 
         // clients want to access resources (aka scopes)
-        public static IEnumerable<Client> GetClients()
+        public IEnumerable<Client> GetClients()
         {
             // client credentials client
             return new List<Client>
@@ -58,7 +65,7 @@ namespace Membership
                 {
                   ClientId = "jaguar_auth",
                   ClientName = "Jaguar Auth Membership",
-                  ClientUri = "http://10.1.1.23:3000",
+                  ClientUri = _clientSettings.ClientWebsite,
                   ClientSecrets = new List<Secret> {
                     new Secret("sKokvgCOnjCe96j4G2TH062X5xEuimhYn".Sha256())
                   },
@@ -68,16 +75,16 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                      "http://10.1.1.23:3000/callback",
-                      "http://10.1.1.23:3000/popupcallback"
+                      _clientSettings.ClientWebsite + "/callback",
+                      _clientSettings.ClientWebsite + "/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {
-                    "http://10.1.1.23:3000"
+                    _clientSettings.ClientWebsite
                   },
                   AllowedCorsOrigins = new List<string>
                   {
-                    "http://10.1.1.23:3000"
+                    _clientSettings.ClientWebsite
                   },
 
                   AllowedScopes = new List<string>
@@ -93,7 +100,7 @@ namespace Membership
               {
                   ClientId = "jaguar_implicit",
                   ClientName = "Jaguar Implicit Membership Flow",
-                  ClientUri = "http://10.1.1.23:3000",
+                  ClientUri = _clientSettings.ClientWebsite,
                   AllowedGrantTypes = GrantTypes.Implicit,
                   RequireConsent = true,
                   AllowRememberConsent = true,
@@ -101,16 +108,16 @@ namespace Membership
 
                   RedirectUris = new List<string>
                   {
-                    "http://10.1.1.23:3000/callback",
-                    "http://10.1.1.23:3000/popupcallback"
+                    _clientSettings.ClientWebsite + "/callback",
+                    _clientSettings.ClientWebsite + "/popupcallback"
                   },
                   PostLogoutRedirectUris = new List<string>
                   {
-                    "http://10.1.1.23:3000"
+                    _clientSettings.ClientWebsite
                   },
                   AllowedCorsOrigins = new List<string>
                   {
-                    "http://10.1.1.23:3000"
+                    _clientSettings.ClientWebsite
                   },
 
                   AllowedScopes = new List<string>

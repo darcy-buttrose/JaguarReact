@@ -2,7 +2,3 @@ bin
 bin/**
 obj
 obj/**
-
-appsettings.json
-hosting.json
-

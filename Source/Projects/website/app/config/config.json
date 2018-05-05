@@ -1,9 +1,9 @@
 {
     "ProjectSetting": "jaguar-website",
     "clientAppSettings": {
-    "apiUrl": "10.1.1.23:64510/api/",
-    "identityUrl": "10.1.1.23:22530/",
-    "thisUrl": "10.1.1.23:3000/",
+    "apiUrl": "10.1.1.9:64510/api/",
+    "identityUrl": "10.1.1.9:22530/",
+    "thisUrl": "10.1.1.9:3000/",
     "apiScheme": "http://",
     "trackMetrics": false
     }

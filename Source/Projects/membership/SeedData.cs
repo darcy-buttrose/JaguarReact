@@ -21,25 +21,26 @@ namespace Membership
 
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                IConfigService configService = scope.ServiceProvider.GetRequiredService<IConfigService>();
                 scope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
 
                 {
                     var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
                     context.Database.Migrate();
-                    EnsureSeedData(context);
-                }                
+                    EnsureSeedData(context, configService);
+                }
             }
 
             Console.WriteLine("Done seeding database.");
             Console.WriteLine();
         }
 
-        private static void EnsureSeedData(ConfigurationDbContext context)
+        private static void EnsureSeedData(ConfigurationDbContext context, IConfigService conf)
         {
             if (!context.Clients.Any())
             {
                 Console.WriteLine("Clients being populated");
-                foreach (var client in Config.GetClients().ToList())
+                foreach (var client in conf.GetClients().ToList())
                 {
                     context.Clients.Add(client.ToEntity());
                 }
@@ -53,7 +54,7 @@ namespace Membership
             if (!context.IdentityResources.Any())
             {
                 Console.WriteLine("IdentityResources being populated");
-                foreach (var resource in Config.GetIdentityResources().ToList())
+                foreach (var resource in conf.GetIdentityResources().ToList())
                 {
                     context.IdentityResources.Add(resource.ToEntity());
                 }
@@ -67,7 +68,7 @@ namespace Membership
             if (!context.ApiResources.Any())
             {
                 Console.WriteLine("ApiResources being populated");
-                foreach (var resource in Config.GetApiResources().ToList())
+                foreach (var resource in conf.GetApiResources().ToList())
                 {
                     context.ApiResources.Add(resource.ToEntity());
                 }

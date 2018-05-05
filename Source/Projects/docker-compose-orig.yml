@@ -5,8 +5,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Maria
-      MYSQL_DATABASE: UsMembership
-      MYSQL_USER: usmob
+      MYSQL_DATABASE: JaguarMembership
+      MYSQL_USER: jaguar
       MYSQL_PASSWORD: Pa55word
     ports:
       - 3306:3306
@@ -22,7 +22,5 @@ services:
   website:
     build:
       context: ./website
-    volumes:
-      - ./website:/usr/src/app
     ports:
      - "3000:3000"

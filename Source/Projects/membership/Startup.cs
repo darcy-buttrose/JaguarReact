@@ -102,10 +102,13 @@ namespace Membership
                  };
              });
 
-            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
+             var clientSettings = Configuration.GetSection("ClientSettings");
+             services.Configure<ClientSettings>(clientSettings);
 
+            services.AddTransient<IProfileService, IdentityWithAdditionalClaimsProfileService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddSingleton<IConfigService, ConfigService>();
 
             services.AddCors(options=>
             {
@@ -114,7 +117,7 @@ namespace Membership
                 {
                     policy.WithOrigins(new string[]
                     {
-                      "http://10.1.1.23:3000"
+                      clientSettings["ClientWebsite"]
                        })
                         .AllowAnyHeader()
                         .AllowAnyMethod();
