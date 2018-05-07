@@ -15,7 +15,7 @@ function Get-IpAddress {
       $ipInfo = Get-NetIPAddress -AddressState Preferred -AddressFamily IPv4 | ForEach-Object IPAddress
     }
 
-    $DEVHOSTIP = ($ipInfo | Where-Object {($_ -ne '127.0.0.1') -and ($_ -notlike '172.*') -and ($_ -notlike '*.255') } )
+    $DEVHOSTIP = ($ipInfo | Where-Object {($_ -ne '127.0.0.1') -and ($_ -notlike '172.*') -and ($_ -notlike '192.*') -and ($_ -notlike '*.255') } )
     return $DEVHOSTIP
 }
 
@@ -23,6 +23,7 @@ $HOSTIP = Get-IpAddress
 
 # update configs with Host Machine IP
 (get-content ".\membership\appsettings.json.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\appsettings.Development.json"
+(get-content ".\membership\hosting.orig.json") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\hosting.json"
 (get-content ".\website\app\config\config.jsone") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\config\config.json"
 
 Set-Location website
