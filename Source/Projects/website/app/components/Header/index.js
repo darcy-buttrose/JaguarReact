@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LocaleToggle from 'containers/LocaleToggle';
 import AuthConnect from 'containers/AuthConnect';
+import logo from 'assets/icetana-logo.svg';
 import messages from './messages';
-import logo from './icetana-logo.svg';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {

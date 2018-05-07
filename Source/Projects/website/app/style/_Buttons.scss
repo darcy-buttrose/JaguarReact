@@ -9,7 +9,7 @@ button {
   font-weight: 600;
   line-height: 1.75;
   border-radius: 10rem;
-  color: $header-blue;
+  color: $icetana-blue;
   background-color: $white;
 }
 
@@ -18,7 +18,7 @@ button {
   font-weight: 600;
   line-height: 1.75;
   border-radius: 10rem;
-  color: $header-blue;
+  color: $icetana-blue;
   background-color: $white;
 }
 
@@ -29,10 +29,10 @@ button {
   border-radius: 10rem;
   padding-left: 3.5rem;
   padding-right: 3.5rem;
-  color: $header-blue;
+  color: $icetana-blue;
   background-color: $white;
   & :hover {
-    color: lighten($header-blue, 50%);
+    color: lighten($icetana-blue, 50%);
   }
 }
 
@@ -47,6 +47,6 @@ button {
   border-color: $white;
   border-width: medium;
   & :hover {
-    color: lighten($header-blue, 50%);
+    color: lighten($icetana-blue, 50%);
   }
 }

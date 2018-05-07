@@ -11,26 +11,22 @@ h1 {
   @extend %base-header;
   font-size: 4rem;
   line-height: 1.2;
-  color: $dark;
 }
 
 h2 {
   @extend %base-header;
   font-size: 2.8rem;
   line-height: 1.21;
-  color: $dark;
 }
 
 h3 {
   @extend %base-header;
   font-size: 2.2rem;
   line-height: 1.23;
-  color: $header-blue;
 }
 
 h4 {
   @extend %base-header;
   font-size: 1.6rem;
   line-height: 1.19;
-  color: $header-blue;
 }
