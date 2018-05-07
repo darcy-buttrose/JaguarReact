@@ -3,6 +3,8 @@
 @import 'Variables';
 @import 'Layout';
 @import 'Header';
+@import 'AppHeader';
+@import 'StatusBar';
 @import 'Typography';
 @import 'Footer';
 @import 'Buttons';
@@ -50,6 +52,11 @@ main {
   min-width: 100%;
 }
 
+.connect-main-layout {
+  @extend .connect-layout;
+  padding-top: 5rem;
+}
+
 img {
     width: 100%;
     height: auto;
@@ -57,7 +64,7 @@ img {
 
 a {
   text-decoration: none;
-  color: $header-blue;
+  color: $icetana-blue;
 }
 
 .connect-hidden {
