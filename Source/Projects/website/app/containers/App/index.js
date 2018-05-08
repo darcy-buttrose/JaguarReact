@@ -20,6 +20,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NotAuthorisedPage from 'containers/NotAuthorisedPage/Loadable';
 import '../../style/index.scss';
 import LiveWallPage from '../LiveWallPage';
+import LiveWallInnerPage from '../LiveWallInnerPage';
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
+        <Route path="/livewall-inner" component={LiveWallInnerPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />
         <Route path="/popupcallback" component={PopupCallback} />
