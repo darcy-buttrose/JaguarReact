@@ -1,0 +1,26 @@
+@import 'Variables';
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  color: $icetana-blue;
+  height: 4rem;
+  width: 100%;
+  z-index: 10;
+  padding: 0;
+  background-color: $white;
+  background-image: none;
+  border-color: $border-color;
+  border-width: 0.1rem;
+  border-style: solid;
+  .app-header-logo {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    img {
+      max-width: 10rem;
+    }
+  }
+}
