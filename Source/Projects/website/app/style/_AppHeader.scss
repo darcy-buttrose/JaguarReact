@@ -6,7 +6,7 @@
   left: 0;
   display: block;
   color: $icetana-blue;
-  height: 4rem;
+  height: $app-header-height;
   width: 100%;
   z-index: 10;
   padding: 0;
@@ -16,11 +16,18 @@
   border-width: 0.1rem;
   border-style: solid;
   .app-header-logo {
+    color: $icetana-blue;
     display: inline-block;
     margin-top: 1rem;
     margin-left: 1rem;
     img {
       max-width: 10rem;
     }
+  }
+  .app-header-profile {
+    display: inline-block;
+    float: right;
+    margin-right: 1.5rem;
+    margin-top: .5rem;
   }
 }
