@@ -33,7 +33,7 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
   render() {
     return (
       <span>
-        { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher isNight={true} /> : '' }
+        { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
         <ProfileButton
           username={this.props.auth.userName}
           onLogout={() => { this.performAuthRemoval(); }}
