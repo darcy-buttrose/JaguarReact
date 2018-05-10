@@ -13,13 +13,14 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectReducer from 'utils/injectReducer';
+import ThemeSwitcher from 'components/ThemeSwitcher';
 import makeSelectAuth from '../AuthConnect/selectors';
 import makeSelectProfile from './selectors';
-// import reducer from '../AuthConnect/reducer';
 import reducer from './reducer';
 import { logout } from '../AuthConnect/actions';
 import { changeTheme } from './actions';
 import mgr from '../AuthConnect/userManager';
+import '../../style/light/index.scss';
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -32,6 +33,7 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
   render() {
     return (
       <span>
+        { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
         <ProfileButton
           username={this.props.auth.userName}
           onLogout={() => { this.performAuthRemoval(); }}
