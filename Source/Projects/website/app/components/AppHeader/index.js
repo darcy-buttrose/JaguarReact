@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AppHeaderLogo from 'components/AppHeaderLogo';
 import ProfileButtonContainer from 'containers/ProfileButtonContainer';
-import logo from 'assets/icetana-logo.svg';
-import messages from './messages';
 
 class AppHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {

@@ -49,7 +49,7 @@ main {
 
 .connect-main-layout {
   @extend .connect-layout;
-  padding-top: 5rem;
+  padding-top: $app-header-height;
 }
 
 img {
