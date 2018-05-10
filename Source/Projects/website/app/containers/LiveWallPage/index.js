@@ -16,15 +16,15 @@ class LiveWallPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.goChannel = this.goChannel.bind(this);
+    console.log('Parent Costructor');
     this.channel = frameChannels.create('my-channel', { target: '#django-livewall-iframe' });
+    console.log('Parent Costructor Channel: ', this.channel);
     props.onLogin();
     this.channel.subscribe((msg) => {
       console.log('Outer Got', msg);
       if (msg.token) {
         if (msg.token.length > 0) {
           props.onLoginSuccess(msg.token);
-          // examine token for User or Admin here - then redirect based on value
-          props.onUserRedirect();
         }
         if (msg.error && msg.error.length > 0) {
           props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
@@ -42,7 +42,7 @@ class LiveWallPage extends React.PureComponent {
   render() {
     return (
       <Iframe
-        url="http://10.1.1.73:8000/portal/ui/livewall/react/"
+        url="http://localhost:8000/portal/ui/livewall/react/"
         id="django-livewall-iframe"
         display="flex"
         position="relative"
