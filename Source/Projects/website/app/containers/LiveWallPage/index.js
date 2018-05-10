@@ -37,19 +37,17 @@ class LiveWallPage extends React.PureComponent {
     this.channel.push({ hello: 'world' });
   }
 
-  // django url: http://localhost:8000/portal/ui/livewall/react/
+  // django url: http://10.1.1.73:8000/portal/ui/livewall/react/
+  // local tewst: http://localhost:3000/livewall-inner
   render() {
     return (
-      <div>
-        <Iframe
-          url="http://localhost:3000/livewall-inner"
-          id="django-livewall-iframe"
-          display="flex"
-          position="relative"
-          allowFullScreen
-        />
-        <button onClick={this.goChannel}>Outer</button>
-      </div>
+      <Iframe
+        url="http://10.1.1.73:8000/portal/ui/livewall/react/"
+        id="django-livewall-iframe"
+        display="flex"
+        position="relative"
+        allowFullScreen
+      />
     );
   }
 }
