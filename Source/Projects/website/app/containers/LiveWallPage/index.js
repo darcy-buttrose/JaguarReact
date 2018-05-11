@@ -9,12 +9,18 @@ import { compose } from 'redux';
 
 import injectReducer from '../../utils/injectReducer';
 import makeSelectLiveWall from './selectors';
+import makeSelectApp from '../App/selectors';
 import reducer from './reducer';
 import { loginStart, loginSuccess, loginFailure } from './actions';
+import appPropTypes from '../App/propTypes';
 
 class LiveWallPage extends React.PureComponent {
   constructor(props) {
     super(props);
+
+    const { config } = props.app;
+    console.log('config', config);
+
     this.goChannel = this.goChannel.bind(this);
     console.log('Parent Costructor');
     this.channel = frameChannels.create('my-channel', { target: '#django-livewall-iframe' });
@@ -40,56 +46,35 @@ class LiveWallPage extends React.PureComponent {
   // django url: http://10.1.1.73:8000/portal/ui/livewall/react/
   // local tewst: http://localhost:3000/livewall-inner
   render() {
-    return (
-      <Iframe
-        url="http://localhost:8000/portal/ui/livewall/react/"
-        id="django-livewall-iframe"
-        display="flex"
-        position="relative"
-        allowFullScreen
-      />
-    );
+    const { config } = this.props.app;
+    console.log('render config', config);
+    if (config) {
+      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/`;
+      console.log('djangoLiveWallUrl', djangoLiveWallUrl);
+
+      return (
+        <Iframe
+          url={djangoLiveWallUrl}
+          id="django-livewall-iframe"
+          display="flex"
+          position="relative"
+          allowFullScreen
+        />
+      );
+    }
+    return null;
   }
 }
 
 LiveWallPage.propTypes = {
+  app: PropTypes.shape(appPropTypes),
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
-  onUserRedirect: PropTypes.func,
-  // onAdminRedirect: PropTypes.func,
-  // auth: PropTypes.shape({
-  //   user: PropTypes.shape({
-  //     id_token: PropTypes.string,
-  //     session_state: PropTypes.string,
-  //     access_token: PropTypes.string,
-  //     token_type: PropTypes.string,
-  //     scope: PropTypes.string,
-  //     expires_at: PropTypes.number,
-  //     profile: PropTypes.shape({
-  //       sid: PropTypes.string,
-  //       sub: PropTypes.string,
-  //       auth_time: PropTypes.number,
-  //       idp: PropTypes.string,
-  //       amr: PropTypes.array,
-  //       preferred_username: PropTypes.string,
-  //       name: PropTypes.string,
-  //       email: PropTypes.string,
-  //       email_verified: PropTypes.bool,
-  //       given_name: PropTypes.string,
-  //       role: PropTypes.array,
-  //       scope: PropTypes.string,
-  //     }),
-  //   }),
-  //   userName: PropTypes.string,
-  //   isAuthenticated: PropTypes.bool,
-  //   isAuthenticating: PropTypes.bool,
-  //   showError: PropTypes.bool,
-  //   errorMessage: PropTypes.string,
-  // }),
 };
 
 const mapStateToProps = createStructuredSelector({
+  app: makeSelectApp(),
   livewall: makeSelectLiveWall(),
 });
 

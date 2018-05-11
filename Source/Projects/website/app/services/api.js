@@ -1,6 +1,5 @@
 import apisauce from 'apisauce';
-import appConfig from '../config/config.json';
-import { apiServer } from 'utils/getConfig';
+import { apiServer } from './config';
 
 /*
  * apisauce is supported by reactotron.
