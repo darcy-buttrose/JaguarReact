@@ -9,7 +9,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm install'
+        dir('Source/Projects/website') {
+            sh 'npm install'
+        }
       }
     }
   }
