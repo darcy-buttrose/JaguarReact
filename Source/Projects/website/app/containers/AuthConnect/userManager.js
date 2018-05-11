@@ -9,7 +9,7 @@ const appConfig = {
   scope: 'openid profile email',
   post_logout_redirect_uri: developmentServer(),
   popup_redirect_uri: developmentServer() + 'popupcallback',
-  popupWindowFeatures: 'location=no,toolbar=no,width=500,height=500,top=500,left=500,modal=yes,chrome=yes',
+  popupWindowFeatures: 'location=no,toolbar=no,width=500,height=500,top=100,left=0,modal=yes,chrome=yes',
 };
 
 const mgr = new Oidc.UserManager(appConfig);
