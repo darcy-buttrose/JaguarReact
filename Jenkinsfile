@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         dir('Source/Projects/website') {
-            sh 'npm install'
+            sh 'pwd'
         }
       }
     }
