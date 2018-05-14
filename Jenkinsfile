@@ -10,9 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         dir('Source/Projects/website') {
-            sh 'npm install'
-			sh 'npm build:dll'
-			sh 'npm run test'
+            sh 'npm config ls'
         }
       }
     }
