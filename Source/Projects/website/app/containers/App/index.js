@@ -51,7 +51,7 @@ class App extends React.PureComponent {
         <Switch>
           <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
           <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
-          <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
+          <AppRoute exact path="/livewall" layout={PublicLayout} component={LiveWallPage} />
           <Route path="/livewall-inner" component={LiveWallInnerPage} />
           <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
           <Route path="/callback" component={CallbackPage} />
