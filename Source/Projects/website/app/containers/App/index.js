@@ -25,7 +25,6 @@ import NotFoundPage from '../NotFoundPage/Loadable';
 import NotAuthorisedPage from '../NotAuthorisedPage/Loadable';
 import '../../style/index.scss';
 import LiveWallPage from '../LiveWallPage';
-import LiveWallInnerPage from '../LiveWallInnerPage';
 
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
@@ -52,7 +51,6 @@ class App extends React.PureComponent {
           <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
           <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
           <AppRoute exact path="/livewall" layout={PublicLayout} component={LiveWallPage} />
-          <Route path="/livewall-inner" component={LiveWallInnerPage} />
           <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
           <Route path="/callback" component={CallbackPage} />
           <Route path="/popupcallback" component={PopupCallback} />
