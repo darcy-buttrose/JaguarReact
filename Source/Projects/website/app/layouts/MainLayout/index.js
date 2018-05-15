@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 function MainLayout(props) {
   return (
-    <div className='connect-main-layout'>
+    <div className="connect-main-layout">
       <AppHeader />
       {props.children}
       <StatusBar />

@@ -1,7 +1,5 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import PoweredBy from 'components/PoweredBy'
-import messages from './messages';
+import PoweredBy from 'components/PoweredBy';
 
 function StatusBar() {
   return (

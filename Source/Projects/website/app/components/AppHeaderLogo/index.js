@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import logo from 'assets/appheader-logo.svg';
 import messages from './messages';
 
