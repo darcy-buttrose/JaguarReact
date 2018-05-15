@@ -27,7 +27,7 @@ pipeline {
     stage('Website - Package') {
       steps {
         dir('Source/Projects/website') {
-            sh 'npm build'
+            sh 'npm run build'
         }
       }
     }
