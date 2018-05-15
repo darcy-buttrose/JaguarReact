@@ -1,0 +1,10 @@
+{
+  "clientAppSettings": {
+    "apiUrl": "10.1.1.23:64510/api/",
+    "identityUrl": "10.1.1.23:22530/",
+    "thisUrl": "portal-dev:80/",
+    "djangoUrl": "portal-dev:8000/",
+    "apiScheme": "http://",
+    "trackMetrics": false
+  }
+}
