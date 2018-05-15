@@ -7,11 +7,27 @@ pipeline {
 
   }
   stages {
-    stage('Build') {
+    stage('Install Dependencies') {
       steps {
         dir('Source/Projects/website') {
             sh 'npm install'
+        }
+        dir('Source/Projects/webapi') {
+            sh 'npm install'
+        }
+      }
+    }
+    stage('Website - Test') {
+      steps {
+        dir('Source/Projects/website') {
             sh 'npm run test:simple'
+        }
+      }
+    }
+    stage('Website - Package') {
+      steps {
+        dir('Source/Projects/website') {
+            sh 'npm build'
         }
       }
     }
