@@ -1,15 +1,18 @@
 pipeline {
   agent {
     docker {
-      image 'node:6-alpine'
-      args '-p 3000:3000'
+      image 'node:8.11.1'
+      args '-u root -p 3000:3000'
     }
 
   }
   stages {
     stage('Build') {
       steps {
-        sh 'npm install'
+        dir('Source/Projects/website') {
+            sh 'npm install'
+            sh 'npm run test'
+        }
       }
     }
   }
