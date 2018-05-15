@@ -11,6 +11,7 @@ pipeline {
       steps {
         dir('Source/Projects/website') {
             sh 'npm install'
+            sh 'npm run test'
         }
       }
     }
