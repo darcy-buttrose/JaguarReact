@@ -1,13 +1,13 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:8.11.1'
-      args '-p 3000:3000'
-    }
-
-  }
+  agent none
   stages {
     stage('Install Dependencies') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
       steps {
         dir('Source/Projects/website') {
             sh 'npm install'
@@ -18,6 +18,12 @@ pipeline {
       }
     }
     stage('Website - Test') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
       steps {
         dir('Source/Projects/website') {
             sh 'npm run test:simple'
@@ -25,6 +31,12 @@ pipeline {
       }
     }
     stage('Website - Package') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
       steps {
         dir('Source/Projects/website') {
             sh 'npm run build'
@@ -32,11 +44,23 @@ pipeline {
       }
     }
     stage('Ready For Test') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
       steps {
         input "Deploy To Test?"
       }
     }
     stage('Website - Deploy To Test') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-p 3000:3000'
+        }
+      }
       steps {
         dir('Source/Projects/website/build') {
             sh 'rm appConfig.orig.json'
