@@ -39,13 +39,9 @@ pipeline {
     stage('Website - Deploy To Test') {
       steps {
         dir('Source/Projects/website/build') {
-            echo 'Go Go Gadget Deploy'
-            echo '- setup appConfig'
             sh 'rm appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
-            echo '- build contents'
             sh 'ls -latr'
-            echo '- config'
             sh 'cat appConfig.json'
         }
       }
