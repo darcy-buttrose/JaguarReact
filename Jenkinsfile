@@ -81,5 +81,14 @@ pipeline {
         }
       }
     }
+    stage('Tag Github') {
+        steps {
+            sshagent(['46942447a8dd84e0f77b43483aca9a7000799e52']) {
+                sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
+                sh 'git commit -am "jenkins tag"'
+                sh 'git push'
+            }
+        }
+    }
   }
 }
