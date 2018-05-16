@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Install Dependencies') {
+    stage('Dependencies') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -12,12 +12,9 @@ pipeline {
         dir('Source/Projects/website') {
             sh 'npm install'
         }
-        dir('Source/Projects/webapi') {
-            sh 'npm install'
-        }
       }
     }
-    stage('Website - Test') {
+    stage('Test') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -30,7 +27,7 @@ pipeline {
         }
       }
     }
-    stage('Website - Package') {
+    stage('Package') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -43,7 +40,7 @@ pipeline {
         }
       }
     }
-    stage('Website - Prep For Test') {
+    stage('Docker Preperation') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -64,7 +61,7 @@ pipeline {
         }
       }
     }
-    stage('Website - Dockerise') {
+    stage('Docker Build') {
       steps {
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
