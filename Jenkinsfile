@@ -86,8 +86,14 @@ pipeline {
             sshagent(['46942447a8dd84e0f77b43483aca9a7000799e52']) {
                 sh "git config user.email \"joanne.church@icetana.com.au\""
                 sh "git config user.name \"Joanne-church\""
-                sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
-                sh 'git push'
+                script {
+                    try {
+                        sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
+                    } catch (err) {
+                        echo "git tag failed"
+                    }
+                    sh 'git push'
+                }
             }
         }
     }
