@@ -59,7 +59,7 @@ pipeline {
             sh 'cat appConfig.json'
         }
         dir('Source/Projects/website') {
-            sh 'cp . /tmp/jaguar-website'
+            sh 'cp -r -v build server internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
             sh 'ls -latr /tmp/jaguar-website'
         }
       }
