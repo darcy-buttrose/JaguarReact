@@ -1,6 +1,17 @@
 pipeline {
   agent any
   stages {
+    stage('Generate Version') {
+      steps {
+        script {
+          BUILD_VERSION_GENERATED = VersionNumber(
+                  versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}.${BUILDS_TODAY,X}',
+                  projectStartDate:    '2018-05-01',
+                  skipFailedBuilds:    true)
+          currentBuild.displayName = BUILD_VERSION_GENERATED
+        }
+      }
+    }
     stage('Dependencies') {
       agent {
         docker {
@@ -48,7 +59,6 @@ pipeline {
         }
       }
       steps {
-        input "Deploy To Test?"
         dir('Source/Projects/website/build') {
             sh 'rm appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
@@ -63,6 +73,7 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
+        input "Deploy To Test?"
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
           sh 'docker build -t jaguar/website .'
