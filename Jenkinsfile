@@ -67,8 +67,6 @@ pipeline {
     stage('Website - Dockerise') {
       steps {
         dir('/tmp/jaguar-website') {
-          tag = VersionNumber(versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}.${BUILDS_TODAY,X}')
-          echo ${tag}
           sh 'ls -latr'
           sh 'docker build -t jaguar/website .'
         }
