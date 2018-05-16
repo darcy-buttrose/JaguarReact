@@ -77,7 +77,6 @@ pipeline {
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
-          sh "docker push jaguar/website:${currentBuild.displayName}"
           sh 'docker image ls -a'
         }
       }
