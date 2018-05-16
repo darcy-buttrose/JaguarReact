@@ -43,7 +43,7 @@ pipeline {
         }
       }
     }
-    stage('Ready For Test') {
+    stage('Website - Prep For Test') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -51,18 +51,8 @@ pipeline {
         }
       }
       steps {
-        input "Deploy To Test?"
-      }
-    }
-    stage('Website - Deploy To Test') {
-      agent {
-        docker {
-          image 'node:8.11.1'
-          args '-p 3000:3000'
-        }
-      }
-      steps {
         dir('Source/Projects/website/build') {
+            input "Deploy To Test?"
             sh 'rm appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
             sh 'ls -latr'
