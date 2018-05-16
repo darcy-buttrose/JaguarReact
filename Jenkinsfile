@@ -82,6 +82,12 @@ pipeline {
       }
     }
     stage('Tag Github') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
         steps {
             sshagent(['46942447a8dd84e0f77b43483aca9a7000799e52']) {
                 sh "git config user.email \"joanne.church@icetana.com.au\""
