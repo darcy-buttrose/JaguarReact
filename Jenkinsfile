@@ -57,7 +57,6 @@ pipeline {
             sh 'mv appConfig.test.json appConfig.json'
             sh 'ls -latr'
             sh 'cat appConfig.json'
-            sh 'scp . jenkins@portal-dev:/home/icetana/JaguarReact'
         }
       }
     }
