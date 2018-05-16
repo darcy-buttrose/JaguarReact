@@ -1,7 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('Install Dependencies') {
+    stage('Generate Version') {
+      steps {
+        script {
+          BUILD_VERSION_GENERATED = VersionNumber(
+                  versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}.${BUILDS_TODAY,X}',
+                  projectStartDate:    '2018-05-01',
+                  skipFailedBuilds:    true)
+          currentBuild.displayName = BUILD_VERSION_GENERATED
+        }
+      }
+    }
+    stage('Dependencies') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -12,12 +23,9 @@ pipeline {
         dir('Source/Projects/website') {
             sh 'npm install'
         }
-        dir('Source/Projects/webapi') {
-            sh 'npm install'
-        }
       }
     }
-    stage('Website - Test') {
+    stage('Test') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -30,7 +38,7 @@ pipeline {
         }
       }
     }
-    stage('Website - Package') {
+    stage('Package') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -43,7 +51,7 @@ pipeline {
         }
       }
     }
-    stage('Website - Prep For Test') {
+    stage('Docker Preperation') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -51,7 +59,6 @@ pipeline {
         }
       }
       steps {
-        input "Deploy To Test?"
         dir('Source/Projects/website/build') {
             sh 'rm appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
@@ -64,11 +71,13 @@ pipeline {
         }
       }
     }
-    stage('Website - Dockerise') {
+    stage('Docker Build') {
       steps {
+        input "Image ${currentBuild.displayName}?"
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
-          sh 'docker build -t jaguar/website .'
+          sh "docker build -t jaguar/website:${currentBuild.displayName} ."
+          sh 'docker image ls -a'
         }
       }
     }
