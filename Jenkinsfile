@@ -47,16 +47,28 @@ pipeline {
       agent {
         docker {
           image 'node:8.11.1'
-          args '-u root -p 3000:3000'
+          args '-u root -p 3000:3000 -v /tmp/jaguar-website:/tmp/jaguar-website'
         }
       }
       steps {
+        input "Deploy To Test?"
         dir('Source/Projects/website/build') {
-            input "Deploy To Test?"
             sh 'rm appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
             sh 'ls -latr'
             sh 'cat appConfig.json'
+        }
+        dir('Source/Projects/website') {
+            sh 'cp . /tmp/jaguar-website'
+            sh 'ls -latr /tmp/jaguar-website'
+        }
+      }
+    }
+    stage('Website - Dockerise') {
+      steps {
+        dir('/tmp/jaguar-website') {
+            sh 'ls -latr'
+            sh 'docker build -t jaguar/website .'
         }
       }
     }
