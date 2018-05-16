@@ -12,6 +12,22 @@ pipeline {
         }
       }
     }
+    stage('Test Github') {
+      agent {
+        docker {
+          image 'node:8.11.1'
+          args '-u root -p 3000:3000'
+        }
+      }
+      steps {
+            sshagent(['46942447a8dd84e0f77b43483aca9a7000799e52']) {
+                sh "ssh -T git@github.com"
+                sh "git config user.email \"joanne.church@icetana.com.au\""
+                sh "git config user.name \"Joanne-church\""
+            }
+            input "continue"
+      }
+    }
     stage('Dependencies') {
       agent {
         docker {
@@ -90,12 +106,13 @@ pipeline {
       }
         steps {
             sshagent(['46942447a8dd84e0f77b43483aca9a7000799e52']) {
+                sh "ssh -T git@github.com"
                 sh "git config user.email \"joanne.church@icetana.com.au\""
                 sh "git config user.name \"Joanne-church\""
                 sh "git config push.default simple"
-                sh "git config remote.origin.url https://github.com/icetana/JaguarReact.git"
+                sh "git config remote.origin.url https://git@github.com/icetana/JaguarReact.git"
                 sh "git checkout ${env.BRANCH_NAME}"
-                sh "git fetch"
+                sh "git pull"
                 script {
                     try {
                         sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
