@@ -73,10 +73,11 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        input "Deploy To Test?"
+        input "Image ${currentBuild.displayName}?"
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
-          sh 'docker build -t jaguar/website .'
+          sh 'docker build -t jaguar/website:${currentBuild.displayName} .'
+          sh 'docker image ls -a'
         }
       }
     }
