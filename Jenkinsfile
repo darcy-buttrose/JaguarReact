@@ -63,11 +63,11 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        tag = VersionNumber (versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}.${BUILDS_TODAY,X}')
-        input "Build Image for ${tag}?"
+        # tag = VersionNumber (versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}.${BUILDS_TODAY,X}')
+        input "Build Image?"
         dir('/tmp/jaguar-website') {
             sh 'ls -latr'
-            sh 'docker build -t jaguar/website:${tag} .'
+            sh 'docker build -t jaguar/website .'
         }
       }
     }
