@@ -68,7 +68,6 @@ pipeline {
       steps {
         dir('/tmp/jaguar-website') {
             sh 'ls -latr'
-            sh 'docker image rm jaguar/website'
             sh 'docker build -t jaguar/website .'
         }
       }
