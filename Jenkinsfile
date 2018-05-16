@@ -5,7 +5,7 @@ pipeline {
       steps {
         script {
           BUILD_VERSION_GENERATED = VersionNumber(
-                  versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}_${env.BRANCH_NAME}_${BUILDS_TODAY,X}',
+                  versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}_${BRANCH_NAME}_${BUILDS_TODAY,X}',
                   projectStartDate:    '2018-05-01',
                   skipFailedBuilds:    true)
           currentBuild.displayName = BUILD_VERSION_GENERATED
