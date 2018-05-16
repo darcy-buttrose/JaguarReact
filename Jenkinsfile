@@ -87,6 +87,7 @@ pipeline {
                 sh "git config user.email \"joanne.church@icetana.com.au\""
                 sh "git config user.name \"Joanne-church\""
                 sh "git config push.default simple"
+                sh "git checkout ${env.BRANCH_NAME}"
                 script {
                     try {
                         sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
