@@ -12,12 +12,8 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
-
-// Import root app
-import App from 'containers/App';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -48,9 +44,12 @@ import '!file-loader?name=[name].[ext]!./dark.css';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 import configureStore from './configureStore';
+import appSaga from './containers/App/saga';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+import Root from './containers/Root';
 
 // Observe loading of Lato (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -68,15 +67,14 @@ latoObserver.load().then(() => {
 const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
+store.runSaga(appSaga);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <Root history={history} />
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE
