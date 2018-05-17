@@ -15,19 +15,26 @@ import { compose } from 'redux';
 import injectReducer from 'utils/injectReducer';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import makeSelectAuth from '../Auth/selectors';
+import makeSelectApp from '../App/selectors';
 import makeSelectProfile from './selectors';
 import reducer from './reducer';
 import { logout } from '../Auth/actions';
 import { changeTheme } from './actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
+import appPropTypes from '../App/propTypes';
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   performAuthRemoval() {
-    mgr.removeUser();
-    this.props.onLogout();
-    this.props.onRedirect();
+    const { config } = this.props.app;
+    if (config.clientAppSettings.authMode === 'identity') {
+      mgr.removeUser();
+      this.props.onLogout();
+      this.props.onRedirect();
+    } else {
+      this.props.onLogoutRedirect();
+    }
   }
 
   render() {
@@ -47,8 +54,10 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
 }
 
 ProfileButtonContainer.propTypes = {
+  app: PropTypes.shape(appPropTypes),
   onLogout: PropTypes.func,
   onRedirect: PropTypes.func,
+  onLogoutRedirect: PropTypes.func,
   onChangeTheme: PropTypes.func,
   auth: PropTypes.shape({
     user: PropTypes.shape({
@@ -88,12 +97,14 @@ ProfileButtonContainer.propTypes = {
 const mapStateToProps = createStructuredSelector({
   auth: makeSelectAuth(),
   profile: makeSelectProfile(),
+  app: makeSelectApp(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
     onRedirect: () => dispatch(push('/')),
+    onLogoutRedirect: () => dispatch(push('/logout')),
     onChangeTheme: (item) => dispatch(changeTheme(item)),
     dispatch,
   };
