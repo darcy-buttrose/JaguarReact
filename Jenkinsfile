@@ -1,12 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Publish Image') {
-      steps {
-        sh 'docker tag jaguar/website:latest dregistry.icetana.com.au/jaguar/website:1'
-        sh 'docker push dregistry.icetana.com.au/jaguar/website:1'
-      }
-    }
     stage('Generate Version') {
       steps {
         script {
@@ -57,7 +51,7 @@ pipeline {
         }
       }
     }
-    stage('Docker Preperation') {
+    stage('Preperation Image Contents') {
       agent {
         docker {
           image 'node:8.11.1'
@@ -77,14 +71,19 @@ pipeline {
         }
       }
     }
-    stage('Docker Build') {
+    stage('Build Image') {
       steps {
-        input "Image ${currentBuild.displayName}?"
         dir('/tmp/jaguar-website') {
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
           sh 'docker image ls -a'
         }
+      }
+    }
+    stage('Publish Image') {
+      steps {
+        sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:${currentBuild.displayName}"
+        sh "docker push dregistry.icetana.com.au/jaguar/website:${currentBuild.displayName}"
       }
     }
   }
