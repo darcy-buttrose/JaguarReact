@@ -1,6 +1,12 @@
 pipeline {
   agent any
   stages {
+    stage('Publish Image') {
+      steps {
+        sh 'docker tag jaguar/website:latest dregistry.icetana.com.au/jaguar/website:1'
+        sh 'docker push dregistry.icetana.com.au/jaguar/website:1'
+      }
+    }
     stage('Generate Version') {
       steps {
         script {
