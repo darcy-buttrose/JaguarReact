@@ -14,10 +14,10 @@ import { compose } from 'redux';
 
 import injectReducer from 'utils/injectReducer';
 import ThemeSwitcher from 'components/ThemeSwitcher';
-import makeSelectAuth from '../AuthConnect/selectors';
+import makeSelectAuth from '../Auth/selectors';
 import makeSelectProfile from './selectors';
 import reducer from './reducer';
-import { logout } from '../AuthConnect/actions';
+import { logout } from '../Auth/actions';
 import { changeTheme } from './actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';

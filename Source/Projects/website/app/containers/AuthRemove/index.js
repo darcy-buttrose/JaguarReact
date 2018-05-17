@@ -13,9 +13,9 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectReducer from 'utils/injectReducer';
-import makeSelectAuth from '../AuthConnect/selectors';
-import reducer from '../AuthConnect/reducer';
-import { logout } from '../AuthConnect/actions';
+import makeSelectAuth from '../Auth/selectors';
+import reducer from '../Auth/reducer';
+import { logout } from '../Auth/actions';
 import mgr from '../AuthConnect/userManager';
 
 export class AuthRemove extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function

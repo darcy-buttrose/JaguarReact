@@ -18,13 +18,15 @@ import AppRoute from '../AppRoute';
 import PublicLayout from '../../layouts/PublicLayout';
 import MainLayout from '../../layouts/MainLayout';
 import HomePage from '../HomePage/Loadable';
+import APage from '../APage/Loadable';
 import PrivatePage from '../PrivatePage';
 import CallbackPage from '../CallbackPage';
 import PopupCallback from '../PopupCallback';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import NotAuthorisedPage from '../NotAuthorisedPage/Loadable';
 import '../../style/index.scss';
-import LiveWallPage from '../LiveWallPage';
+import LiveWallPage from '../LiveWallPage/Loadable';
+import DjangoLoginPage from '../DjangoLoginPage/Loadable';
 
 import injectReducer from '../../utils/injectReducer';
 import injectSaga from '../../utils/injectSaga';
@@ -51,6 +53,7 @@ class App extends React.PureComponent {
           <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
           <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
           <AppRoute exact path="/livewall" layout={PublicLayout} component={LiveWallPage} />
+          <AppRoute exact path="/login" layout={PublicLayout} component={DjangoLoginPage} />
           <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
           <Route path="/callback" component={CallbackPage} />
           <Route path="/popupcallback" component={PopupCallback} />

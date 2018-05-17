@@ -7,22 +7,20 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import injectReducer from '../../utils/injectReducer';
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
 import { loginStart, loginSuccess, loginFailure } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 
-class LiveWallPage extends React.PureComponent {
+class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
     const { config } = props.app;
     console.log('config', config);
 
-    this.goChannel = this.goChannel.bind(this);
     console.log('Parent Costructor');
-    this.channel = frameChannels.create('my-channel', { target: '#django-livewall-iframe' });
+    this.channel = frameChannels.create('my-channel', { target: '#django-login-iframe' });
     console.log('Parent Costructor Channel: ', this.channel);
     props.onLogin();
     this.channel.subscribe((msg) => {
@@ -31,8 +29,13 @@ class LiveWallPage extends React.PureComponent {
         if (msg.token.length > 0) {
           const user = {
             id_token: msg.token,
+            profile: {
+              name: '',
+            },
           };
           props.onLoginSuccess(user);
+          // examine token for User or Admin here - then redirect based on value
+          this.props.onUserRedirect();
         }
         if (msg.error && msg.error.length > 0) {
           props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
@@ -41,19 +44,17 @@ class LiveWallPage extends React.PureComponent {
     });
   }
 
-  // django url: http://10.1.1.73:8000/portal/ui/livewall/react/
-  // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
     console.log('render config', config);
     if (config) {
-      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/`;
-      console.log('djangoLiveWallUrl', djangoLiveWallUrl);
+      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/`;
+      console.log('djangoLoginUrl', djangoLiveWallUrl);
 
       return (
         <Iframe
           url={djangoLiveWallUrl}
-          id="django-livewall-iframe"
+          id="django-login-iframe"
           display="flex"
           position="relative"
           allowFullScreen
@@ -64,11 +65,14 @@ class LiveWallPage extends React.PureComponent {
   }
 }
 
-LiveWallPage.propTypes = {
+
+DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
+  onUserRedirect: PropTypes.func,
+  onAdminRedirect: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -79,7 +83,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: () => dispatch(loginStart()),
-    onLoginSuccess: (user) => dispatch(loginSuccess(user)),
+    onLoginSuccess: (token) => dispatch(loginSuccess(token)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     onUserRedirect: () => dispatch(push('/private')),
     onAdminRedirect: () => dispatch(push('/')),
@@ -91,4 +95,4 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,
-)(LiveWallPage);
+)(DjangoLoginPage);
