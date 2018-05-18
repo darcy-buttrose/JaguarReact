@@ -1,24 +1,6 @@
 pipeline {
   agent any
   stages {
-#    stage('Git Tag') {
-#      steps {
-#        sh "git config user.email \"darcy.buttrose@gmail.com\""
-#        sh "git config user.name \"darcy-buttrose\""
-#        sh "git config push.default simple"
-#        sh "git config remote.origin.url https://github.com/icetana/JaguarReact.git"
-#        sh "git checkout ${env.BRANCH_NAME}"
-#        sh "git pull"
-#        script {
-#          try {
-#            sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
-#          } catch (err) {
-#            echo "git tag failed"
-#          }
-#          sh 'git push --tags'
-#        }
-#      }
-#    }
     stage('Generate Version') {
       steps {
         script {
