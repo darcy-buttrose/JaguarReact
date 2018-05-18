@@ -3,21 +3,19 @@ pipeline {
   stages {
     stage('Git Tag') {
       steps {
-        sshagent('9665b560-0d86-43cb-805c-aa92f059e87a') {
-            sh "git config user.email \"darcy.buttrose@gmail.com\""
-            sh "git config user.name \"darcy-buttrose\""
-            sh "git config push.default simple"
-            sh "git config remote.origin.url https://darcy-buttrose@github.com/icetana/JaguarReact.git"
-            sh "git checkout ${env.BRANCH_NAME}"
-            sh "git pull"
-            script {
-              try {
-                sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
-              } catch (err) {
-                echo "git tag failed"
-              }
-              sh 'git push --tags'
-            }
+        sh "git config user.email \"darcy.buttrose@gmail.com\""
+        sh "git config user.name \"darcy-buttrose\""
+        sh "git config push.default simple"
+        sh "git config remote.origin.url https://darcy-buttrose@github.com/icetana/JaguarReact.git"
+        sh "git checkout ${env.BRANCH_NAME}"
+        sh "git pull"
+        script {
+          try {
+            sh "git tag -a ${currentBuild.displayName} -m ${currentBuild.displayName}"
+          } catch (err) {
+            echo "git tag failed"
+          }
+          sh 'git push --tags'
         }
       }
     }
