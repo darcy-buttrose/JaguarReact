@@ -41,6 +41,8 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     return (
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
+        <button onClick={this.props.onGoLiveWall}>Livewall</button>
+        <button onClick={this.props.onGoLogin}>Login</button>
         <ProfileButton
           username={this.props.auth.userName}
           onLogout={() => { this.performAuthRemoval(); }}
@@ -58,6 +60,8 @@ ProfileButtonContainer.propTypes = {
   onLogout: PropTypes.func,
   onRedirect: PropTypes.func,
   onLogoutRedirect: PropTypes.func,
+  onGoLiveWall: PropTypes.func,
+  onGoLogin: PropTypes.func,
   onChangeTheme: PropTypes.func,
   auth: PropTypes.shape({
     user: PropTypes.shape({
@@ -106,6 +110,8 @@ function mapDispatchToProps(dispatch) {
     onRedirect: () => dispatch(push('/')),
     onLogoutRedirect: () => dispatch(push('/logout')),
     onChangeTheme: (item) => dispatch(changeTheme(item)),
+    onGoLiveWall: () => dispatch(push('/livewall')),
+    onGoLogin: () => dispatch(push('/login')),
     dispatch,
   };
 }

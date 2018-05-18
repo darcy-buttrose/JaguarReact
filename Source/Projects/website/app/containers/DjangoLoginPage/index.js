@@ -9,7 +9,7 @@ import { compose } from 'redux';
 
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
-import { loginStart, loginSuccess, loginFailure } from '../Auth/actions';
+import { loginStart, loginSuccess, loginFailure, logout } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 
 class DjangoLoginPage extends React.PureComponent {
@@ -23,10 +23,15 @@ class DjangoLoginPage extends React.PureComponent {
     this.channel = frameChannels.create('my-channel', { target: '#django-login-iframe' });
     console.log('Login Costructor Channel: ', this.channel);
     props.onLogin();
-    this.channel.subscribe((msg) => {
+    this.channelHandler = (msg) => {
       console.log('Login Got', msg);
-      if (msg.token) {
+      if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
+        console.log('Login clear token');
+        this.props.onLogout();
+      }
+      if (msg.isSessionTokenActive !== undefined && msg.isSessionTokenActive && msg.token) {
         if (msg.token.length > 0) {
+          console.log('Login GOOD TO GO');
           const user = {
             id_token: msg.token,
             profile: {
@@ -35,20 +40,29 @@ class DjangoLoginPage extends React.PureComponent {
           };
           props.onLoginSuccess(user);
           // examine token for User or Admin here - then redirect based on value
+          // console.log('Login wait 2000');
+          // setTimeout(() => this.props.onUserRedirect(), 2000);
           this.props.onUserRedirect();
         }
         if (msg.error && msg.error.length > 0) {
           props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
         }
       }
-    });
+    };
+    this.channel.subscribe(this.channelHandler);
   }
 
+  componentWillUnmount() {
+    if (this.channelHandler) {
+      console.log('Login removing channel handler');
+      this.channel.unsubscribe(this.channelHandler);
+    }
+  }
   render() {
     const { config } = this.props.app;
     console.log('render config', config);
     if (config) {
-      const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/`;
+      const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/?next=/portal/ui/livewall/react/`;
       console.log('loginUrl', loginUrl);
 
       return (
@@ -68,6 +82,7 @@ class DjangoLoginPage extends React.PureComponent {
 
 DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  onLogout: PropTypes.func,
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
@@ -81,11 +96,13 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    onLogout: () => dispatch(logout()),
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (token) => dispatch(loginSuccess(token)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     onUserRedirect: () => dispatch(push('/livewall')),
-    onAdminRedirect: () => dispatch(push('/')),
+//    onUserRedirect: () => console.log('will redirect to livewall'),
+    onAdminRedirect: () => console.log('will redirect to home'),
     dispatch,
   };
 }

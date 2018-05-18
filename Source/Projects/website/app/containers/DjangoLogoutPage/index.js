@@ -22,17 +22,23 @@ class DjangoLogoutPage extends React.PureComponent {
     console.log('Logout Costructor');
     this.channel = frameChannels.create('my-channel', { target: '#django-logout-iframe' });
     console.log('Logout Costructor Channel: ', this.channel);
-    props.onLogout();
-    this.channel.subscribe((msg) => {
+    this.channelHandler = (msg) => {
       console.log('Logout Got', msg);
       if (msg.isUserAuthenticated !== undefined) {
         if (!msg.isUserAuthenticated) {
-          this.props.onUserRedirectToHome();
-        } else {
-          this.props.onUserRedirectToLogin();
+          props.onLogout();
         }
+        this.props.onUserRedirectToLogin();
       }
-    });
+    };
+    this.channel.subscribe(this.channelHandler);
+  }
+
+  componentWillUnmount() {
+    if (this.channelHandler) {
+      console.log('Logout removing channel handler');
+      this.channel.unsubscribe(this.channelHandler);
+    }
   }
 
   render() {
@@ -72,8 +78,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
-    onUserRedirectToHome: () => dispatch(push('/')),
+    onUserRedirectToHome: () => console.log('will redirect to home'),
     onUserRedirectToLogin: () => dispatch(push('/login')),
+//    onUserRedirectToLogin: () => console.log('will redirect to login'),
     dispatch,
   };
 }

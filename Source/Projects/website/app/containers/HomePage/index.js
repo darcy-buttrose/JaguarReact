@@ -20,15 +20,20 @@ import messages from './messages';
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <h1>
+          <FormattedMessage {...messages.header} />
+        </h1>
+        {/* <button onClick={this.props.onGoLiveWall}>LiveWall</button> */}
+        {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
+      </div>
     );
   }
 }
 
 HomePage.propTypes = {
-  onGo: PropTypes.func,
+  onGoLiveWall: PropTypes.func,
+  onGoLogout: PropTypes.func,
 };
 
 function mapStateToProps() {
@@ -37,7 +42,8 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onGo: () => dispatch(push('/a')),
+    onGoLiveWall: () => dispatch(push('/livewall')),
+    onGoLogout: () => dispatch(push('/logout')),
     dispatch,
   };
 }

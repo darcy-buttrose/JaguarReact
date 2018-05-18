@@ -23,7 +23,7 @@ class LiveWallPage extends React.PureComponent {
     this.channel = frameChannels.create('my-channel', { target: '#django-livewall-iframe' });
     console.log('LiveWall Costructor Channel: ', this.channel);
     props.onLogin();
-    this.channel.subscribe((msg) => {
+    this.channelHandler = (msg) => {
       console.log('LiveWall Got', msg);
       if (msg.token) {
         const user = {
@@ -37,7 +37,15 @@ class LiveWallPage extends React.PureComponent {
       if (msg.error && msg.error.length > 0) {
         props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
       }
-    });
+    };
+    this.channel.subscribe(this.channelHandler);
+  }
+
+  componentWillUnmount() {
+    if (this.channelHandler) {
+      console.log('LiveWall removing channel handler');
+      this.channel.unsubscribe(this.channelHandler);
+    }
   }
 
   // django url: http://10.1.1.73:8000/portal/ui/livewall/react/

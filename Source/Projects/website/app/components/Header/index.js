@@ -4,6 +4,7 @@ import LocaleToggle from 'containers/LocaleToggle';
 import AuthConnect from 'containers/AuthConnect';
 import logo from 'assets/icetana-logo.svg';
 import messages from './messages';
+import DjangoButtons from '../../containers/DjangoButtons';
 
 class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -22,6 +23,7 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
                   <LocaleToggle />
                 </span>
                 <span className="header-drop-no-image">
+                  <DjangoButtons />
                   <AuthConnect />
                 </span>
               </div>

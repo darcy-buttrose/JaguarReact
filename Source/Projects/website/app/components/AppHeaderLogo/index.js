@@ -1,11 +1,14 @@
 import React from 'react';
 import logo from 'assets/appheader-logo.svg';
+import { Link } from 'react-router-dom';
 import messages from './messages';
 
 function AppHeaderLogo() {
   return (
     <span>
-      <img src={logo} alt={messages.logoAlt.defaultMessage} />
+      <Link to="/">
+        <img src={logo} alt={messages.logoAlt.defaultMessage} />
+      </Link>
     </span>
   );
 }
