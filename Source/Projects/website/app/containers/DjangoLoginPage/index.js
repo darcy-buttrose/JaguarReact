@@ -16,6 +16,10 @@ class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      showIframe: true,
+    };
+
     const { config } = props.app;
     console.log('config', config);
 
@@ -29,8 +33,14 @@ class DjangoLoginPage extends React.PureComponent {
         console.log('Login clear token');
         this.props.onLogout();
       }
-      if (msg.isSessionTokenActive !== undefined && msg.isSessionTokenActive && msg.token) {
-        if (msg.token.length > 0) {
+      if (msg.isSessionTokenActive === undefined && msg.isUserAuthenticated !== undefined) {
+        console.log('Login hiding ifrane ready for redirect');
+        this.setState({
+          showIframe: false,
+        });
+      }
+      if (msg.isSessionTokenActive !== undefined) {
+        if (msg.isSessionTokenActive && msg.token && msg.token.length > 0) {
           console.log('Login GOOD TO GO');
           const user = {
             id_token: msg.token,
@@ -64,12 +74,14 @@ class DjangoLoginPage extends React.PureComponent {
     if (config) {
       const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/?next=/portal/ui/livewall/react/`;
       console.log('loginUrl', loginUrl);
+      const iframeDisplay = this.state.showIframe ? 'flex' : 'none';
+      console.log('iframeDisplay', iframeDisplay);
 
       return (
         <Iframe
           url={loginUrl}
           id="django-login-iframe"
-          display="flex"
+          display={iframeDisplay}
           position="relative"
           allowFullScreen
         />
