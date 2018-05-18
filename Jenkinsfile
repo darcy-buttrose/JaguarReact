@@ -8,7 +8,7 @@ pipeline {
                   versionNumberString: '${BUILD_DATE_FORMATTED, "yyyy.M.d"}_${BRANCH_NAME}_${BUILDS_TODAY,X}',
                   projectStartDate:    '2018-05-01',
                   skipFailedBuilds:    true)
-          currentBuild.displayName = BUILD_VERSION_GENERATED
+          currentBuild.displayName = BUILD_VERSION_GENERATED.replace("/","_")
         }
       }
     }
