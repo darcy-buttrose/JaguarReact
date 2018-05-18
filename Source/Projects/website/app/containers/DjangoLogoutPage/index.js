@@ -19,14 +19,18 @@ class DjangoLogoutPage extends React.PureComponent {
     const { config } = props.app;
     console.log('config', config);
 
-    console.log('Parent Costructor');
-    this.channel = frameChannels.create('my-channel', { target: '#django-login-iframe' });
-    console.log('Parent Costructor Channel: ', this.channel);
+    console.log('Logout Costructor');
+    this.channel = frameChannels.create('my-channel', { target: '#django-logout-iframe' });
+    console.log('Logout Costructor Channel: ', this.channel);
     props.onLogout();
     this.channel.subscribe((msg) => {
-      console.log('Outer Got', msg);
-      if (!msg.isUserAuthenticated) {
-        this.props.onUserRedirect();
+      console.log('Logout Got', msg);
+      if (msg.isUserAuthenticated !== undefined) {
+        if (!msg.isUserAuthenticated) {
+          this.props.onUserRedirectToHome();
+        } else {
+          this.props.onUserRedirectToLogin();
+        }
       }
     });
   }
@@ -35,12 +39,12 @@ class DjangoLogoutPage extends React.PureComponent {
     const { config } = this.props.app;
     console.log('render config', config);
     if (config) {
-      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/logout/`;
-      console.log('djangoLoginUrl', djangoLiveWallUrl);
+      const logoutUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/logout/`;
+      console.log('logoutUrl', logoutUrl);
 
       return (
         <Iframe
-          url={djangoLiveWallUrl}
+          url={logoutUrl}
           id="django-logout-iframe"
           display="flex"
           position="relative"
@@ -56,7 +60,8 @@ class DjangoLogoutPage extends React.PureComponent {
 DjangoLogoutPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
   onLogout: PropTypes.func,
-  onUserRedirect: PropTypes.func,
+  onUserRedirectToHome: PropTypes.func,
+  onUserRedirectToLogin: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -67,7 +72,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
-    onUserRedirect: () => dispatch(push('/')),
+    onUserRedirectToHome: () => dispatch(push('/')),
+    onUserRedirectToLogin: () => dispatch(push('/login')),
     dispatch,
   };
 }

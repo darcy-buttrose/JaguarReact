@@ -19,12 +19,12 @@ class DjangoLoginPage extends React.PureComponent {
     const { config } = props.app;
     console.log('config', config);
 
-    console.log('Parent Costructor');
+    console.log('Login Costructor');
     this.channel = frameChannels.create('my-channel', { target: '#django-login-iframe' });
-    console.log('Parent Costructor Channel: ', this.channel);
+    console.log('Login Costructor Channel: ', this.channel);
     props.onLogin();
     this.channel.subscribe((msg) => {
-      console.log('Outer Got', msg);
+      console.log('Login Got', msg);
       if (msg.token) {
         if (msg.token.length > 0) {
           const user = {
@@ -48,12 +48,12 @@ class DjangoLoginPage extends React.PureComponent {
     const { config } = this.props.app;
     console.log('render config', config);
     if (config) {
-      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/`;
-      console.log('djangoLoginUrl', djangoLiveWallUrl);
+      const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/`;
+      console.log('loginUrl', loginUrl);
 
       return (
         <Iframe
-          url={djangoLiveWallUrl}
+          url={loginUrl}
           id="django-login-iframe"
           display="flex"
           position="relative"
@@ -72,7 +72,6 @@ DjangoLoginPage.propTypes = {
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
   onUserRedirect: PropTypes.func,
-  onAdminRedirect: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -85,7 +84,7 @@ function mapDispatchToProps(dispatch) {
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (token) => dispatch(loginSuccess(token)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
-    onUserRedirect: () => dispatch(push('/private')),
+    onUserRedirect: () => dispatch(push('/livewall')),
     onAdminRedirect: () => dispatch(push('/')),
     dispatch,
   };

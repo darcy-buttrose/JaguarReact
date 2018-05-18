@@ -35,7 +35,7 @@ function App() {
       <Switch>
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
-        <AppRoute exact path="/livewall" layout={PublicLayout} component={LiveWallPage} />
+        <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
         <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
