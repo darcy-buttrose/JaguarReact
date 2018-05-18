@@ -6,7 +6,7 @@ pipeline {
         sh "git config user.email \"darcy.buttrose@gmail.com\""
         sh "git config user.name \"darcy-buttrose\""
         sh "git config push.default simple"
-        sh "git config remote.origin.url https://darcy-buttrose@github.com/icetana/JaguarReact.git"
+        sh "git config remote.origin.url https://github.com/icetana/JaguarReact.git"
         sh "git checkout ${env.BRANCH_NAME}"
         sh "git pull"
         script {
