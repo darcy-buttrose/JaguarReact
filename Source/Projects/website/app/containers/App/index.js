@@ -19,7 +19,9 @@ import PopupCallback from 'containers/PopupCallback';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NotAuthorisedPage from 'containers/NotAuthorisedPage/Loadable';
 import '../../style/index.scss';
-import LiveWallPage from '../LiveWallPage';
+import LiveWallPage from '../LiveWallPage/Loadable';
+import LoginPage from '../DjangoLoginPage/Loadable';
+import LogoutPage from '../DjangoLogoutPage/Loadable';
 
 function App() {
   return (
@@ -33,7 +35,9 @@ function App() {
       <Switch>
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
-        <AppRoute exact path="/livewall" layout={PublicLayout} component={LiveWallPage} />
+        <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
+        <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
+        <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />
         <Route path="/popupcallback" component={PopupCallback} />

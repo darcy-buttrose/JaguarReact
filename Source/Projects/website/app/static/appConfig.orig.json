@@ -4,7 +4,9 @@
     "identityUrl": "REPLACE_WITH_HOSTIP:22530/",
     "thisUrl": "REPLACE_WITH_HOSTIP:3000/",
     "djangoUrl": "REPLACE_WITH_HOSTIP:8000/",
+    "authMode": "other",
     "apiScheme": "http://",
-    "trackMetrics": false
+    "trackMetrics": false,
+    "channel": "icetana-portal-channel"
   }
 }

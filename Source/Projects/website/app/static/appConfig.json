@@ -4,7 +4,9 @@
     "identityUrl": "10.1.1.90:22530/",
     "thisUrl": "10.1.1.90:3000/",
     "djangoUrl": "portal-dev:8000/",
+    "authMode": "other",
     "apiScheme": "http://",
-    "trackMetrics": false
+    "trackMetrics": false,
+    "channel": "icetana-portal-channel"
   }
 }
