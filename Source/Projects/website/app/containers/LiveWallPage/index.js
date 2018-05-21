@@ -16,35 +16,39 @@ class LiveWallPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this.channelHandler = this.channelHandler.bind(this);
+
     const { config } = props.app;
     console.log('config', config);
 
-    console.log('LiveWall Costructor');
-    this.channel = frameChannels.create('my-channel', { target: '#django-livewall-iframe' });
-    console.log('LiveWall Costructor Channel: ', this.channel);
+    console.log('LiveWall: Costructor');
+    console.log(`LiveWall: channel is ${JSON.stringify(config.clientAppSettings.channel)}`);
+    this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-livewall-iframe' });
+    console.log('LiveWall: Costructor Channel: ', this.channel);
     props.onLogin();
-    this.channelHandler = (msg) => {
-      console.log('LiveWall Got', msg);
-      if (msg.token) {
-        const user = {
-          id_token: msg.token,
-          profile: {
-            name: '',
-          },
-        };
-        props.onLoginSuccess(user);
-      }
-      if (msg.error && msg.error.length > 0) {
-        props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
-      }
-    };
     this.channel.subscribe(this.channelHandler);
   }
 
   componentWillUnmount() {
     if (this.channelHandler) {
-      console.log('LiveWall removing channel handler');
+      console.log('LiveWall: removing channel handler');
       this.channel.unsubscribe(this.channelHandler);
+    }
+  }
+
+  channelHandler(msg) {
+    console.log('LiveWall: Got', msg);
+    if (msg.token) {
+      const user = {
+        id_token: msg.token,
+        profile: {
+          name: '',
+        },
+      };
+      this.props.onLoginSuccess(user);
+    }
+    if (msg.error && msg.error.length > 0) {
+      this.props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
     }
   }
 

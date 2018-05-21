@@ -20,47 +20,19 @@ class DjangoLoginPage extends React.PureComponent {
       showIframe: true,
     };
 
+    this.channelHandler = this.channelHandler.bind(this);
+
     const { config } = props.app;
     console.log('config', config);
 
-    console.log('Login Costructor');
-    this.channel = frameChannels.create('my-channel', { target: '#django-login-iframe' });
+    console.log('Login: Costructor');
+    console.log(`Login: channel is ${JSON.stringify(config.clientAppSettings.channel)}`);
+    this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-login-iframe' });
     console.log('Login Costructor Channel: ', this.channel);
     props.onLogin();
-    this.channelHandler = (msg) => {
-      console.log('Login Got', msg);
-      if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
-        console.log('Login clear token');
-        this.props.onLogout();
-      }
-      if (msg.isSessionTokenActive === undefined && msg.isUserAuthenticated !== undefined) {
-        console.log('Login hiding ifrane ready for redirect');
-        this.setState({
-          showIframe: false,
-        });
-      }
-      if (msg.isSessionTokenActive !== undefined) {
-        if (msg.isSessionTokenActive && msg.token && msg.token.length > 0) {
-          console.log('Login GOOD TO GO');
-          const user = {
-            id_token: msg.token,
-            profile: {
-              name: '',
-            },
-          };
-          props.onLoginSuccess(user);
-          // examine token for User or Admin here - then redirect based on value
-          // console.log('Login wait 2000');
-          // setTimeout(() => this.props.onUserRedirect(), 2000);
-          this.props.onUserRedirect();
-        }
-        if (msg.error && msg.error.length > 0) {
-          props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
-        }
-      }
-    };
     this.channel.subscribe(this.channelHandler);
   }
+
 
   componentWillUnmount() {
     if (this.channelHandler) {
@@ -68,9 +40,43 @@ class DjangoLoginPage extends React.PureComponent {
       this.channel.unsubscribe(this.channelHandler);
     }
   }
+
+  channelHandler(msg) {
+    console.log('Login: Got', msg);
+    if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
+      console.log('Login: clear token');
+      this.props.onLogout();
+    }
+    if (msg.isSessionTokenActive === false && msg.isUserAuthenticated === true) {
+      console.log('Login: hiding ifrane ready for redirect');
+      this.setState({
+        showIframe: false,
+      });
+    }
+    if (msg.isSessionTokenActive === true) {
+      if (msg.isSessionTokenActive && msg.token && msg.token.length > 0) {
+        console.log('Login: GOOD TO GO');
+        const user = {
+          id_token: msg.token,
+          profile: {
+            name: '',
+          },
+        };
+        this.props.onLoginSuccess(user);
+        // examine token for User or Admin here - then redirect based on value
+        // console.log('Login wait 2000');
+        // setTimeout(() => this.props.onUserRedirect(), 2000);
+        this.props.onUserRedirect();
+      }
+      if (msg.error && msg.error.length > 0) {
+        this.props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
+      }
+    }
+  }
+
   render() {
     const { config } = this.props.app;
-    console.log('render config', config);
+    console.log('Login: render config', config);
     if (config) {
       const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/?next=/portal/ui/livewall/react/`;
       console.log('loginUrl', loginUrl);
