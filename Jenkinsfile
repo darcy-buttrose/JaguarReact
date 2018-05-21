@@ -22,8 +22,7 @@ pipeline {
         script {
           try {
             sh "mkdir /tmp/jaguar-website_${currentBuild.displayName}"
-          }
-          catch {
+          } catch (Exception err) {
             sh 'mkdir failed'
           }
         }
