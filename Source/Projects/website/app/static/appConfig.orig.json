@@ -6,6 +6,7 @@
     "djangoUrl": "REPLACE_WITH_HOSTIP:8000/",
     "authMode": "other",
     "apiScheme": "http://",
-    "trackMetrics": false
+    "trackMetrics": false,
+    "channel": "icetana-portal-channel"
   }
 }
