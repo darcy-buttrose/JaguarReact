@@ -112,11 +112,23 @@ pipeline {
         sh "docker push dregistry.icetana.com.au/jaguar/website:${currentBuild.displayName}"
         script {
           if (env.BRANCH_NAME == 'develop') {
-            sh "docker rmi dregistry.icetana.com.au/jaguar/website:latest"
+            script {
+              try {
+                sh "docker rmi dregistry.icetana.com.au/jaguar/website:latest"
+              } catch (Exception err) {
+                echo 'docker rmi failed'
+              }
+            }
             sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:latest"
             sh "docker push dregistry.icetana.com.au/jaguar/website:latest"
           } else if (env.BRANCH_NAME == 'develop') {
-            sh "docker rmi dregistry.icetana.com.au/jaguar/website:demo"
+            script {
+              try {
+                sh "docker rmi dregistry.icetana.com.au/jaguar/website:demo"
+              } catch (Exception err) {
+                echo 'docker rmi failed'
+              }
+            }
             sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:demo"
             sh "docker push dregistry.icetana.com.au/jaguar/website:demo"
           }
