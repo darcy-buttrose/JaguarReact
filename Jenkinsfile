@@ -66,7 +66,7 @@ pipeline {
       agent {
         docker {
           image 'node:8.11.1'
-          args '-u root -p 3000:3000 -v /tmp/jaguar-website/${BRANCH_NAME}:/tmp/jaguar-website'
+          args '-u root -p 3000:3000 -v /tmp/jaguar-website_${BRANCH_NAME}:/tmp/jaguar-website'
         }
       }
       steps {
@@ -91,7 +91,7 @@ pipeline {
     }
     stage('Build Image') {
       steps {
-        dir("/tmp/jaguar-website/${BRANCH_NAME}") {
+        dir("/tmp/jaguar-website_${BRANCH_NAME}") {
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
           sh 'docker image ls -a'
