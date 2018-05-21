@@ -73,7 +73,7 @@ pipeline {
       agent {
         docker {
           image 'node:8.11.1'
-          args "-u root -p 3000:3000 -v /tmp/jaguar-website_${currentBuild.displayName}:/tmp/jaguar-website"
+          args '-u root -p 3000:3000 -v /tmp/jaguar-website:/tmp/jaguar-website'
         }
       }
       steps {
@@ -98,7 +98,7 @@ pipeline {
     }
     stage('Build Image') {
       steps {
-        dir("/tmp/jaguar-website_${currentBuild.displayName}") {
+        dir('/tmp/jaguar-website') {
           sh 'pwd'
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
