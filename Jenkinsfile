@@ -66,15 +66,22 @@ pipeline {
       agent {
         docker {
           image 'node:8.11.1'
-          args '-u root -p 3000:3000 -v /tmp/jaguar-website:/tmp/jaguar-website'
+          args '-u root -p 3000:3000 -v /tmp/jaguar-website/${BRANCH_NAME}:/tmp/jaguar-website'
         }
       }
       steps {
         dir('Source/Projects/website/app-build') {
-            sh 'rm -f appConfig.orig.json'
-            sh 'mv appConfig.test.json appConfig.json'
-            sh 'ls -latr'
-            sh 'cat appConfig.json'
+          script {
+            if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
+              sh 'mv appConfig.dev.json appConfig.json'
+            } else if (env.BRANCH_NAME == 'develop') {
+              sh 'mv appConfig.test.json appConfig.json'
+            } else if (env.BRANCH_NAME == 'master') {
+              sh 'mv appConfig.demo.json appConfig.json'
+            }
+          }
+          sh 'ls -latr'
+          sh 'cat appConfig.json'
         }
         dir('Source/Projects/website') {
             sh 'cp -r -v app-build server-build internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
@@ -84,7 +91,7 @@ pipeline {
     }
     stage('Build Image') {
       steps {
-        dir('/tmp/jaguar-website') {
+        dir('/tmp/jaguar-website/${BRANCH_NAME}') {
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
           sh 'docker image ls -a'
@@ -95,6 +102,17 @@ pipeline {
       steps {
         sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:${currentBuild.displayName}"
         sh "docker push dregistry.icetana.com.au/jaguar/website:${currentBuild.displayName}"
+        script {
+          if (env.BRANCH_NAME == 'develop') {
+            sh "docker rmi dregistry.icetana.com.au/jaguar/website:latest"
+            sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:latest"
+            sh "docker push dregistry.icetana.com.au/jaguar/website:latest"
+          } else if (env.BRANCH_NAME == 'develop') {
+            sh "docker rmi dregistry.icetana.com.au/jaguar/website:demo"
+            sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:demo"
+            sh "docker push dregistry.icetana.com.au/jaguar/website:demo"
+          }
+        }
       }
     }
   }

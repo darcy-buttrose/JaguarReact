@@ -1,9 +1,9 @@
 {
   "clientAppSettings": {
-    "apiUrl": "portal-test:80/api/",
-    "identityUrl": "portal-test:22530/",
-    "thisUrl": "portal-test:80/",
-    "djangoUrl": "portal-test:8000/",
+    "apiUrl": "portal-dev:80/api/",
+    "identityUrl": "portal-dev:22530/",
+    "thisUrl": "portal-dev:80/",
+    "djangoUrl": "portal-dev:8000/",
     "authMode": "other",
     "apiScheme": "http://",
     "trackMetrics": false,
