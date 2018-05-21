@@ -57,6 +57,8 @@ pipeline {
       steps {
         dir('Source/Projects/website') {
             sh 'npm run build'
+            sh 'ls -latr app-build'
+            sh 'ls -latr server-build'
         }
       }
     }
@@ -68,14 +70,14 @@ pipeline {
         }
       }
       steps {
-        dir('Source/Projects/website/build') {
+        dir('Source/Projects/website/app-build') {
             sh 'rm -f appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
             sh 'ls -latr'
             sh 'cat appConfig.json'
         }
         dir('Source/Projects/website') {
-            sh 'cp -r -v build server internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
+            sh 'cp -r -v app-build server-build internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
             sh 'ls -latr /tmp/jaguar-website'
         }
       }
