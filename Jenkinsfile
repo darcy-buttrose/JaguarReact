@@ -121,7 +121,7 @@ pipeline {
             }
             sh "docker tag jaguar/website:${currentBuild.displayName} dregistry.icetana.com.au/jaguar/website:latest"
             sh "docker push dregistry.icetana.com.au/jaguar/website:latest"
-          } else if (env.BRANCH_NAME == 'develop') {
+          } else if (env.BRANCH_NAME == 'master') {
             script {
               try {
                 sh "docker rmi dregistry.icetana.com.au/jaguar/website:demo"
