@@ -69,7 +69,7 @@ pipeline {
       }
       steps {
         dir('Source/Projects/website/build') {
-            sh 'rm appConfig.orig.json'
+            sh 'rm -f appConfig.orig.json'
             sh 'mv appConfig.test.json appConfig.json'
             sh 'ls -latr'
             sh 'cat appConfig.json'
