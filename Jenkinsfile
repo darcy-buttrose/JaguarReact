@@ -19,6 +19,14 @@ pipeline {
                   skipFailedBuilds:    true)
           currentBuild.displayName = BUILD_VERSION_GENERATED.replace("/","_")
         }
+        script {
+          try {
+            sh "mkdir /tmp/jaguar-website_${currentBuild.displayName}"
+          }
+          catch {
+            sh 'mkdir failed'
+          }
+        }
       }
     }
     stage('Dependencies') {
