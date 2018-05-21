@@ -91,7 +91,7 @@ pipeline {
     }
     stage('Build Image') {
       steps {
-        dir('/tmp/jaguar-website/${BRANCH_NAME}') {
+        dir("/tmp/jaguar-website/${BRANCH_NAME}") {
           sh 'ls -latr'
           sh "docker build -t jaguar/website:${currentBuild.displayName} ."
           sh 'docker image ls -a'
