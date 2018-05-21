@@ -19,25 +19,18 @@ class LiveWallPage extends React.PureComponent {
     this.channelHandler = this.channelHandler.bind(this);
 
     const { config } = props.app;
-    console.log('config', config);
-
-    console.log('LiveWall: Costructor');
-    console.log(`LiveWall: channel is ${JSON.stringify(config.clientAppSettings.channel)}`);
     this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-livewall-iframe' });
-    console.log('LiveWall: Costructor Channel: ', this.channel);
     props.onLogin();
     this.channel.subscribe(this.channelHandler);
   }
 
   componentWillUnmount() {
     if (this.channelHandler) {
-      console.log('LiveWall: removing channel handler');
       this.channel.unsubscribe(this.channelHandler);
     }
   }
 
   channelHandler(msg) {
-    console.log('LiveWall: Got', msg);
     if (msg.token) {
       const user = {
         id_token: msg.token,
@@ -56,10 +49,8 @@ class LiveWallPage extends React.PureComponent {
   // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
-    console.log('LiveWall render config', config);
     if (config) {
       const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/`;
-      console.log('djangoLiveWallUrl', djangoLiveWallUrl);
 
       return (
         <Iframe

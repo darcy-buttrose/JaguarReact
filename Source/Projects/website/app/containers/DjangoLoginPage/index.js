@@ -23,12 +23,7 @@ class DjangoLoginPage extends React.PureComponent {
     this.channelHandler = this.channelHandler.bind(this);
 
     const { config } = props.app;
-    console.log('config', config);
-
-    console.log('Login: Costructor');
-    console.log(`Login: channel is ${JSON.stringify(config.clientAppSettings.channel)}`);
     this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-login-iframe' });
-    console.log('Login Costructor Channel: ', this.channel);
     props.onLogin();
     this.channel.subscribe(this.channelHandler);
   }
@@ -36,26 +31,21 @@ class DjangoLoginPage extends React.PureComponent {
 
   componentWillUnmount() {
     if (this.channelHandler) {
-      console.log('Login removing channel handler');
       this.channel.unsubscribe(this.channelHandler);
     }
   }
 
   channelHandler(msg) {
-    console.log('Login: Got', msg);
     if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
-      console.log('Login: clear token');
       this.props.onLogout();
     }
     if (msg.isSessionTokenActive === false && msg.isUserAuthenticated === true) {
-      console.log('Login: hiding ifrane ready for redirect');
       this.setState({
         showIframe: false,
       });
     }
     if (msg.isSessionTokenActive === true) {
       if (msg.isSessionTokenActive && msg.token && msg.token.length > 0) {
-        console.log('Login: GOOD TO GO');
         const user = {
           id_token: msg.token,
           profile: {
@@ -64,8 +54,6 @@ class DjangoLoginPage extends React.PureComponent {
         };
         this.props.onLoginSuccess(user);
         // examine token for User or Admin here - then redirect based on value
-        // console.log('Login wait 2000');
-        // setTimeout(() => this.props.onUserRedirect(), 2000);
         this.props.onUserRedirect();
       }
       if (msg.error && msg.error.length > 0) {
@@ -76,12 +64,9 @@ class DjangoLoginPage extends React.PureComponent {
 
   render() {
     const { config } = this.props.app;
-    console.log('Login: render config', config);
     if (config) {
       const loginUrl = `http://${config.clientAppSettings.djangoUrl}portal/accounts/login/?next=/portal/ui/livewall/react/`;
-      console.log('loginUrl', loginUrl);
       const iframeDisplay = this.state.showIframe ? 'flex' : 'none';
-      console.log('iframeDisplay', iframeDisplay);
 
       return (
         <Iframe
@@ -119,7 +104,6 @@ function mapDispatchToProps(dispatch) {
     onLoginSuccess: (token) => dispatch(loginSuccess(token)),
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     onUserRedirect: () => dispatch(push('/livewall')),
-//    onUserRedirect: () => console.log('will redirect to livewall'),
     onAdminRedirect: () => console.log('will redirect to home'),
     dispatch,
   };
