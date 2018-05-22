@@ -9,7 +9,7 @@ import { compose } from 'redux';
 
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
-import { loginStart, loginSuccess, loginFailure, logout } from '../Auth/actions';
+import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 
 class DjangoLoginPage extends React.PureComponent {
@@ -36,6 +36,8 @@ class DjangoLoginPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
+    console.log('Login: channelHandler msg', msg);
+
     if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
       this.props.onLogout();
     }
@@ -101,7 +103,10 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
     onLogin: () => dispatch(loginStart()),
-    onLoginSuccess: (token) => dispatch(loginSuccess(token)),
+    onLoginSuccess: (token) => {
+      dispatch(loginSuccess(token));
+      dispatch(startUpdateProfile());
+    },
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     onUserRedirect: () => dispatch(push('/livewall')),
     onAdminRedirect: () => console.log('will redirect to home'),

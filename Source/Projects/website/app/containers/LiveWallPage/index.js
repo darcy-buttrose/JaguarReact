@@ -31,6 +31,8 @@ class LiveWallPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
+    console.log('LiveWallPage: channelHandler msg', msg);
+
     if (msg.token) {
       const user = {
         id_token: msg.token,

@@ -30,6 +30,8 @@ class DjangoLogoutPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
+    console.log('Logout: channelHandler msg', msg);
+
     if (msg.isUserAuthenticated !== undefined) {
       if (!msg.isUserAuthenticated) {
         this.props.onLogout();

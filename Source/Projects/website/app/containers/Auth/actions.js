@@ -9,6 +9,9 @@ import {
   LOGIN_REQUEST_SUCCESS,
   LOGIN_REQUEST_FAILURE,
   LOGOUT,
+  UPDATE_PROFILE_INIT,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_FAILURE
 } from './constants';
 
 /**
@@ -52,5 +55,25 @@ export function loginFailure(error) {
 export function logout() {
   return {
     type: LOGOUT,
+  };
+}
+
+export function startUpdateProfile() {
+  return {
+    type: UPDATE_PROFILE_INIT,
+  };
+}
+
+export function updateProfileSuccess(profile) {
+  return {
+    type: UPDATE_PROFILE_SUCCESS,
+    profile,
+  };
+}
+
+export function updateProfileFailure(error) {
+  return {
+    type: UPDATE_PROFILE_FAILURE,
+    error,
   };
 }
