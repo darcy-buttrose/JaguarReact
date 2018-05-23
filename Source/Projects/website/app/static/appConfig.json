@@ -3,7 +3,7 @@
     "apiUrl": "localhost:3000/api/",
     "identityUrl": "localhost:22530/",
     "thisUrl": "localhost:3000/",
-    "djangoUrl": "10.1.1.73:8000/",
+    "djangoUrl": "portal-dev:8000/",
     "authMode": "other",
     "apiScheme": "http://",
     "trackMetrics": false,

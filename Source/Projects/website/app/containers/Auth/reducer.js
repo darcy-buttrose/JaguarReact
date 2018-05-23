@@ -14,6 +14,7 @@ import {
   UPDATE_PROFILE_INIT,
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_FAILURE,
+  UPDATE_TOKEN,
 } from './constants';
 
 const initialState = fromJS({
@@ -44,14 +45,14 @@ function authReducer(state = initialState, action) {
         .set('errorMessage', '');
     case LOGIN_REQUEST_SUCCESS:
       return state
-        .set('user', action.user)
+        .set('user', fromJS(action.user))
         .set('userName', action.user.profile.name)
         .set('isAuthenticating', false)
         .set('isAuthenticated', true);
     case UPDATE_PROFILE_SUCCESS:
       return state
-        .set('userName', action.profile.username);
-//        .setIn(['user', 'profile'], fromJS(action.profile));
+        .set('userName', action.profile.name)
+        .setIn(['user', 'profile'], fromJS(action.profile));
     case LOGIN_REQUEST_FAILURE:
       return state
       .set('isAuthenticating', false)
@@ -68,6 +69,9 @@ function authReducer(state = initialState, action) {
       .set('isAuthenticated', false)
       .set('showError', false)
       .set('errorMessage', null);
+    case UPDATE_TOKEN:
+      return state
+        .setIn(['user', 'id_token'], action.token);
     default:
       return state;
   }

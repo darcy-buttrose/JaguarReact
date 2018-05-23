@@ -8,7 +8,7 @@ import { compose } from 'redux';
 
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
-import { loginStart, loginSuccess, loginFailure } from '../Auth/actions';
+import { updateToken, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 import userIsAuthenticated from '../../utils/userIsAuthenticated';
 
@@ -20,7 +20,6 @@ class LiveWallPage extends React.PureComponent {
 
     const { config } = props.app;
     this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-livewall-iframe' });
-    props.onLogin();
     this.channel.subscribe(this.channelHandler);
   }
 
@@ -34,16 +33,7 @@ class LiveWallPage extends React.PureComponent {
     console.log('LiveWallPage: channelHandler msg', msg);
 
     if (msg.token) {
-      const user = {
-        id_token: msg.token,
-        profile: {
-          name: '',
-        },
-      };
-      this.props.onLoginSuccess(user);
-    }
-    if (msg.error && msg.error.length > 0) {
-      this.props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
+      this.props.onUpdateToken(msg.token);
     }
   }
 
@@ -70,9 +60,7 @@ class LiveWallPage extends React.PureComponent {
 
 LiveWallPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
-  onLogin: PropTypes.func,
-  onLoginSuccess: PropTypes.func,
-  onLoginFailure: PropTypes.func,
+  onUpdateToken: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -82,9 +70,10 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onLogin: () => dispatch(loginStart()),
-    onLoginSuccess: (user) => dispatch(loginSuccess(user)),
-    onLoginFailure: (error) => dispatch(loginFailure(error)),
+    onUpdateToken: (token) => {
+      dispatch(updateToken(token));
+      dispatch(startUpdateProfile());
+    },
     dispatch,
   };
 }

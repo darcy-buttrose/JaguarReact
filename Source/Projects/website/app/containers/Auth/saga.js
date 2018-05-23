@@ -14,7 +14,7 @@ function* fetchProfile() {
     const idToken = auth.user.id_token;
     const profileApi = api.create(apiUrl, idToken);
     const profile = yield call(profileApi.getProfile);
-    yield put(updateProfileSuccess(profile));
+    yield put(updateProfileSuccess(Object.assign({}, profile, { name: profile.username })));
   } catch (e) {
     yield put(updateProfileFailure(e.message));
   }

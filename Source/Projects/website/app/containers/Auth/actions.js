@@ -11,7 +11,8 @@ import {
   LOGOUT,
   UPDATE_PROFILE_INIT,
   UPDATE_PROFILE_SUCCESS,
-  UPDATE_PROFILE_FAILURE
+  UPDATE_PROFILE_FAILURE,
+  UPDATE_TOKEN,
 } from './constants';
 
 /**
@@ -75,5 +76,12 @@ export function updateProfileFailure(error) {
   return {
     type: UPDATE_PROFILE_FAILURE,
     error,
+  };
+}
+
+export function updateToken(token) {
+  return {
+    type: UPDATE_TOKEN,
+    token,
   };
 }
