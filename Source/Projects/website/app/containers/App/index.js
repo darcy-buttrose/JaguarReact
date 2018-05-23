@@ -9,19 +9,20 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
-import AppRoute from 'containers/AppRoute';
-import PublicLayout from 'layouts/PublicLayout';
-import MainLayout from 'layouts/MainLayout';
-import HomePage from 'containers/HomePage/Loadable';
-import PrivatePage from 'containers/PrivatePage';
-import CallbackPage from 'containers/CallbackPage';
-import PopupCallback from 'containers/PopupCallback';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import NotAuthorisedPage from 'containers/NotAuthorisedPage/Loadable';
-import '../../style/index.scss';
+import AppRoute from '../AppRoute';
+import PublicLayout from '../../layouts/PublicLayout';
+import MainLayout from '../../layouts/MainLayout';
+import HomePage from '../HomePage/Loadable';
+import PrivatePage from '../PrivatePage/Loadable';
+import CallbackPage from '../CallbackPage';
+import PopupCallback from '../PopupCallback';
+import NotFoundPage from '../NotFoundPage/Loadable';
+import NotAuthorisedPage from '../NotAuthorisedPage/Loadable';
 import LiveWallPage from '../LiveWallPage/Loadable';
 import LoginPage from '../DjangoLoginPage/Loadable';
 import LogoutPage from '../DjangoLogoutPage/Loadable';
+import AdminPage from '../AdminPage/Loadable';
+import '../../style/index.scss';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Switch>
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
+        <AppRoute exact path="/admin" layout={MainLayout} component={AdminPage} />
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
         <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />

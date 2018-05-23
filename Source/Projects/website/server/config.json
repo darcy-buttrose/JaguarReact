@@ -1,0 +1,8 @@
+{
+	"port": 8080,
+	"bodyLimit": "100kb",
+	"corsHeaders": ["Link"],
+  "passport": {
+    "secretOrKey": "_8r+3j7)w-d&qk1!@+e+-8u-y_e3kyz!vg#9h&(mic-9e(hn*6"
+  }
+}

@@ -3,13 +3,12 @@ import frameChannels from 'frame-channels';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
-import { loginStart, loginSuccess, loginFailure, logout } from '../Auth/actions';
+import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 
 class DjangoLoginPage extends React.PureComponent {
@@ -36,6 +35,8 @@ class DjangoLoginPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
+    console.log('Login: channelHandler msg', msg);
+
     if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
       this.props.onLogout();
     }
@@ -53,8 +54,6 @@ class DjangoLoginPage extends React.PureComponent {
           },
         };
         this.props.onLoginSuccess(user);
-        // examine token for User or Admin here - then redirect based on value
-        this.props.onUserRedirect();
       }
       if (msg.error && msg.error.length > 0) {
         this.props.onLoginFailure(`login failed: ${msg.error}`); // replace with intl message
@@ -89,7 +88,6 @@ DjangoLoginPage.propTypes = {
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
   onLoginFailure: PropTypes.func,
-  onUserRedirect: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -101,10 +99,11 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
     onLogin: () => dispatch(loginStart()),
-    onLoginSuccess: (token) => dispatch(loginSuccess(token)),
+    onLoginSuccess: (token) => {
+      dispatch(loginSuccess(token));
+      dispatch(startUpdateProfile({ redirectToHome: true }));
+    },
     onLoginFailure: (error) => dispatch(loginFailure(error)),
-    onUserRedirect: () => dispatch(push('/livewall')),
-    onAdminRedirect: () => console.log('will redirect to home'),
     dispatch,
   };
 }

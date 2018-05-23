@@ -1,20 +1,43 @@
 /* eslint consistent-return:0 */
 
 import express from 'express';
+import cors from 'cors';
+import { resolve } from 'path';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
-const logger = require('./logger');
+import logger from './logger';
 
-const argv = require('./argv');
-const port = require('./port');
+import argv from './argv';
+import port from './port';
 
-const setup = require('./middlewares/frontendMiddleware');
+import setup from './middlewares/frontendMiddleware';
+import config from './config.json';
+import api from './api';
+
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
-const resolve = require('path').resolve;
 const app = express();
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-// app.use('/api', myApi);
+app.use(cors({
+  exposedHeaders: config.corsHeaders,
+}));
+
+app.use(bodyParser.json({
+  limit: config.bodyLimit
+}));
+
+passport.use(new Strategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: config.passport.secretOrKey,
+}, (jwtPayload, callBack) => {
+  console.log(`Auth: ${JSON.stringify(jwtPayload)}`);
+  return callBack(null, jwtPayload);
+}));
+
+// api router
+app.use('/api', passport.authenticate('jwt', { session: false }), api({ config }));
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

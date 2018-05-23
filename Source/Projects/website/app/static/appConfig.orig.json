@@ -1,6 +1,6 @@
 {
   "clientAppSettings": {
-    "apiUrl": "REPLACE_WITH_HOSTIP:64510/api/",
+    "apiUrl": "REPLACE_WITH_HOSTIP:3000/api/",
     "identityUrl": "REPLACE_WITH_HOSTIP:22530/",
     "thisUrl": "REPLACE_WITH_HOSTIP:3000/",
     "djangoUrl": "REPLACE_WITH_HOSTIP:8000/",

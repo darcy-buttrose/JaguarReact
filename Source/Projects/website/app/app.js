@@ -44,7 +44,7 @@ import '!file-loader?name=[name].[ext]!./dark.css';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 import configureStore from './configureStore';
-import appSaga from './containers/App/saga';
+import rootSaga from './sagas';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
@@ -67,7 +67,7 @@ latoObserver.load().then(() => {
 const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
-store.runSaga(appSaga);
+store.runSaga(rootSaga);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = (messages) => {

@@ -1,12 +1,11 @@
 import apisauce from 'apisauce';
-import { apiServer } from './config';
 
 /*
  * apisauce is supported by reactotron.
  */
 
 // Create a base for API.
-const create = (baseURL = apiServer()) => {
+const create = (baseURL, token) => {
   const api = apisauce.create({
     // base URL is read from the "constructor"
     baseURL,
@@ -14,7 +13,7 @@ const create = (baseURL = apiServer()) => {
     timeout: 10000,
   });
 
-  const getHeaders = (token) => {
+  const getHeaders = () => {
     const headers = {
       'Cache-Control': 'no-cache',
       Accept: 'application/json',
@@ -23,13 +22,32 @@ const create = (baseURL = apiServer()) => {
     return headers;
   };
 
-  const getSomething = () => api.get('/api/getSomething', {}, { headers: getHeaders('token') });
-  const sendSomething = (somethingModel) => api.post('/api/addSomething', somethingModel, { headers: getHeaders('token') });
+  const getSomething = () => api.get('getSomething', {}, { headers: getHeaders() });
+  const sendSomething = (somethingModel) => api.post('addSomething', somethingModel, { headers: getHeaders() });
+
+  const getProfile = () => new Promise((resolve: Function, reject: Function): void => {
+    fetch(`${baseURL}profile`, {
+      mode: 'cors',
+      method: 'GET',
+      credentials: 'include',
+      headers: getHeaders(),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          reject(new Error('appConfig fetch failed'));
+        }
+        return response.json();
+      })
+      .then(resolve)
+      .catch(reject);
+  });
+
 
   return {
       // a list of the API functions
     getSomething,
     sendSomething,
+    getProfile,
   };
 };
 

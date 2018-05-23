@@ -1,8 +1,8 @@
 {
   "clientAppSettings": {
-    "apiUrl": "10.1.1.90:64510/api/",
-    "identityUrl": "10.1.1.90:22530/",
-    "thisUrl": "10.1.1.90:3000/",
+    "apiUrl": "localhost:3000/api/",
+    "identityUrl": "localhost:22530/",
+    "thisUrl": "localhost:3000/",
     "djangoUrl": "portal-dev:8000/",
     "authMode": "other",
     "apiScheme": "http://",
