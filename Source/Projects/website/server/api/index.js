@@ -14,6 +14,7 @@ function resolveProfile(user) {
     case 'icetana': {
       return Object.assign({}, profile, {
         role: ['operator'],
+        theme: 'night',
       });
     }
     default : {
