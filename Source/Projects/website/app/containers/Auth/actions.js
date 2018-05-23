@@ -59,9 +59,10 @@ export function logout() {
   };
 }
 
-export function startUpdateProfile() {
+export function startUpdateProfile(options) {
   return {
     type: UPDATE_PROFILE_INIT,
+    options,
   };
 }
 

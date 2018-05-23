@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import userIsAuthenticated from 'utils/userIsAuthenticated';
 
-export class PrivatePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class AdminPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
     return (
@@ -11,11 +11,11 @@ export class PrivatePage extends React.PureComponent { // eslint-disable-line re
           <div className="twelve columns">
             <main>
               <Helmet>
-                <title>Private Page</title>
-                <meta name="Private Page" content="." />
+                <title>Admin Page</title>
+                <meta name="Admin Page" content="." />
               </Helmet>
               <div>
-                <h1>This is a private page.</h1>
+                <h1>This is the admin page.</h1>
               </div>
             </main>
           </div>
@@ -25,4 +25,4 @@ export class PrivatePage extends React.PureComponent { // eslint-disable-line re
   }
 }
 
-export default userIsAuthenticated(PrivatePage);
+export default userIsAuthenticated(AdminPage);
