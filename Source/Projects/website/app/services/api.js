@@ -42,12 +42,33 @@ const create = (baseURL, token) => {
       .catch(reject);
   });
 
+  const saveProfile = (profile) => new Promise((resolve: Function, reject: Function): void => {
+    fetch(`${baseURL}profile`, {
+      mode: 'cors',
+      method: 'PUT',
+      credentials: 'include',
+      headers: getHeaders(),
+      body: JSON.stringify({
+        profile,
+      }),
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          reject(new Error('appConfig fetch failed'));
+        }
+        return response.json();
+      })
+      .then(resolve)
+      .catch(reject);
+  });
+
 
   return {
       // a list of the API functions
     getSomething,
     sendSomething,
     getProfile,
+    saveProfile,
   };
 };
 
