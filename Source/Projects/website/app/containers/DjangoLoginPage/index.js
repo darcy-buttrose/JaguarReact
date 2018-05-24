@@ -101,7 +101,7 @@ function mapDispatchToProps(dispatch) {
     onLogin: () => dispatch(loginStart()),
     onLoginSuccess: (token) => {
       dispatch(loginSuccess(token));
-      dispatch(startUpdateProfile({ redirectToHome: true }));
+      dispatch(startUpdateProfile({ redirectToHome: true, updateTheme: true }));
     },
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     dispatch,

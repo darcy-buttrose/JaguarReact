@@ -2,12 +2,35 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import api from '../../services/api';
 import { updateProfileSuccess, updateProfileFailure } from './actions';
+import { changeTheme } from '../ProfileButtonContainer/actions';
 import { UPDATE_PROFILE_INIT } from './constants';
 // import { selectAppDomain } from '../App/selectors';
 // import { selectAuthDomain } from './selectors';
 
+function* redirectToHome(profile) {
+  let redirect = '/private';
+  if (profile.role && typeof profile.role === 'object') {
+    if (profile.role.includes('admin')) {
+      redirect = '/admin';
+    }
+    if (profile.role.includes('operator')) {
+      redirect = '/livewall';
+    }
+  }
+  yield put(push(redirect));
+}
+
+function* updateTheme(profile) {
+  if (profile.theme) {
+    yield put(changeTheme(profile.theme, { save: false }));
+  } else {
+    yield put(changeTheme('daylight', { save: false }));
+  }
+}
+
 function* fetchProfile(action) {
   try {
+    const { options } = action;
     const state = yield select();
     const app = state.get('app').toJS();
     const auth = state.get('auth').toJS();
@@ -16,17 +39,11 @@ function* fetchProfile(action) {
     const profileApi = api.create(apiUrl, idToken);
     const profile = yield call(profileApi.getProfile);
     yield put(updateProfileSuccess(Object.assign({}, profile, { name: profile.username })));
-    let redirect = '/private';
-    if (action.options && action.options.redirectToHome) {
-      if (profile.role && typeof profile.role === 'object') {
-        if (profile.role.includes('admin')) {
-          redirect = '/admin';
-        }
-        if (profile.role.includes('operator')) {
-          redirect = '/livewall';
-        }
-      }
-      yield put(push(redirect));
+    if (options && options.redirectToHome) {
+      yield redirectToHome(profile);
+    }
+    if (options && options.updateTheme) {
+      yield updateTheme(profile);
     }
   } catch (e) {
     yield put(updateProfileFailure(e.message));

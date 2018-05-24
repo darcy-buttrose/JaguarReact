@@ -8,14 +8,10 @@ import {
   CHANGE_THEME,
 } from './constants';
 
-/**
- * [changeTheme description]
- * @param  {[type]} item [description]
- * @return {[type]}      [description]
- */
-export function changeTheme(item) {
+export function changeTheme(item, options = { save: true }) {
   return {
     type: CHANGE_THEME,
     item,
+    options,
   };
 }
