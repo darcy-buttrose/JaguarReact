@@ -20,9 +20,7 @@ const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const app = express();
 
-app.use(cors({
-  exposedHeaders: config.corsHeaders,
-}));
+app.use(cors());
 
 app.use(bodyParser.json({
   limit: config.bodyLimit
@@ -41,7 +39,7 @@ app.use('/api', passport.authenticate('jwt', { session: false }), api({ config }
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
-  outputPath: resolve(process.cwd(), 'build'),
+  outputPath: resolve(process.cwd(), 'app-build'),
   publicPath: '/',
 });
 
