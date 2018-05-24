@@ -22,9 +22,9 @@ function* redirectToHome(profile) {
 
 function* updateTheme(profile) {
   if (profile.theme) {
-    yield put(changeTheme(profile.theme));
+    yield put(changeTheme(profile.theme, { save: false }));
   } else {
-    yield put(changeTheme('daylight'));
+    yield put(changeTheme('daylight', { save: false }));
   }
 }
 
