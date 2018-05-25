@@ -12,6 +12,5 @@ module.exports = function addProdMiddlewares(app, options) {
   app.use(compression());
   app.use(publicPath, express.static(outputPath));
 
-  app.get('/config', (req, res) => res.sendFile(path.resolve(outputPath, 'appConfig.json')));
   app.get('*', (req, res) => res.sendFile(path.resolve(outputPath, 'index.html')));
 };
