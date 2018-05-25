@@ -23,6 +23,8 @@ import { changeTheme } from './actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
 import appPropTypes from '../App/propTypes';
+import authPropTypes from '../Auth/propTypes';
+import profilePropTypes from './propTypes';
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -41,7 +43,7 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     return (
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
-        <button onClick={this.props.onGoLiveWall}>Livewall</button>
+        <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
         {/* <button onClick={this.props.onGoLogin}>Login</button> */}
         <ProfileButton
           username={this.props.auth.userName}
@@ -63,39 +65,8 @@ ProfileButtonContainer.propTypes = {
   onGoLiveWall: PropTypes.func,
 //  onGoLogin: PropTypes.func,
   onChangeTheme: PropTypes.func,
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id_token: PropTypes.string,
-      session_state: PropTypes.string,
-      access_token: PropTypes.string,
-      token_type: PropTypes.string,
-      scope: PropTypes.string,
-      expires_at: PropTypes.number,
-      profile: PropTypes.shape({
-        sid: PropTypes.string,
-        sub: PropTypes.string,
-        auth_time: PropTypes.number,
-        idp: PropTypes.string,
-        amr: PropTypes.array,
-        preferred_username: PropTypes.string,
-        name: PropTypes.string,
-        email: PropTypes.string,
-        email_verified: PropTypes.bool,
-        given_name: PropTypes.string,
-        role: PropTypes.array,
-        scope: PropTypes.string,
-      }),
-    }),
-    userName: PropTypes.string,
-    isAuthenticated: PropTypes.bool,
-    isAuthenticating: PropTypes.bool,
-    showError: PropTypes.bool,
-    errorMessage: PropTypes.string,
-  }),
-  profile: PropTypes.shape({
-    menuOpen: PropTypes.bool,
-    currentTheme: PropTypes.string,
-  }),
+  auth: PropTypes.shape(authPropTypes),
+  profile: PropTypes.shape(profilePropTypes),
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import SignIn from 'components/SignIn';
+import SignIn from '../../components/SignIn';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -17,6 +17,7 @@ import makeSelectApp from '../App/selectors';
 import { loginStart, loginSuccess, loginFailure } from '../Auth/actions';
 import mgr from './userManager';
 import appPropTypes from '../App/propTypes';
+import authPropTypes from '../Auth/propTypes';
 
 export class AuthConnect extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -55,35 +56,7 @@ AuthConnect.propTypes = {
   onUserRedirect: PropTypes.func,
   onLoginRedirect: PropTypes.func,
   // onAdminRedirect: PropTypes.func,
-  // auth: PropTypes.shape({
-  //   user: PropTypes.shape({
-  //     id_token: PropTypes.string,
-  //     session_state: PropTypes.string,
-  //     access_token: PropTypes.string,
-  //     token_type: PropTypes.string,
-  //     scope: PropTypes.string,
-  //     expires_at: PropTypes.number,
-  //     profile: PropTypes.shape({
-  //       sid: PropTypes.string,
-  //       sub: PropTypes.string,
-  //       auth_time: PropTypes.number,
-  //       idp: PropTypes.string,
-  //       amr: PropTypes.array,
-  //       preferred_username: PropTypes.string,
-  //       name: PropTypes.string,
-  //       email: PropTypes.string,
-  //       email_verified: PropTypes.bool,
-  //       given_name: PropTypes.string,
-  //       role: PropTypes.array,
-  //       scope: PropTypes.string,
-  //     }),
-  //   }),
-  //   userName: PropTypes.string,
-  //   isAuthenticated: PropTypes.bool,
-  //   isAuthenticating: PropTypes.bool,
-  //   showError: PropTypes.bool,
-  //   errorMessage: PropTypes.string,
-  // }),
+  auth: PropTypes.shape(authPropTypes),
 };
 
 const mapStateToProps = createStructuredSelector({

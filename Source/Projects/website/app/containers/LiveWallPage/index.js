@@ -11,6 +11,7 @@ import makeSelectApp from '../App/selectors';
 import { updateToken, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 import userIsAuthenticated from '../../utils/userIsAuthenticated';
+import authPropTypes from '../Auth/propTypes';
 
 class LiveWallPage extends React.PureComponent {
   constructor(props) {
@@ -60,6 +61,7 @@ class LiveWallPage extends React.PureComponent {
 
 LiveWallPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  auth: PropTypes.shape(authPropTypes),
   onUpdateToken: PropTypes.func,
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppHeader from 'components/AppHeader';
-import StatusBar from 'components/StatusBar';
+import AppHeader from '../../components/AppHeader';
+import StatusBar from '../../components/StatusBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 

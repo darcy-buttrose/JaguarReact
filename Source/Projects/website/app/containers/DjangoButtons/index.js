@@ -5,13 +5,14 @@ import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import makeSelectAuth from '../Auth/selectors';
+import authPropTypes from '../Auth/propTypes';
 
 class DjangoButtons extends React.PureComponent {
   render() {
     if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
       return (
         <span>
-          <button onClick={this.props.onGoLiveWall}>Livewall</button>
+          <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );
@@ -21,11 +22,7 @@ class DjangoButtons extends React.PureComponent {
 }
 
 DjangoButtons.propTypes = {
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id_token: PropTypes.string,
-    }),
-  }),
+  auth: PropTypes.shape(authPropTypes),
   onGoLiveWall: PropTypes.func,
   // onGoLogout: PropTypes.func,
 };

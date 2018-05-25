@@ -10,6 +10,7 @@ import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
 import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
+import authPropTypes from '../Auth/propTypes';
 
 class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
@@ -84,6 +85,7 @@ class DjangoLoginPage extends React.PureComponent {
 
 DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,

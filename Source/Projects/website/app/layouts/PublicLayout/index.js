@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ToastContainer} from 'react-toastify';
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import Header from '../../components/Header';
+import StatusBar from '../../components/StatusBar';
 
 function PublicLayout(props) {
   return (
-    <div className="connect-layout">
+    <div className="connect-public-layout">
       <Header />
       {props.children}
-      <Footer />
+      <StatusBar />
+      <ToastContainer autoClose={8000} />
     </div>
   );
 }

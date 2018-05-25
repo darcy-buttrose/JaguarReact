@@ -11,6 +11,7 @@ import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
 import { logout } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
+import authPropTypes from '../Auth/propTypes';
 
 class DjangoLogoutPage extends React.PureComponent {
   constructor(props) {
@@ -62,6 +63,7 @@ class DjangoLogoutPage extends React.PureComponent {
 
 DjangoLogoutPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onUserRedirectToLogin: PropTypes.func,
 };

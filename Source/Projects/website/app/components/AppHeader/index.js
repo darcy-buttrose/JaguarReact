@@ -1,6 +1,6 @@
 import React from 'react';
-import AppHeaderLogo from 'components/AppHeaderLogo';
-import ProfileButtonContainer from 'containers/ProfileButtonContainer';
+import AppHeaderLogo from '../../components/AppHeaderLogo';
+import ProfileButtonContainer from '../../containers/ProfileButtonContainer';
 
 class AppHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
