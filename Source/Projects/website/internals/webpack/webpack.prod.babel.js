@@ -2,7 +2,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = require('./webpack.base.babel')({
   // In production, we skip all hot-reloading stuff
@@ -42,9 +41,6 @@ module.exports = require('./webpack.base.babel')({
       },
       inject: true,
     }),
-
-    // move static content
-    new CopyWebpackPlugin([{ from: 'app/static', to: '' }]),
   ],
 
   performance: {
