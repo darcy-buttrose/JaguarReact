@@ -1,9 +1,9 @@
 import React from 'react';
-import AuthConnect from '../../containers/AuthConnect';
-import DjangoButtons from '../../containers/DjangoButtons';
-import AppHeaderLogo from '../AppHeaderLogo';
+import AuthConnect from '../AuthConnect/index';
+import DjangoButtons from '../DjangoButtons/index';
+import AppHeaderLogo from '../../components/AppHeaderLogo/index';
 
-class Header extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class PublicHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <header className="app-header">
@@ -19,4 +19,4 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   }
 }
 
-export default Header;
+export default PublicHeader;
