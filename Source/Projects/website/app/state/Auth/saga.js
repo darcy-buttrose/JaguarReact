@@ -2,7 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import api from '../../services/api';
 import { updateProfileSuccess, updateProfileFailure } from './actions';
-import { changeTheme } from '../ProfileButtonContainer/actions';
+import { changeTheme } from '../Profile/actions';
 import { UPDATE_PROFILE_INIT } from './constants';
 // import { selectAppDomain } from '../App/selectors';
 // import { selectAuthDomain } from './selectors';

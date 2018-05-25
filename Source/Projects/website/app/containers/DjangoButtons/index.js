@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
-import makeSelectAuth from '../Auth/selectors';
-import authPropTypes from '../Auth/propTypes';
+import makeSelectAuth from '../../state/Auth/selectors';
+import authPropTypes from '../../state/Auth/propTypes';
 
 class DjangoButtons extends React.PureComponent {
   render() {

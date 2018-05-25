@@ -13,11 +13,11 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectReducer from 'utils/injectReducer';
-import makeSelectAuth from '../Auth/selectors';
-import reducer from '../Auth/reducer';
-import { logout } from '../Auth/actions';
+import makeSelectAuth from '../../state/Auth/selectors';
+import reducer from '../../state/Auth/reducer';
+import { logout } from '../../state/Auth/actions';
 import mgr from '../AuthConnect/userManager';
-import authPropTypes from '../Auth/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
 
 export class AuthRemove extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

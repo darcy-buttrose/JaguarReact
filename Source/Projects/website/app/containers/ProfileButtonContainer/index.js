@@ -12,19 +12,17 @@ import ProfileButton from 'components/ProfileButton';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import injectReducer from 'utils/injectReducer';
 import ThemeSwitcher from 'components/ThemeSwitcher';
-import makeSelectAuth from '../Auth/selectors';
-import makeSelectApp from '../App/selectors';
-import makeSelectProfile from './selectors';
-import reducer from './reducer';
-import { logout } from '../Auth/actions';
-import { changeTheme } from './actions';
+import makeSelectAuth from '../../state/Auth/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import makeSelectProfile from '../../state/Profile/selectors';
+import { logout } from '../../state/Auth/actions';
+import { changeTheme } from '../../state/Profile/actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
-import appPropTypes from '../App/propTypes';
-import authPropTypes from '../Auth/propTypes';
-import profilePropTypes from './propTypes';
+import appPropTypes from '../../state/App/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
+import profilePropTypes from '../../state/Profile/propTypes';
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -89,9 +87,6 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'profile', reducer });
-
 export default compose(
-  withReducer,
   withConnect,
 )(ProfileButtonContainer);

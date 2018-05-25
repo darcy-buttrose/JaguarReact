@@ -7,11 +7,11 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../Auth/selectors';
-import makeSelectApp from '../App/selectors';
-import { logout } from '../Auth/actions';
-import appPropTypes from '../App/propTypes';
-import authPropTypes from '../Auth/propTypes';
+import makeSelectAuth from '../../state/Auth/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import { logout } from '../../state/Auth/actions';
+import appPropTypes from '../../state/App/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
 
 class DjangoLogoutPage extends React.PureComponent {
   constructor(props) {
