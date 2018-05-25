@@ -5,8 +5,7 @@ pipeline {
       steps {
         script {
           sshagent(['9665b560-0d86-43cb-805c-aa92f059e87a']) {
-            sh "git tag test_tag_from_jenkins"
-            sh "git push --tags"
+            sh "git status"
           }
         }
       }
