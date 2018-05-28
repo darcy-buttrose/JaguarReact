@@ -17,7 +17,7 @@ class DjangoButtons extends React.PureComponent {
       return (
         <span>
           <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
-          {/* <CameraFilter></CameraFilter> */}
+          <CameraFilter></CameraFilter>
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );

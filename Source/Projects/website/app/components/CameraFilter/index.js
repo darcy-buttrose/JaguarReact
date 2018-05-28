@@ -37,7 +37,7 @@ class CameraFilter extends Component {
         //         {this.dropdownMenu}
         //     </div>
         // )
-        return null;
+        return (<span>FF</span>);
     }
         
 }
