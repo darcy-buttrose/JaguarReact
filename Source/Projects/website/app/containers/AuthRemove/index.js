@@ -13,10 +13,11 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import injectReducer from 'utils/injectReducer';
-import makeSelectAuth from '../Auth/selectors';
-import reducer from '../Auth/reducer';
-import { logout } from '../Auth/actions';
+import makeSelectAuth from '../../state/Auth/selectors';
+import reducer from '../../state/Auth/reducer';
+import { logout } from '../../state/Auth/actions';
 import mgr from '../AuthConnect/userManager';
+import authPropTypes from '../../state/Auth/propTypes';
 
 export class AuthRemove extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -36,35 +37,7 @@ export class AuthRemove extends React.PureComponent { // eslint-disable-line rea
 AuthRemove.propTypes = {
   onLogout: PropTypes.func,
   onRedirect: PropTypes.func,
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id_token: PropTypes.string,
-      session_state: PropTypes.string,
-      access_token: PropTypes.string,
-      token_type: PropTypes.string,
-      scope: PropTypes.string,
-      expires_at: PropTypes.number,
-      profile: PropTypes.shape({
-        sid: PropTypes.string,
-        sub: PropTypes.string,
-        auth_time: PropTypes.number,
-        idp: PropTypes.string,
-        amr: PropTypes.array,
-        preferred_username: PropTypes.string,
-        name: PropTypes.string,
-        email: PropTypes.string,
-        email_verified: PropTypes.bool,
-        given_name: PropTypes.string,
-        role: PropTypes.array,
-        scope: PropTypes.array,
-      }),
-    }),
-    userName: PropTypes.string,
-    isAuthenticated: PropTypes.bool,
-    isAuthenticating: PropTypes.bool,
-    showError: PropTypes.bool,
-    errorMessage: PropTypes.string,
-  }),
+  auth: PropTypes.shape(authPropTypes),
 };
 
 const mapStateToProps = createStructuredSelector({

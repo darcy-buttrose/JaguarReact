@@ -9,13 +9,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
-import AppRoute from '../AppRoute';
-import PublicLayout from '../../layouts/PublicLayout';
-import MainLayout from '../../layouts/MainLayout';
+import AppRoute from '../AppRoute/index';
+import PublicLayout from '../../layouts/PublicLayout/index';
+import MainLayout from '../../layouts/MainLayout/index';
 import HomePage from '../HomePage/Loadable';
 import PrivatePage from '../PrivatePage/Loadable';
-import CallbackPage from '../CallbackPage';
-import PopupCallback from '../PopupCallback';
+import CallbackPage from '../CallbackPage/index';
+import PopupCallback from '../PopupCallback/index';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import NotAuthorisedPage from '../NotAuthorisedPage/Loadable';
 import LiveWallPage from '../LiveWallPage/Loadable';
@@ -24,7 +24,7 @@ import LogoutPage from '../DjangoLogoutPage/Loadable';
 import AdminPage from '../AdminPage/Loadable';
 import '../../style/index.scss';
 
-function App() {
+function Router() {
   return (
     <div>
       <Helmet
@@ -49,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default Router;

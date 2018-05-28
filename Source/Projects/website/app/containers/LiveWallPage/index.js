@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../Auth/selectors';
-import makeSelectApp from '../App/selectors';
-import makeSelectLiveWall from './selectors';
-import { updateToken, startUpdateProfile } from '../Auth/actions';
-import appPropTypes from '../App/propTypes';
+import makeSelectAuth from '../../state/Auth/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import { updateToken, startUpdateProfile } from '../../state/Auth/actions';
+import appPropTypes from '../../state/App/propTypes';
 import userIsAuthenticated from '../../utils/userIsAuthenticated';
+import authPropTypes from '../../state/Auth/propTypes';
 
 import liveWallPropTypes from './propTypes';
 import reducer from './reducer';
@@ -69,6 +69,7 @@ class LiveWallPage extends React.PureComponent {
 LiveWallPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
   liveWall: PropTypes.shape(liveWallPropTypes), 
+  auth: PropTypes.shape(authPropTypes),
   onUpdateToken: PropTypes.func,
 };
 

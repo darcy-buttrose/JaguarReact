@@ -12,18 +12,21 @@ import ProfileButton from 'components/ProfileButton';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import injectReducer from 'utils/injectReducer';
 import ThemeSwitcher from 'components/ThemeSwitcher';
-import makeSelectAuth from '../Auth/selectors';
-import makeSelectApp from '../App/selectors';
-import makeSelectProfile from './selectors';
-import reducer from './reducer';
-import { logout } from '../Auth/actions';
-import { changeTheme } from './actions';
+import makeSelectAuth from '../../state/Auth/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import makeSelectProfile from '../../state/Profile/selectors';
+import { logout } from '../../state/Auth/actions';
+import { changeTheme } from '../../state/Profile/actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
-import appPropTypes from '../App/propTypes';
 import CameraFilter from '../../components/CameraFilter/index';
+
+import appPropTypes from '../../state/App/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
+import profilePropTypes from '../../state/Profile/propTypes';
+
+
 
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -43,7 +46,7 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     return (
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
-        <button onClick={this.props.onGoLiveWall}>Livewall</button>
+        <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
         <CameraFilter></CameraFilter>
         {/* <button onClick={this.props.onGoLogin}>Login</button> */}
         <ProfileButton
@@ -66,39 +69,8 @@ ProfileButtonContainer.propTypes = {
   onGoLiveWall: PropTypes.func,
 //  onGoLogin: PropTypes.func,
   onChangeTheme: PropTypes.func,
-  auth: PropTypes.shape({
-    user: PropTypes.shape({
-      id_token: PropTypes.string,
-      session_state: PropTypes.string,
-      access_token: PropTypes.string,
-      token_type: PropTypes.string,
-      scope: PropTypes.string,
-      expires_at: PropTypes.number,
-      profile: PropTypes.shape({
-        sid: PropTypes.string,
-        sub: PropTypes.string,
-        auth_time: PropTypes.number,
-        idp: PropTypes.string,
-        amr: PropTypes.array,
-        preferred_username: PropTypes.string,
-        name: PropTypes.string,
-        email: PropTypes.string,
-        email_verified: PropTypes.bool,
-        given_name: PropTypes.string,
-        role: PropTypes.array,
-        scope: PropTypes.string,
-      }),
-    }),
-    userName: PropTypes.string,
-    isAuthenticated: PropTypes.bool,
-    isAuthenticating: PropTypes.bool,
-    showError: PropTypes.bool,
-    errorMessage: PropTypes.string,
-  }),
-  profile: PropTypes.shape({
-    menuOpen: PropTypes.bool,
-    currentTheme: PropTypes.string,
-  }),
+  auth: PropTypes.shape(authPropTypes),
+  profile: PropTypes.shape(profilePropTypes),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -121,9 +93,6 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'profile', reducer });
-
 export default compose(
-  withReducer,
   withConnect,
 )(ProfileButtonContainer);
