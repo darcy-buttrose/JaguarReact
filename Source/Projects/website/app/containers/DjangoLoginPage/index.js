@@ -6,10 +6,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../Auth/selectors';
-import makeSelectApp from '../App/selectors';
-import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../Auth/actions';
-import appPropTypes from '../App/propTypes';
+import makeSelectAuth from '../../state/Auth/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
+import appPropTypes from '../../state/App/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
 
 class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
@@ -84,6 +85,7 @@ class DjangoLoginPage extends React.PureComponent {
 
 DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,

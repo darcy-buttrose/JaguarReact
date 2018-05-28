@@ -12,20 +12,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-
-import messages from './messages';
+import {Helmet} from 'react-helmet';
 
 class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
-        {/* <button onClick={this.props.onGoLiveWall}>LiveWall</button> */}
-        {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
+      <div className="container" >
+        <div className="row">
+          <div className="twelve columns">
+            <main>
+              <Helmet>
+                <title>Private Page</title>
+                <meta name="Private Page" content="." />
+              </Helmet>
+              <div>
+                <h1>This is the home page.</h1>
+              </div>
+            </main>
+          </div>
+        </div>
       </div>
     );
   }

@@ -77,18 +77,18 @@ pipeline {
         }
       }
       steps {
-        dir('Source/Projects/website/app-build') {
+        dir('Source/Projects/website/server-build') {
           script {
             if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
-              sh 'mv appConfig.dev.json appConfig.json'
+              sh 'mv config.dev.json config.json'
             } else if (env.BRANCH_NAME == 'develop') {
-              sh 'mv appConfig.test.json appConfig.json'
+              sh 'mv config.test.json config.json'
             } else if (env.BRANCH_NAME == 'master') {
-              sh 'mv appConfig.demo.json appConfig.json'
+              sh 'mv config.demo.json config.json'
             }
           }
           sh 'ls -latr'
-          sh 'cat appConfig.json'
+          sh 'cat config.json'
         }
         dir('Source/Projects/website') {
             sh 'cp -r -v app-build server-build internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'

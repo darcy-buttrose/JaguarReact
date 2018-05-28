@@ -2,10 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ConnectedRouter } from 'react-router-redux';
 import { connect } from 'react-redux';
-
-// Import root app
-import App from '../App';
-import { startLoadConfig } from '../App/actions';
+import Router from '../Router';
+import { startLoadConfig } from '../../state/App/actions';
 
 class Root extends React.PureComponent {
   componentDidMount() {
@@ -15,7 +13,7 @@ class Root extends React.PureComponent {
   render() {
     return (
       <ConnectedRouter history={this.props.history}>
-        <App />
+        <Router />
       </ConnectedRouter>
     );
   }

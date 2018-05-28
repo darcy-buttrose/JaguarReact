@@ -52,6 +52,11 @@ main {
   padding-top: 5rem;
 }
 
+.connect-public-layout {
+  @extend .connect-layout;
+  padding-top: 5rem;
+}
+
 img {
     width: 100%;
     height: auto;
