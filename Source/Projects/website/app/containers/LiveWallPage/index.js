@@ -48,6 +48,7 @@ class LiveWallPage extends React.PureComponent {
   // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
+    console.log('abc:::  ', this.props.liveWall.filter)
     const filter = '';//this.props.liveWall.filter + '/' || '';
     
     if (config) {
@@ -95,6 +96,6 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'liveWall', reducer });
 
 export default compose(
-  withConnect,
   withReducer,
+  withConnect,  
 )(LiveWallPage);

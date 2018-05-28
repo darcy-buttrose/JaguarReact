@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the livewall state domain
  */
-const selectLiveWallDomain = (state) => state.get('livewall');
+const selectLiveWallDomain = (state) => state.get('liveWall');
 
 /**
  * Other specific selectors
@@ -16,7 +16,7 @@ const selectLiveWallDomain = (state) => state.get('livewall');
 
 const makeSelectLiveWall = () => createSelector(
   selectLiveWallDomain,
-  (substate) => substate //.toJS()
+  (substate) => {console.log('makeSelectLiveWall: ', substate.toJS()); return substate.toJS()} 
 );
 
 export default makeSelectLiveWall;
