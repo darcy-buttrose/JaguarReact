@@ -1,34 +1,49 @@
 import React, {Component} from 'react';
 
 
-// class CameraFilter extends Component {
-//     state = {
-//         showFilter: false,
-//        }
-    
-//     // 
+
+class CameraFilter extends Component {
+    constructor () {
+        super();
+        this.state = {
+          isHidden: true
+        }
+    }
+
+    toggleHandler = () => {
+        this.setState({
+          isHidden: !this.state.isHidden
+        })
+    }    
 
 
-//     render() {
-//         return (
-//             <div>
-//                 <span onClick="filters">Filter</span>
-//                 this.state.showFilter = ? "<ul><li>A</li><li>B</li><li>C</li></ul>" || null;
-//             </div>
+    render(){
+        let dropdownMenu = null;
 
-//         );
-//     }
-// }
+        if(this.state.isHidden){
+            dropdownMenu = (
+                <ul>
+                    <li>Abc</li>
+                    <li>Abc1</li>
+                    <li>Abc2</li>
+                    <li>Abc3</li>
+                </ul>
+            )
+        } else dropdownMenu = null;
 
-
-const cameraFilter = () => {
-    <ul>
-        <li></li>
-    </sul>
+        // return (
+        //     <div>
+        //         <button onClick={this.toggleHandler}>FF</button>
+        //         {this.dropdownMenu}
+        //     </div>
+        // )
+        return null;
+    }
+        
 }
 
 
 
 
-export default cameraFilter;
+export default CameraFilter;
 

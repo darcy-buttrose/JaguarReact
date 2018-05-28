@@ -20,7 +20,6 @@ import { logout } from '../../state/Auth/actions';
 import { changeTheme } from '../../state/Profile/actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
-import CameraFilter from '../../components/CameraFilter/index';
 
 import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';
@@ -46,8 +45,6 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     return (
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
-        <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
-        <CameraFilter></CameraFilter>
         {/* <button onClick={this.props.onGoLogin}>Login</button> */}
         <ProfileButton
           username={this.props.auth.userName}

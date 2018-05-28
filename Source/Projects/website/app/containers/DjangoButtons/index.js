@@ -8,6 +8,7 @@ import { setFilter, clearFilter } from '../LiveWallPage/actions';
 import makeSelectRoute from '../../state/Route/selectors';
 import makeSelectAuth from '../../state/Auth/selectors';
 import authPropTypes from '../../state/Auth/propTypes';
+import CameraFilter from '../../components/CameraFilter/index';
 
 
 class DjangoButtons extends React.PureComponent {
@@ -16,6 +17,7 @@ class DjangoButtons extends React.PureComponent {
       return (
         <span>
           <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
+          {/* <CameraFilter></CameraFilter> */}
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );

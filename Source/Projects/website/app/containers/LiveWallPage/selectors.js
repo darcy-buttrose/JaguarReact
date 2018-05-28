@@ -16,7 +16,7 @@ const selectLiveWallDomain = (state) => state.get('livewall');
 
 const makeSelectLiveWall = () => createSelector(
   selectLiveWallDomain,
-  (substate) => substate.toJS()
+  (substate) => substate //.toJS()
 );
 
 export default makeSelectLiveWall;
