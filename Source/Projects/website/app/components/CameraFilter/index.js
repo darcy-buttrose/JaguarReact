@@ -22,7 +22,9 @@ import React, {Component} from 'react';
 
 
 const cameraFilter = () => {
-
+    <ul>
+        <li></li>
+    </sul>
 }
 
 
