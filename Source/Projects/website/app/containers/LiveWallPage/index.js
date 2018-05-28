@@ -8,9 +8,15 @@ import { compose } from 'redux';
 
 import makeSelectAuth from '../Auth/selectors';
 import makeSelectApp from '../App/selectors';
+import makeSelectLiveWall from './selectors';
 import { updateToken, startUpdateProfile } from '../Auth/actions';
 import appPropTypes from '../App/propTypes';
 import userIsAuthenticated from '../../utils/userIsAuthenticated';
+
+import liveWallPropTypes from './propTypes';
+import reducer from './reducer';
+
+
 
 class LiveWallPage extends React.PureComponent {
   constructor(props) {
@@ -41,8 +47,10 @@ class LiveWallPage extends React.PureComponent {
   // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
+    const filter = this.props.liveWall.filter + '/' || null;
+    
     if (config) {
-      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/`;
+      const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/${filter}`;
 
       return (
         <Iframe
@@ -60,11 +68,13 @@ class LiveWallPage extends React.PureComponent {
 
 LiveWallPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  liveWall: PropTypes.shape(liveWallPropTypes), 
   onUpdateToken: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   app: makeSelectApp(),
+  liveWall: makeSelectLiveWall(),
   auth: makeSelectAuth(),
 });
 
@@ -80,6 +90,9 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
+const withReducer = injectReducer({ key: 'liveWall', reducer });
+
 export default compose(
   withConnect,
+  withReducer,
 )(LiveWallPage);

@@ -23,6 +23,8 @@ import { changeTheme } from './actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
 import appPropTypes from '../App/propTypes';
+import CameraFilter from '../../components/CameraFilter/index';
+
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -42,6 +44,7 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
         <button onClick={this.props.onGoLiveWall}>Livewall</button>
+        <CameraFilter></CameraFilter>
         {/* <button onClick={this.props.onGoLogin}>Login</button> */}
         <ProfileButton
           username={this.props.auth.userName}
