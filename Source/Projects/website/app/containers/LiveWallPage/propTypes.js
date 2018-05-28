@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 
 const liveWallPropTypes = {
-    filter: PropTypes.string
+    filter: PropTypes.number
 };
 
 

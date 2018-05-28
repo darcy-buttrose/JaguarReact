@@ -15,7 +15,7 @@ import userIsAuthenticated from '../../utils/userIsAuthenticated';
 import authPropTypes from '../../state/Auth/propTypes';
 
 import liveWallPropTypes from './propTypes';
-import reducer from './reducer';
+// import reducer from './reducer';
 import injectReducer from '../../utils/injectReducer';
 
 
@@ -48,9 +48,8 @@ class LiveWallPage extends React.PureComponent {
   // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
-    console.log('abc:::  ', this.props.liveWall.filter)
-    const filter = '';//this.props.liveWall.filter + '/' || '';
-    
+    const filter = this.props.liveWall.filter === 0 ? '' : this.props.liveWall.filter + '/' ;
+
     if (config) {
       const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/${filter}`;
 
@@ -91,11 +90,12 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
+// const withReducer = injectReducer({ key: 'liveWall', reducer });
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'liveWall', reducer });
+
 
 export default compose(
-  withReducer,
+  // withReducer,
   withConnect,  
 )(LiveWallPage);

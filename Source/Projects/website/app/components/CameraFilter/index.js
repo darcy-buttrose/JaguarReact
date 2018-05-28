@@ -1,48 +1,81 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
 
 
 class CameraFilter extends Component {
     constructor () {
         super();
+
         this.state = {
-          isHidden: true
+            filters: [
+                {
+                    id: 1,
+                    name: 'Filter name 1'
+                },
+                {
+                    id: 2,
+                    name: 'Filter name 2'
+                },
+                {
+                    id: 3,
+                    name: 'Filter name 3'
+                }
+            ]
         }
     }
 
-    toggleHandler = () => {
-        this.setState({
-          isHidden: !this.state.isHidden
-        })
-    }    
+    // toggleHandler = () => {
+    //     this.setState({
+    //       isHidden: !this.state.isHidden
+    //     })
+    // }    
 
 
     render(){
-        let dropdownMenu = null;
+        const currentFilter = this.state.filters.find( (f)=> f.id === this.props.filter )
 
-        if(this.state.isHidden){
-            dropdownMenu = (
-                <ul>
-                    <li>Abc</li>
-                    <li>Abc1</li>
-                    <li>Abc2</li>
-                    <li>Abc3</li>
+        const renderFilter = (el) => (
+                <li key={el.id}
+                    className={(currentFilter === el) ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
+                    onClick={() => { this.props.onChangeFilter(el.id); }}
+                    role="presentation">{el.name}</li>  
+            );
+
+        return (
+            <span className="app-profile">
+                <span
+                    className="fas fa-filter fa-2x"
+                    role="presentation"></span>
+                <ul className="app-profile-menu">
+                    {this.state.filters.map(renderFilter)}
+                    {/* <li>{props.username}</li>
+                    <hr />
+                    <li
+                    onClick={props.onLogout}
+                    role="presentation"
+                    ><FormattedMessage {...messages.logoff} /></li>
+                    <hr />
+                    <li
+                    className={(props.currentTheme === 'daylight') ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
+                    onClick={() => { props.onChangeTheme('daylight'); }}
+                    role="presentation"
+                    ><FormattedMessage {...messages.daylight} /></li>
+                    <li
+                    className={(props.currentTheme === 'night') ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
+                    onClick={() => { props.onChangeTheme('night'); }}
+                    role="presentation"
+                    ><FormattedMessage {...messages.night} /></li> */}
                 </ul>
-            )
-        } else dropdownMenu = null;
-
-        // return (
-        //     <div>
-        //         <button onClick={this.toggleHandler}>FF</button>
-        //         {this.dropdownMenu}
-        //     </div>
-        // )
-        return (<span>FF</span>);
+            </span>
+        )
     }
         
 }
 
-
+CameraFilter.propTypes = {
+    filter: PropTypes.number,
+    onChangeFilter: PropTypes.func
+}
 
 
 export default CameraFilter;
