@@ -12,12 +12,8 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
-
-// Import root app
-import App from 'containers/App';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -48,9 +44,12 @@ import '!file-loader?name=[name].[ext]!./dark.css';
 /* eslint-enable import/no-webpack-loader-syntax */
 
 import configureStore from './configureStore';
+import rootSaga from './sagas';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
+
+import Root from './containers/Root';
 
 // Observe loading of Lato (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
@@ -68,15 +67,14 @@ latoObserver.load().then(() => {
 const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
+store.runSaga(rootSaga);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <Root history={history} />
       </LanguageProvider>
     </Provider>,
     MOUNT_NODE
@@ -87,7 +85,7 @@ if (module.hot) {
   // Hot reloadable React components and translation json files
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
-  module.hot.accept(['./i18n', 'containers/App'], () => {
+  module.hot.accept(['./i18n', 'containers/Router'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render(translationMessages);
   });

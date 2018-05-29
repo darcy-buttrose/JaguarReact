@@ -1,9 +1,3 @@
-/*
- * Teacher
- *
- * This is the first thing teachers see after login
- */
-
 import React from 'react';
 import userIsAuthenticated from 'utils/userIsAuthenticated';
 

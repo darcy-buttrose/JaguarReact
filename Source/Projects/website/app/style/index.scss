@@ -52,6 +52,11 @@ main {
   padding-top: $app-header-height;
 }
 
+.connect-public-layout {
+  @extend .connect-layout;
+  padding-top: 5rem;
+}
+
 img {
     width: 100%;
     height: auto;
