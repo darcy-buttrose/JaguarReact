@@ -8,7 +8,7 @@ import { setFilter, clearFilter } from '../LiveWallPage/actions';
 import makeSelectRoute from '../../state/Route/selectors';
 import makeSelectAuth from '../../state/Auth/selectors';
 import authPropTypes from '../../state/Auth/propTypes';
-import liveWallPropTypes from '../../containers/LiveWallPage/propTypes'; 
+import liveWallPropTypes from '../../containers/LiveWallPage/propTypes';
 import CameraFilter from '../../components/CameraFilter/index';
 import makeSelectLiveWall from '../../containers/LiveWallPage/selectors';
 
@@ -19,7 +19,7 @@ class DjangoButtons extends React.PureComponent {
     if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
       return (
         <span>
-          <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
+          <span className="fas fa-th fa-2x" onClick={this.props.onGoLiveWall}></span>
           <CameraFilter filter={this.props.liveWall.filter} onChangeFilter={this.props.onSetLiveWallFilter} />
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
@@ -31,7 +31,7 @@ class DjangoButtons extends React.PureComponent {
 
 DjangoButtons.propTypes = {
   auth: PropTypes.shape(authPropTypes),
-  liveWall: PropTypes.shape(liveWallPropTypes), 
+  liveWall: PropTypes.shape(liveWallPropTypes),
   onGoLiveWall: PropTypes.func,
   // onGoLogout: PropTypes.func,
   onSetLiveWallFilter: PropTypes.func,
