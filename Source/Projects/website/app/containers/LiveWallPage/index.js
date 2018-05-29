@@ -46,13 +46,15 @@ class LiveWallPage extends React.PureComponent {
       const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/`;
 
       return (
-        <Iframe
-          url={djangoLiveWallUrl}
-          id="django-livewall-iframe"
-          display="flex"
-          position="relative"
-          allowFullScreen
-        />
+        <div className="django-iframe">
+          <Iframe
+            url={djangoLiveWallUrl}
+            id="django-livewall-iframe"
+            display="flex"
+            position="relative"
+            allowFullScreen
+          />
+        </div>
       );
     }
     return null;

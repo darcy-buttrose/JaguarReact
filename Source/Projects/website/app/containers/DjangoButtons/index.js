@@ -12,8 +12,6 @@ class DjangoButtons extends React.PureComponent {
     if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
       return (
         <span>
-          <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
-          {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );
     }

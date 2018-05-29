@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SideBar from 'components/SideBar';
 import AppHeader from '../../containers/AppHeader';
 import StatusBar from '../../components/StatusBar';
 import { ToastContainer } from 'react-toastify';
@@ -9,6 +10,7 @@ function MainLayout(props) {
   return (
     <div className="connect-main-layout">
       <AppHeader />
+      <SideBar />
       {props.children}
       <StatusBar />
       <ToastContainer autoClose={8000} />
