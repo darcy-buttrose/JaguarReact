@@ -1,7 +1,9 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import profileApi from '../../services/profile';
+
 import { updateProfileSuccess, updateProfileFailure } from './actions';
+import { updateCameraFiltersSuccess, updateCameraFiltersFailure } from '../App/actions';
 import { changeTheme } from '../Profile/actions';
 import { UPDATE_PROFILE_INIT } from './constants';
 // import { selectAppDomain } from '../App/selectors';
@@ -50,8 +52,11 @@ function* fetchProfile(action) {
   }
 }
 
+
 function* authSaga() {
   yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile);
 }
+
+
 
 export default authSaga;
