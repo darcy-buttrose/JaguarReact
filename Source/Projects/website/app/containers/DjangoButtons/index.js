@@ -16,11 +16,21 @@ import makeSelectLiveWall from '../../containers/LiveWallPage/selectors';
 
 class DjangoButtons extends React.PureComponent {
   render() {
+    let renderCameraFilter = null;
+    if(this.props.route.location.pathname === '/livewall')
+    renderCameraFilter = (
+        <CameraFilter 
+          filter={this.props.liveWall.filter} 
+          onChangeFilter={this.props.onSetLiveWallFilter} 
+        />
+      ) 
+
+    console.log('ROUTE: ', this.props.route)
     if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
       return (
         <span>
           <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
-          <CameraFilter filter={this.props.liveWall.filter} onChangeFilter={this.props.onSetLiveWallFilter} />
+          {renderCameraFilter}
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );

@@ -9,16 +9,28 @@ class CameraFilter extends Component {
         this.state = {
             filters: [
                 {
-                    id: 1,
-                    name: 'Filter name 1'
+                    "id": 0,
+                    "name": "All cameras"
                 },
                 {
-                    id: 2,
-                    name: 'Filter name 2'
+                    "id": 5,
+                    "name": "Glitchy"
                 },
                 {
-                    id: 3,
-                    name: 'Filter name 3'
+                    "id": 4,
+                    "name": "internal"
+                },
+                {
+                    "id": 1,
+                    "name": "milestone-all"
+                },
+                {
+                    "id": 2,
+                    "name": "milestone-pta"
+                },
+                {
+                    "id": 3,
+                    "name": "milestone-swinburne"
                 }
             ]
         }
@@ -48,23 +60,6 @@ class CameraFilter extends Component {
                     role="presentation"></span>
                 <ul className="app-profile-menu">
                     {this.state.filters.map(renderFilter)}
-                    {/* <li>{props.username}</li>
-                    <hr />
-                    <li
-                    onClick={props.onLogout}
-                    role="presentation"
-                    ><FormattedMessage {...messages.logoff} /></li>
-                    <hr />
-                    <li
-                    className={(props.currentTheme === 'daylight') ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
-                    onClick={() => { props.onChangeTheme('daylight'); }}
-                    role="presentation"
-                    ><FormattedMessage {...messages.daylight} /></li>
-                    <li
-                    className={(props.currentTheme === 'night') ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
-                    onClick={() => { props.onChangeTheme('night'); }}
-                    role="presentation"
-                    ><FormattedMessage {...messages.night} /></li> */}
                 </ul>
             </span>
         )

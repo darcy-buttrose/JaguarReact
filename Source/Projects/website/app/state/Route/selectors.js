@@ -16,7 +16,7 @@ const selectRouteDomain = (state) => state.get('route');
 
 const makeSelectRoute = () => createSelector(
   selectRouteDomain,
-  (substate) => substate
+  (substate) => substate.toJS()
 );
 
 export default makeSelectRoute;
