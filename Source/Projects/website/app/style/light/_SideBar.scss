@@ -1,0 +1,10 @@
+@import 'Variables';
+
+.jaguar-sidebar {
+  float:left;
+  height: 100vh;
+  border-width: 0.1rem;
+  border-style: solid;
+  border-color: $border-color;
+  margin-right: 1rem;
+}

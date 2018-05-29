@@ -40,6 +40,10 @@ button {
   @extend .default-button;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .signout-button {
   @extend .default-button;
   color: $white;

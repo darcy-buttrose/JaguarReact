@@ -6,10 +6,12 @@
   left: 0;
   padding:0;
   width: 100%;
+  z-index: 10;
   height: $app-statusbar-height;
   border-color: $border-color;
   border-width: 0.1rem;
   border-style: solid;
+  background-color: $page-background;
   .app-powered {
     float:right;
     display:inline-block;
