@@ -23,39 +23,39 @@ const create = (baseURL, token) => {
   };
 
   const getProfile = () => new Promise((resolve: Function, reject: Function): void => {
-    fetch(`${baseURL}profile`, {
-      mode: 'cors',
-      method: 'GET',
-      credentials: 'include',
-      headers: getHeaders(),
-    })
+    // fetch(`${baseURL}profile`, {
+    //   mode: 'cors',
+    //   method: 'GET',
+    //   credentials: 'include',
+    //   headers: getHeaders(),
+    // })
+    api.get('profile', {}, { headers: getHeaders() })
       .then((response) => {
         if (response.status !== 200) {
-          reject(new Error('appConfig fetch failed'));
+          reject(new Error('profile api get failed'));
         }
-        return response.json();
+        resolve(response.data);
       })
-      .then(resolve)
       .catch(reject);
   });
 
   const saveProfile = (profile) => new Promise((resolve: Function, reject: Function): void => {
-    fetch(`${baseURL}profile`, {
-      mode: 'cors',
-      method: 'PUT',
-      credentials: 'include',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        profile,
-      }),
-    })
+    // fetch(`${baseURL}profile`, {
+    //   mode: 'cors',
+    //   method: 'PUT',
+    //   credentials: 'include',
+    //   headers: getHeaders(),
+    //   body: JSON.stringify({
+    //     profile,
+    //   }),
+    // })
+    api.put('profile', { profile }, { headers: getHeaders() })
       .then((response) => {
         if (response.status !== 200) {
-          reject(new Error('appConfig fetch failed'));
+          reject(new Error('profile api save failed'));
         }
-        return response.json();
+        resolve(response.data);
       })
-      .then(resolve)
       .catch(reject);
   });
 
