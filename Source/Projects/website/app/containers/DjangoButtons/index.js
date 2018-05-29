@@ -11,6 +11,8 @@ import authPropTypes from '../../state/Auth/propTypes';
 import liveWallPropTypes from '../../containers/LiveWallPage/propTypes';
 import CameraFilter from '../../components/CameraFilter/index';
 import makeSelectLiveWall from '../../containers/LiveWallPage/selectors';
+import makeSelectApp from '../../state/App/selectors';
+import appPropTypes from '../../state/App/propTypes';
 
 
 
@@ -30,7 +32,11 @@ class DjangoButtons extends React.PureComponent {
       return (
         <span>
           <span className="fas fa-th fa-2x" onClick={this.props.onGoLiveWall}></span>
-          <CameraFilter filter={this.props.liveWall.filter} onChangeFilter={this.props.onSetLiveWallFilter} />
+          <CameraFilter 
+            filter={this.props.liveWall.filter} 
+            filters={this.props.app.cameraFilters} 
+            onChangeFilter={this.props.onSetLiveWallFilter} 
+          />
           {/* <button onClick={this.props.onGoLogout}>Logout</button> */}
         </span>
       );
@@ -40,6 +46,7 @@ class DjangoButtons extends React.PureComponent {
 }
 
 DjangoButtons.propTypes = {
+  app: PropTypes.shape(appPropTypes),
   auth: PropTypes.shape(authPropTypes),
   liveWall: PropTypes.shape(liveWallPropTypes),
   onGoLiveWall: PropTypes.func,
@@ -49,6 +56,7 @@ DjangoButtons.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  app: makeSelectApp(),
   auth: makeSelectAuth(),
   liveWall: makeSelectLiveWall(),
   route: makeSelectRoute()
