@@ -20,6 +20,11 @@ import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';
 
 export class AuthConnect extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor () {
+    super();
+
+    this.performAuth = this.performAuth.bind(this);
+  }
 
   performAuth() {
     const { config } = this.props.app;
@@ -42,8 +47,7 @@ export class AuthConnect extends React.PureComponent { // eslint-disable-line re
 
   render() {
     return (
-      <SignIn onSignIn={() => { this.performAuth(); }} />
-      // !this.props.auth.isAuthenticated ? <SignIn onSignIn={() => { this.performAuth(); }} /> : <div className="header-text">{this.props.auth.userName}</div>
+      <span className="clickable far fa-user-circle fa-2x" onClick={this.performAuth} />
     );
   }
 }
