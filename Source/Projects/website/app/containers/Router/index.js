@@ -23,6 +23,9 @@ import LoginPage from '../DjangoLoginPage/Loadable';
 import LogoutPage from '../DjangoLogoutPage/Loadable';
 import AdminPage from '../AdminPage/Loadable';
 import '../../style/index.scss';
+import HistoryPage from '../HistoryPage/Loadable';
+import PlaybackWallPage from '../PlaybackWallPage/Loadable';
+import PlaybackPage from '../PlaybackPage/Loadable';
 
 function Router() {
   return (
@@ -36,6 +39,9 @@ function Router() {
       <Switch>
         <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
+        <AppRoute exact path="/playbackwall" layout={MainLayout} component={PlaybackWallPage} />
+        <AppRoute exact path="/playback" layout={MainLayout} component={PlaybackPage} />
+        <AppRoute exact path="/history" layout={MainLayout} component={HistoryPage} />
         <AppRoute exact path="/admin" layout={MainLayout} component={AdminPage} />
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />

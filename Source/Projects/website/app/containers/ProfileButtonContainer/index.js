@@ -41,8 +41,6 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     return (
       <span>
         { this.props.profile.currentTheme === 'night' ? <ThemeSwitcher /> : '' }
-        <button className="default-button" onClick={this.props.onGoLiveWall}>Livewall</button>
-        {/* <button onClick={this.props.onGoLogin}>Login</button> */}
         <ProfileButton
           username={this.props.auth.userName}
           onLogout={() => { this.performAuthRemoval(); }}
