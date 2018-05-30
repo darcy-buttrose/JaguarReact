@@ -9,6 +9,8 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import appReducer from 'state/App/reducer';
 import authReducer from 'state/Auth/reducer';
 import profileReducer from 'state/Profile/reducer';
+import liveWallReducer from './containers/LiveWallPage/reducer';
+
 
 /*
  * routeReducer
@@ -48,6 +50,7 @@ export default function createReducer(injectedReducers) {
     app: appReducer,
     auth: authReducer,
     profile: profileReducer,
+    liveWall: liveWallReducer,
     ...injectedReducers,
   });
 }

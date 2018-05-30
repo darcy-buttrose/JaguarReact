@@ -1,7 +1,15 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getConfig } from '../../services/config';
-import { loadConfigSuccess, loadConfigFailure } from './actions';
-import { CONFIG_REQUEST_INIT } from './constants';
+import { 
+  loadConfigSuccess, 
+  loadConfigFailure, 
+  updateCameraFiltersSuccess,
+  updateCameraFiltersFailure
+} from './actions';
+import { CONFIG_REQUEST_INIT, CAMERA_FILTERS_UPDATE_INIT } from './constants';
+import cameraFilterApi from '../../services/cameraFilter';
+import cameraFilter from '../../services/cameraFilter';
+
 
 function* fetchConfig() {
   try {
@@ -12,8 +20,27 @@ function* fetchConfig() {
   }
 }
 
+
+function* fetchCameraFilters(action) {
+  try {
+    const { options } = action;
+    const state = yield select();
+    const app = state.get('app').toJS();
+    const auth = state.get('auth').toJS();
+    const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
+    const idToken = auth.user.id_token;
+    const cameraFilterData = cameraFilterApi.create(apiUrl, idToken);
+    const cameraFilters = yield call(cameraFilterData.getCameraFilter);
+    yield put(updateCameraFiltersSuccess(cameraFilters));
+  } catch (e) {
+    yield put(updateCameraFiltersFailure(e.message));
+  }
+}
+
+
 function* appSaga() {
   yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
+  yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters);
 }
 
 export default appSaga;

@@ -8,9 +8,12 @@ import { compose } from 'redux';
 
 import makeSelectAuth from '../../state/Auth/selectors';
 import makeSelectApp from '../../state/App/selectors';
+import { startUpdateCameraFilters } from '../../state/App/actions';
 import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';
+
+
 
 class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
@@ -104,6 +107,7 @@ function mapDispatchToProps(dispatch) {
     onLoginSuccess: (token) => {
       dispatch(loginSuccess(token));
       dispatch(startUpdateProfile({ redirectToHome: true, updateTheme: true }));
+      dispatch(startUpdateCameraFilters());
     },
     onLoginFailure: (error) => dispatch(loginFailure(error)),
     dispatch,
