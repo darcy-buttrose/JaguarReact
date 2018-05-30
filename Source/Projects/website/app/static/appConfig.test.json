@@ -1,0 +1,12 @@
+{
+  "clientAppSettings": {
+    "apiUrl": "portal-test:80/api/",
+    "identityUrl": "portal-test:22530/",
+    "thisUrl": "portal-test:80/",
+    "djangoUrl": "portal-test:8000/",
+    "authMode": "other",
+    "apiScheme": "http://",
+    "trackMetrics": false,
+    "channel": "icetana-portal-channel"
+  }
+}

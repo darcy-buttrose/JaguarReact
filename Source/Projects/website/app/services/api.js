@@ -4,6 +4,28 @@ import apisauce from 'apisauce';
  * apisauce is supported by reactotron.
  */
 
+let profiles = {
+  admin: {
+    role: ['admin'],
+  },
+  icetana: {
+    role: ['operator'],
+  },
+};
+
+function resolveProfile(user) {
+  const profile = {
+    name: user.username,
+  };
+  return Object.assign({}, profile, profiles[profile.name] || { role: ['other'] });
+}
+
+function parseJwt (token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};
+
 // Create a base for API.
 const create = (baseURL, token) => {
   const api = apisauce.create({
@@ -22,44 +44,27 @@ const create = (baseURL, token) => {
     return headers;
   };
 
+  const getUser = () => {
+    return parseJwt(token);
+  };
+
   const getSomething = () => api.get('getSomething', {}, { headers: getHeaders() });
   const sendSomething = (somethingModel) => api.post('addSomething', somethingModel, { headers: getHeaders() });
 
   const getProfile = () => new Promise((resolve: Function, reject: Function): void => {
-    fetch(`${baseURL}profile`, {
-      mode: 'cors',
-      method: 'GET',
-      credentials: 'include',
-      headers: getHeaders(),
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          reject(new Error('appConfig fetch failed'));
-        }
-        return response.json();
-      })
-      .then(resolve)
-      .catch(reject);
+    const user = getUser();
+    const outProfile = resolveProfile(user);
+    console.log('get profile out', outProfile);
+    resolve(outProfile);
   });
 
   const saveProfile = (profile) => new Promise((resolve: Function, reject: Function): void => {
-    fetch(`${baseURL}profile`, {
-      mode: 'cors',
-      method: 'PUT',
-      credentials: 'include',
-      headers: getHeaders(),
-      body: JSON.stringify({
-        profile,
-      }),
-    })
-      .then((response) => {
-        if (response.status !== 200) {
-          reject(new Error('appConfig fetch failed'));
-        }
-        return response.json();
-      })
-      .then(resolve)
-      .catch(reject);
+    const user = getUser();
+    const existingProfile = resolveProfile(user);
+    profiles[user.username] = Object.assign({}, existingProfile, profile);
+    const outProfile = resolveProfile(user);
+    console.log('put profile out', outProfile);
+    resolve(outProfile);
   });
 
 
