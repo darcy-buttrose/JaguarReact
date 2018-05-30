@@ -37,7 +37,7 @@ function Router() {
         <meta name="Jaguar" content="." />
       </Helmet>
       <Switch>
-        <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
+        <AppRoute exact path="/" layout={PublicLayout} component={LoginPage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
         <AppRoute exact path="/playbackwall" layout={MainLayout} component={PlaybackWallPage} />
         <AppRoute exact path="/playback" layout={MainLayout} component={PlaybackPage} />
