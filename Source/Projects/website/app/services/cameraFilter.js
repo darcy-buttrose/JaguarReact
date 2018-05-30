@@ -4,6 +4,33 @@ import apisauce from 'apisauce';
  * apisauce is supported by reactotron.
  */
 
+const cameraFilter = [
+  {
+    "id": 0,
+    "name": "All Cameras"
+  },
+  {
+    "id": 5,
+    "name": "Glitchy"
+  },
+  {
+    "id": 4,
+    "name": "internal"
+  },
+  {
+    "id": 1,
+    "name": "milestone-all"
+  },
+  {
+    "id": 2,
+    "name": "milestone-pta"
+  },
+  {
+    "id": 3,
+    "name": "milestone-swinburne"
+  }
+];
+
 // Create a base for API.
 const create = (baseURL, token) => {
   const api = apisauce.create({
@@ -23,14 +50,7 @@ const create = (baseURL, token) => {
   };
 
   const getCameraFilter = () => new Promise((resolve: Function, reject: Function): void => {
-    api.get('cameraFilter', {}, { headers: getHeaders() })
-      .then((response) => {
-        if (response.status !== 200) {
-          reject(new Error('cameraFilter api get failed'));
-        }
-        resolve(response.data);
-      })
-      .catch(reject);
+    resolve(cameraFilter);
   });
 
 
