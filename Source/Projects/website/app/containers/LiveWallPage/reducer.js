@@ -7,50 +7,26 @@
 import { fromJS } from 'immutable';
 
 import {
-  LOGIN_REQUEST_INIT,
-  LOGIN_REQUEST_SUCCESS,
-  LOGIN_REQUEST_FAILURE,
-  LOGOUT,
+  LIVEWALL_UPDATE_CAMERAFILTER,
+  LIVEWALL_CLEAR_CAMERAFILTER,
 } from './constants';
 
 const initialState = fromJS({
-  token: '',
-  isAuthenticated: false,
-  isAuthenticating: false,
-  showError: false,
-  errorMessage: null,
+  filter: 0
 });
 
-/**
- * [authReducer description]
- * @param  {[type]} [state=initialState] [description]
- * @param  {[type]} action               [description]
- * @return {[type]}                      [description]
- */
-function authReducer(state = initialState, action) {
+
+function liveWallReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST_INIT:
+    case LIVEWALL_UPDATE_CAMERAFILTER:
       return state
-        .set('isAuthenticating', true);
-    case LOGIN_REQUEST_SUCCESS:
+        .set('filter', action.filter);
+    case LIVEWALL_CLEAR_CAMERAFILTER:
       return state
-      .set('token', action.token)
-      .set('isAuthenticating', false)
-      .set('isAuthenticated', true);
-    case LOGIN_REQUEST_FAILURE:
-      return state
-      .set('isAuthenticating', false)
-      .set('showError', true)
-      .set('errorMessage', action.error);
-    case LOGOUT:
-      return state
-      .set('token', null)
-      .set('isAuthenticated', false)
-      .set('showError', false)
-      .set('errorMessage', null);
+        .set('filter', initialState.get('filter'));
     default:
       return state;
   }
 }
 
-export default authReducer;
+export default liveWallReducer;

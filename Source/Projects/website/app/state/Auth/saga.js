@@ -1,7 +1,9 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import api from '../../services/api';
+import profileApi from '../../services/profile';
+
 import { updateProfileSuccess, updateProfileFailure } from './actions';
+import { updateCameraFiltersSuccess, updateCameraFiltersFailure } from '../App/actions';
 import { changeTheme } from '../Profile/actions';
 import { UPDATE_PROFILE_INIT } from './constants';
 // import { selectAppDomain } from '../App/selectors';
@@ -36,8 +38,8 @@ function* fetchProfile(action) {
     const auth = state.get('auth').toJS();
     const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
     const idToken = auth.user.id_token;
-    const profileApi = api.create(apiUrl, idToken);
-    const profile = yield call(profileApi.getProfile);
+    const profileData = profileApi.create(apiUrl, idToken);
+    const profile = yield call(profileData.getProfile);
     yield put(updateProfileSuccess(Object.assign({}, profile, { name: profile.username })));
     if (options && options.redirectToHome) {
       yield redirectToHome(profile);
@@ -50,8 +52,11 @@ function* fetchProfile(action) {
   }
 }
 
+
 function* authSaga() {
   yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile);
 }
+
+
 
 export default authSaga;

@@ -1,15 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('Git Test') {
-      steps {
-        script {
-          sshagent(['9665b560-0d86-43cb-805c-aa92f059e87a']) {
-            sh "git status"
-          }
-        }
-      }
-    }
     stage('Generate Version') {
       steps {
         script {
@@ -64,8 +55,7 @@ pipeline {
       steps {
         dir('Source/Projects/website') {
             sh 'npm run build'
-            sh 'ls -latr app-build'
-            sh 'ls -latr server-build'
+            sh 'ls -latr build'
         }
       }
     }
@@ -77,21 +67,21 @@ pipeline {
         }
       }
       steps {
-        dir('Source/Projects/website/server-build') {
+        dir('Source/Projects/website/build') {
           script {
             if (env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'develop') {
-              sh 'mv config.dev.json config.json'
+              sh 'mv appConfig.dev.json appConfig.json'
             } else if (env.BRANCH_NAME == 'develop') {
-              sh 'mv config.test.json config.json'
+              sh 'mv appConfig.test.json appConfig.json'
             } else if (env.BRANCH_NAME == 'master') {
-              sh 'mv config.demo.json config.json'
+              sh 'mv appConfig.demo.json appConfig.json'
             }
           }
           sh 'ls -latr'
-          sh 'cat config.json'
+          sh 'cat appConfig.json'
         }
         dir('Source/Projects/website') {
-            sh 'cp -r -v app-build server-build internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
+            sh 'cp -r -v build server internals app package*.json .dockerignore Dockerfile /tmp/jaguar-website'
             sh 'ls -latr /tmp/jaguar-website'
         }
       }

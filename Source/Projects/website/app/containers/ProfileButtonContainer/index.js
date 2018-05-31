@@ -20,9 +20,13 @@ import { logout } from '../../state/Auth/actions';
 import { changeTheme } from '../../state/Profile/actions';
 import mgr from '../AuthConnect/userManager';
 import '../../style/light/index.scss';
+
 import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';
 import profilePropTypes from '../../state/Profile/propTypes';
+
+
+
 
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

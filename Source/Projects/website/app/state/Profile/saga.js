@@ -1,5 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import api from '../../services/api';
+import profileApi from '../../services/profile';
 import { CHANGE_THEME } from './constants';
 
 function* saveTheme(action) {
@@ -9,9 +9,9 @@ function* saveTheme(action) {
   const auth = state.get('auth').toJS();
   const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
   const idToken = auth.user.id_token;
-  const profileApi = api.create(apiUrl, idToken);
+  const profileData = profileApi.create(apiUrl, idToken);
   if (options.save) {
-    yield call(profileApi.saveProfile, {theme: action.item});
+    yield call(profileData.saveProfile, {theme: action.item});
   }
 }
 

@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the livewall state domain
  */
-const selectLiveWallDomain = (state) => state.get('livewall');
+const selectLiveWallDomain = (state) => state.get('liveWall');
 
 /**
  * Other specific selectors

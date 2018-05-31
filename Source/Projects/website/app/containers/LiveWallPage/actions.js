@@ -1,23 +1,22 @@
 /*
  *
- * Auth actions
+ * LiveWall actions
  *
  */
 
 import {
-  LOGIN_REQUEST_INIT,
-  LOGIN_REQUEST_SUCCESS,
-  LOGIN_REQUEST_FAILURE,
-  LOGOUT,
+  LIVEWALL_UPDATE_CAMERAFILTER,
+  LIVEWALL_CLEAR_CAMERAFILTER,
 } from './constants';
 
 /**
  * [loginStart description]
  * @return {[type]} [description]
  */
-export function loginStart() {
+export function setFilter(filter) {
   return {
-    type: LOGIN_REQUEST_INIT,
+    type: LIVEWALL_UPDATE_CAMERAFILTER,
+    filter
   };
 }
 
@@ -26,31 +25,8 @@ export function loginStart() {
  * @param  {[type]} user [description]
  * @return {[type]}      [description]
  */
-export function loginSuccess(token) {
+export function clearFilter() {
   return {
-    type: LOGIN_REQUEST_SUCCESS,
-    token,
-  };
-}
-
-/**
- * [loginFailure description]
- * @param  {[type]} error [description]
- * @return {[type]}       [description]
- */
-export function loginFailure(error) {
-  return {
-    type: LOGIN_REQUEST_FAILURE,
-    error,
-  };
-}
-
-/**
- * [logout description]
- * @return {[type]} [description]
- */
-export function logout() {
-  return {
-    type: LOGOUT,
+    type: LIVEWALL_CLEAR_CAMERAFILTER
   };
 }

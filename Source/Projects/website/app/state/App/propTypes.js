@@ -11,6 +11,10 @@ const appPropTypes = {
       trackMetrics: PropTypes.bool,
     }),
   }),
+  cameraFilters: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string
+  })),
 };
 
 export default appPropTypes;
