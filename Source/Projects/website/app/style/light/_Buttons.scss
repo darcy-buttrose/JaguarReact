@@ -1,1 +1,56 @@
 @import 'Variables';
+
+button {
+  height: 3.1rem;
+}
+
+%button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  color: $icetana-blue;
+  background-color: $white;
+}
+
+.button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  color: $icetana-blue;
+  background-color: $white;
+}
+
+.default-button {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.75;
+  border-radius: 10rem;
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+  color: $icetana-blue;
+  background-color: $white;
+  & :hover {
+    color: lighten($icetana-blue, 50%);
+  }
+}
+
+.signin-button {
+  @extend .default-button;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.signout-button {
+  @extend .default-button;
+  color: $white;
+  background-color: transparent;
+  border-color: $white;
+  border-width: medium;
+  & :hover {
+    color: lighten($icetana-blue, 50%);
+  }
+}
