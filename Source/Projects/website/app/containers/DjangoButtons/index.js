@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
-import { setFilter, clearFilter } from '../LiveWallPage/actions';
+import { setFilter } from '../LiveWallPage/actions';
 import makeSelectRoute from '../../state/Route/selectors';
 import makeSelectAuth from '../../state/Auth/selectors';
 import authPropTypes from '../../state/Auth/propTypes';
@@ -13,13 +13,12 @@ import CameraFilter from '../../components/CameraFilter/index';
 import makeSelectLiveWall from '../../containers/LiveWallPage/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import appPropTypes from '../../state/App/propTypes';
-
-
+import routePropTypes from '../../state/Route/propTypes';
 
 class DjangoButtons extends React.PureComponent {
   render() {
     let renderCameraFilter = null;
-    if(this.props.route.location.pathname === '/livewall') {
+    if (this.props.route.location.pathname === '/livewall') {
       renderCameraFilter = (
         <CameraFilter
           filter={this.props.liveWall.filter}
@@ -29,7 +28,6 @@ class DjangoButtons extends React.PureComponent {
       );
     }
 
-    console.log('ROUTE: ', this.props.route)
     if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
       return (
         <span>
@@ -42,20 +40,18 @@ class DjangoButtons extends React.PureComponent {
 }
 
 DjangoButtons.propTypes = {
+  route: PropTypes.shape(routePropTypes),
   app: PropTypes.shape(appPropTypes),
   auth: PropTypes.shape(authPropTypes),
   liveWall: PropTypes.shape(liveWallPropTypes),
-  onGoLiveWall: PropTypes.func,
-  // onGoLogout: PropTypes.func,
   onSetLiveWallFilter: PropTypes.func,
-  onClearLiveWallFilter: PropTypes.func
 };
 
 const mapStateToProps = createStructuredSelector({
   app: makeSelectApp(),
   auth: makeSelectAuth(),
   liveWall: makeSelectLiveWall(),
-  route: makeSelectRoute()
+  route: makeSelectRoute(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -63,7 +59,6 @@ function mapDispatchToProps(dispatch) {
     onGoLiveWall: () => dispatch(push('/livewall')),
     onGoLogout: () => dispatch(push('/logout')),
     onSetLiveWallFilter: (filter) => dispatch(setFilter(filter)),
-    onClearLiveWallFilter: () => dispatch(clearFilter()),
     dispatch,
   };
 }

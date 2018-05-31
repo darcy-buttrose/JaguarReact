@@ -6,14 +6,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../../state/Auth/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import { startUpdateCameraFilters } from '../../state/App/actions';
 import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
-import authPropTypes from '../../state/Auth/propTypes';
-
-
 
 class DjangoLoginPage extends React.PureComponent {
   constructor(props) {
@@ -31,7 +27,6 @@ class DjangoLoginPage extends React.PureComponent {
     this.channel.subscribe(this.channelHandler);
   }
 
-
   componentWillUnmount() {
     if (this.channelHandler) {
       this.channel.unsubscribe(this.channelHandler);
@@ -39,8 +34,6 @@ class DjangoLoginPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
-    console.log('Login: channelHandler msg', msg);
-
     if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
       this.props.onLogout();
     }
@@ -88,7 +81,6 @@ class DjangoLoginPage extends React.PureComponent {
 
 DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
-  auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,
@@ -97,7 +89,6 @@ DjangoLoginPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   app: makeSelectApp(),
-  auth: makeSelectAuth(),
 });
 
 function mapDispatchToProps(dispatch) {

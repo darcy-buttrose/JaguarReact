@@ -12,7 +12,6 @@ import { Switch, Route } from 'react-router-dom';
 import AppRoute from '../AppRoute/index';
 import PublicLayout from '../../layouts/PublicLayout/index';
 import MainLayout from '../../layouts/MainLayout/index';
-import HomePage from '../HomePage/Loadable';
 import PrivatePage from '../PrivatePage/Loadable';
 import CallbackPage from '../CallbackPage/index';
 import PopupCallback from '../PopupCallback/index';

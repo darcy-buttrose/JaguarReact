@@ -30,6 +30,6 @@ export function updateCameraFiltersFailure(error) {
 
 export function startUpdateCameraFilters() {
   return {
-    type: CAMERA_FILTERS_UPDATE_INIT
+    type: CAMERA_FILTERS_UPDATE_INIT,
   };
 }

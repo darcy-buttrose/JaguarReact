@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 import PublicHeader from '../../containers/PublicHeader';
 import StatusBar from '../../components/StatusBar';

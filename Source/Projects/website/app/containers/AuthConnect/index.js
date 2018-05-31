@@ -8,7 +8,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import SignIn from '../../components/SignIn';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -17,10 +16,9 @@ import makeSelectApp from '../../state/App/selectors';
 import { loginStart, loginSuccess, loginFailure } from '../../state/Auth/actions';
 import mgr from './userManager';
 import appPropTypes from '../../state/App/propTypes';
-import authPropTypes from '../../state/Auth/propTypes';
 
 export class AuthConnect extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  constructor () {
+  constructor() {
     super();
 
     this.performAuth = this.performAuth.bind(this);
@@ -47,7 +45,7 @@ export class AuthConnect extends React.PureComponent { // eslint-disable-line re
 
   render() {
     return (
-      <span className="clickable far fa-user-circle fa-2x" onClick={this.performAuth} />
+      <span className="clickable far fa-user-circle fa-2x" onClick={this.performAuth} role="presentation" />
     );
   }
 }
@@ -59,8 +57,6 @@ AuthConnect.propTypes = {
   onLoginFailure: PropTypes.func,
   onUserRedirect: PropTypes.func,
   onLoginRedirect: PropTypes.func,
-  // onAdminRedirect: PropTypes.func,
-  auth: PropTypes.shape(authPropTypes),
 };
 
 const mapStateToProps = createStructuredSelector({

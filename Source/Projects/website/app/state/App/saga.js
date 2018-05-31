@@ -1,14 +1,13 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getConfig } from '../../services/config';
-import { 
-  loadConfigSuccess, 
-  loadConfigFailure, 
+import {
+  loadConfigSuccess,
+  loadConfigFailure,
   updateCameraFiltersSuccess,
-  updateCameraFiltersFailure
+  updateCameraFiltersFailure,
 } from './actions';
 import { CONFIG_REQUEST_INIT, CAMERA_FILTERS_UPDATE_INIT } from './constants';
 import cameraFilterApi from '../../services/cameraFilter';
-import cameraFilter from '../../services/cameraFilter';
 
 
 function* fetchConfig() {
@@ -21,9 +20,8 @@ function* fetchConfig() {
 }
 
 
-function* fetchCameraFilters(action) {
+function* fetchCameraFilters() {
   try {
-    const { options } = action;
     const state = yield select();
     const app = state.get('app').toJS();
     const auth = state.get('auth').toJS();
