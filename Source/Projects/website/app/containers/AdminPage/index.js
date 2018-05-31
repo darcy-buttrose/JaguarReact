@@ -15,7 +15,7 @@ export class AdminPage extends React.PureComponent { // eslint-disable-line reac
                 <meta name="Admin Page" content="." />
               </Helmet>
               <div>
-                <h1>This is the admin page.</h1>
+                <h1>This your admin page.</h1>
               </div>
             </main>
           </div>
