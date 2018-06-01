@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SideBar from 'components/SideBar';
-import AppHeader from '../../containers/AppHeader';
-import StatusBar from '../../components/StatusBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import AppHeader from '../../containers/AppHeader';
+import StatusBar from '../../components/StatusBar';
 
 function MainLayout(props) {
   return (
