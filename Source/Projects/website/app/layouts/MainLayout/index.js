@@ -6,9 +6,6 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import AppHeader from '../../containers/AppHeader';
 import StatusBar from '../../components/StatusBar';
 
-import SideBar from '../../components/SideBar';
-import AppHeader from '../../containers/AppHeader';
-import StatusBar from '../../components/StatusBar';
 function MainLayout(props) {
   return (
     <div className="connect-main-layout">
