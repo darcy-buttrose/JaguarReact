@@ -23,10 +23,12 @@ const create = (baseURL, token) => {
   };
 
   const getCameraFilter = () => new Promise((resolve: Function, reject: Function): void => {
-    api.get('camera_views/list', {}, { headers: getHeaders() })
+    api.get('camera_views/list/', {}, { headers: getHeaders() })
       .then((response) => {
         if (response.status === 200) {
-          resolve(response.data);
+          let cameraFilters = response.data.results || [];
+          cameraFilters = [{ id: 0, name: 'No Filter' }, ...cameraFilters];
+          resolve(cameraFilters);
         } else {
           reject('get cameraFilter failed');
         }
