@@ -42,6 +42,7 @@
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:simple": "cross-env NODE_ENV=test jest",
+    "test:jenkins": "npm run lint && npm run test:simple",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "flow": "flow"

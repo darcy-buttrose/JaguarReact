@@ -41,7 +41,7 @@ pipeline {
       }
       steps {
         dir('Source/Projects/website') {
-            sh 'npm run test:simple'
+            sh 'npm run test:jenkins'
         }
       }
     }

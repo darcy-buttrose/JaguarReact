@@ -12,7 +12,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  filter: 0
+  filter: 0,
 });
 
 

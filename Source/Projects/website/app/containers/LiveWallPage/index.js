@@ -4,19 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 
 import makeSelectAuth from '../../state/Auth/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import makeSelectLiveWall from './selectors';
 import { updateToken, startUpdateProfile } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
-import userIsAuthenticated from '../../utils/userIsAuthenticated';
-import authPropTypes from '../../state/Auth/propTypes';
 
 import liveWallPropTypes from './propTypes';
-// import reducer from './reducer';
-import injectReducer from '../../utils/injectReducer';
 
 
 class LiveWallPage extends React.PureComponent {
@@ -37,8 +32,6 @@ class LiveWallPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
-    console.log('LiveWallPage: channelHandler msg', msg);
-
     if (msg.token) {
       this.props.onUpdateToken(msg.token);
     }
@@ -48,7 +41,7 @@ class LiveWallPage extends React.PureComponent {
   // local tewst: http://localhost:3000/livewall-inner
   render() {
     const { config } = this.props.app;
-    const filter = this.props.liveWall.filter === 0 ? '' : this.props.liveWall.filter + '/' ;
+    const filter = this.props.liveWall.filter === 0 ? '' : `${this.props.liveWall.filter}/`;
 
     if (config) {
       const djangoLiveWallUrl = `http://${config.clientAppSettings.djangoUrl}portal/ui/livewall/react/${filter}`;
@@ -71,8 +64,7 @@ class LiveWallPage extends React.PureComponent {
 
 LiveWallPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
-  liveWall: PropTypes.shape(liveWallPropTypes), 
-  auth: PropTypes.shape(authPropTypes),
+  liveWall: PropTypes.shape(liveWallPropTypes),
   onUpdateToken: PropTypes.func,
 };
 
@@ -92,12 +84,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// const withReducer = injectReducer({ key: 'liveWall', reducer });
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-
-
-export default compose(
-  // withReducer,
-  withConnect,  
-)(LiveWallPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LiveWallPage);

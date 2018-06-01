@@ -13,7 +13,7 @@ const appPropTypes = {
   }),
   cameraFilters: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string
+    name: PropTypes.string,
   })),
 };
 

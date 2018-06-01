@@ -25,9 +25,6 @@ import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';
 import profilePropTypes from '../../state/Profile/propTypes';
 
-
-
-
 export class ProfileButtonContainer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   performAuthRemoval() {
@@ -62,8 +59,6 @@ ProfileButtonContainer.propTypes = {
   onLogout: PropTypes.func,
   onRedirect: PropTypes.func,
   onLogoutRedirect: PropTypes.func,
-  onGoLiveWall: PropTypes.func,
-//  onGoLogin: PropTypes.func,
   onChangeTheme: PropTypes.func,
   auth: PropTypes.shape(authPropTypes),
   profile: PropTypes.shape(profilePropTypes),

@@ -7,11 +7,9 @@ import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../../state/Auth/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import { logout } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
-import authPropTypes from '../../state/Auth/propTypes';
 
 class DjangoLogoutPage extends React.PureComponent {
   constructor(props) {
@@ -31,8 +29,6 @@ class DjangoLogoutPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
-    console.log('Logout: channelHandler msg', msg);
-
     if (msg.isUserAuthenticated !== undefined) {
       if (!msg.isUserAuthenticated) {
         this.props.onLogout();
@@ -63,14 +59,12 @@ class DjangoLogoutPage extends React.PureComponent {
 
 DjangoLogoutPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
-  auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onUserRedirectToLogin: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   app: makeSelectApp(),
-  auth: makeSelectAuth(),
 });
 
 function mapDispatchToProps(dispatch) {

@@ -16,7 +16,7 @@ import {
 export function setFilter(filter) {
   return {
     type: LIVEWALL_UPDATE_CAMERAFILTER,
-    filter
+    filter,
   };
 }
 
@@ -27,6 +27,6 @@ export function setFilter(filter) {
  */
 export function clearFilter() {
   return {
-    type: LIVEWALL_CLEAR_CAMERAFILTER
+    type: LIVEWALL_CLEAR_CAMERAFILTER,
   };
 }

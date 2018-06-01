@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import makeSelectAuth from '../../state/Auth/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import { startUpdateCameraFilters } from '../../state/App/actions';
 import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
@@ -28,7 +27,6 @@ class DjangoLoginPage extends React.Component {
     this.channel.subscribe(this.channelHandler);
   }
 
-
   componentWillUnmount() {
     if (this.channelHandler) {
       this.channel.unsubscribe(this.channelHandler);
@@ -36,8 +34,6 @@ class DjangoLoginPage extends React.Component {
   }
 
   channelHandler(msg) {
-    console.log('Login: channelHandler msg', msg);
-
     if (msg.isUserAuthenticated !== undefined && msg.isUserAuthenticated === false) {
       this.props.onLogout();
     }
@@ -94,7 +90,6 @@ DjangoLoginPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   app: makeSelectApp(),
-  auth: makeSelectAuth(),
 });
 
 function mapDispatchToProps(dispatch) {

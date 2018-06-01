@@ -17,10 +17,9 @@ const initialState = fromJS({
   cameraFilters: [
     {
       id: 0,
-      name: "All Cameras"
-    }
+      name: 'All Cameras',
+    },
   ],
-  
 });
 
 const appReducer = (state = initialState, action) => {
