@@ -1,36 +1,40 @@
-const cameraFilter = [
-  {
-    id: 0,
-    name: 'All Cameras',
-  },
-  {
-    id: 5,
-    name: 'Glitchy',
-  },
-  {
-    id: 4,
-    name: 'internal',
-  },
-  {
-    id: 1,
-    name: 'milestone-all',
-  },
-  {
-    id: 2,
-    name: 'milestone-pta',
-  },
-  {
-    id: 3,
-    name: 'milestone-swinburne',
-  },
-];
+import apisauce from 'apisauce';
+
+/*
+ * apisauce is supported by reactotron.
+ */
 
 // Create a base for API.
-const create = () => {
-  const getCameraFilter = () => new Promise((resolve: Function): void => {
-    resolve(cameraFilter);
+const create = (baseURL, token) => {
+  const api = apisauce.create({
+    // base URL is read from the "constructor"
+    baseURL,
+    // 10 second timeout...
+    timeout: 10000,
   });
 
+  const getHeaders = () => {
+    const headers = {
+      'Cache-Control': 'no-cache',
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}` };
+    return headers;
+  };
+
+  const getCameraFilter = () => new Promise((resolve: Function, reject: Function): void => {
+    api.get('camera_views/list', {}, { headers: getHeaders() })
+      .then((response) => {
+        if (response.status === 200) {
+          resolve(response.data);
+        } else {
+          reject('get cameraFilter failed');
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 
   return {
     // a list of the API functions
