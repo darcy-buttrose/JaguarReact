@@ -1,6 +1,6 @@
 {
   "clientAppSettings": {
-    "apiUrl": "portal-test:80/api/",
+    "apiUrl": "portal-test:8000/portal/webapi/",
     "identityUrl": "portal-test:22530/",
     "thisUrl": "portal-test:80/",
     "djangoUrl": "portal-test:8000/",
