@@ -26,12 +26,12 @@ function ConfigPage() {
     id,
     name: namor.generate({ words: 2, numbers: 3 }),
     trainedMinutes: Math.floor(Math.random() * 1440),
-    flagsColour: genFlagColour(Math.floor(Math.random() * 3)),
-    attr1: genAttrColour(Math.floor(Math.random() * 3)),
-    attr2: genAttrColour(Math.floor(Math.random() * 3)),
-    attr3: genAttrColour(Math.floor(Math.random() * 3)),
-    attr4: genAttrColour(Math.floor(Math.random() * 3)),
-    attr5: genAttrColour(Math.floor(Math.random() * 3)),
+    flagsColour: genFlagColour(Math.floor(Math.random() * 4)),
+    attr1: genAttrColour(Math.floor(Math.random() * 4)),
+    attr2: genAttrColour(Math.floor(Math.random() * 4)),
+    attr3: genAttrColour(Math.floor(Math.random() * 4)),
+    attr4: genAttrColour(Math.floor(Math.random() * 4)),
+    attr5: genAttrColour(Math.floor(Math.random() * 4)),
   }));
 
   return (
