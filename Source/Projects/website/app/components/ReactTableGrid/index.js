@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import _ from 'lodash';
 
 const trainedTime = (minutes) => `${minutes}m`;
 
@@ -21,7 +20,7 @@ const tvCell = (tvColour) => tvColour !== 'none' ? <span className="fas fa-tv" s
 const boltCell = (boltColour) => boltColour !== 'none' ? <span className="fas fa-bolt" style={{ color: boltColour }} /> : null;
 const sunCell = (sunColour) => sunColour !== 'none' ? <span className="fas fa-sun" style={{ color: sunColour }} /> : null;
 const lightBulbCell = (lightBulbColour) => lightBulbColour !== 'none' ? <span className="fas fa-lightbulb" style={{ color: lightBulbColour }} /> : null;
-const attrFilter = ({filter, onChange}) => (
+const attrFilter = ({ filter, onChange }) => (
   <select
     onChange={(event) => onChange(event.target.value)}
     style={{ width: '100%' }}
@@ -32,7 +31,11 @@ const attrFilter = ({filter, onChange}) => (
     <option value="green">Green</option>
     <option value="orange">Orange</option>
   </select>);
-const flagFilter = ({filter, onChange}) => (
+attrFilter.propTypes = {
+  filter: PropTypes.any,
+  onChange: PropTypes.func,
+};
+const flagFilter = ({ filter, onChange }) => (
   <select
     onChange={(event) => onChange(event.target.value)}
     style={{ width: '100%' }}
@@ -43,6 +46,10 @@ const flagFilter = ({filter, onChange}) => (
     <option value="54">Red</option>
     <option value="21">Green</option>
   </select>);
+flagFilter.propTypes = {
+  filter: PropTypes.any,
+  onChange: PropTypes.func,
+};
 
 const columnsDef = [
   {

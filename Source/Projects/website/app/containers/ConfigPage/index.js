@@ -1,56 +1,44 @@
 import React from 'react';
+import _ from 'lodash';
+import namor from 'namor';
 import ReactTableGrid from '../../components/ReactTableGrid';
 
-class ConfigPage extends React.PureComponent {
-  constructor() {
-    super();
-
-    this.state = {
-      cameraList: [
-        {
-          id: 1,
-          name: 'HIK-Entry-D3003-1-court',
-          trainedMinutes: 2880,
-          flagsColour: 77,
-          attr1: 'red',
-          attr2: 'none',
-          attr3: 'none',
-          attr4: 'none',
-          attr5: 'none',
-        },
-        {
-          id: 2,
-          name: 'HIK-Entry-D3034-2-ship',
-          trainedMinutes: 1560,
-          flagsColour: 54,
-          attr1: 'none',
-          attr2: 'none',
-          attr3: 'none',
-          attr4: 'red',
-          attr5: 'none',
-        },
-        {
-          id: 3,
-          name: 'HIK-D4780-1-Entry',
-          trainedMinutes: 4320,
-          flagsColour: 21,
-          attr1: 'none',
-          attr2: 'none',
-          attr3: 'none',
-          attr4: 'none',
-          attr5: 'orange',
-        },
-      ],
-    };
+const genFlagColour = (number) => {
+  switch (number) {
+    case 1: return 77;
+    case 2: return 21;
+    case 3: return 54;
+    default: return 0;
   }
+};
 
-  render() {
-    return (
-      <div>
-        <ReactTableGrid cameraList={this.state.cameraList} />
-      </div>
-    );
+const genAttrColour = (number) => {
+  switch (number) {
+    case 1: return 'red';
+    case 2: return 'green';
+    case 3: return 'orange';
+    default: return 'none';
   }
+};
+
+function ConfigPage() {
+  const randomCameraList = _.range(1, 4000).map((id) => ({
+    id,
+    name: namor.generate({ words: 2, numbers: 3 }),
+    trainedMinutes: Math.floor(Math.random() * 1440),
+    flagsColour: genFlagColour(Math.floor(Math.random() * 3)),
+    attr1: genAttrColour(Math.floor(Math.random() * 3)),
+    attr2: genAttrColour(Math.floor(Math.random() * 3)),
+    attr3: genAttrColour(Math.floor(Math.random() * 3)),
+    attr4: genAttrColour(Math.floor(Math.random() * 3)),
+    attr5: genAttrColour(Math.floor(Math.random() * 3)),
+  }));
+
+  return (
+    <div>
+      <ReactTableGrid cameraList={randomCameraList} />
+    </div>
+  );
 }
 
 export default ConfigPage;
