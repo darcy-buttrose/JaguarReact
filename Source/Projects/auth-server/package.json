@@ -1,0 +1,23 @@
+{
+  "name": "auth-server",
+  "version": "1.0.0",
+  "description": "Federated Authentication for Jaguar",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/icetana/JaguarReact.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "authentication",
+    "openid"
+  ],
+  "author": "John Morton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "oidc-provider": "^4.0.2"
+  }
+}
