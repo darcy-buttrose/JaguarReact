@@ -5,3 +5,5 @@ Projects/.DS_Store
 Source/Projects/membership/appsettings\.Development\.json
 
 Source/Projects/website/app/static/appConfig\.json
+
+Source/Projects/website/package-lock\.json
