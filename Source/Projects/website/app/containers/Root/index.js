@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConnectedRouter, push } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import { connect } from 'react-redux';
 import Router from '../Router';
 import { startLoadConfig } from '../../state/App/actions';
@@ -32,7 +32,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onStart: () => {
       dispatch(startLoadConfig());
-      dispatch(push('/'));
+      // dispatch(push('/'));
     },
     dispatch,
   };

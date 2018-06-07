@@ -19,7 +19,6 @@ import makeSelectProfile from '../../state/Profile/selectors';
 import { logout } from '../../state/Auth/actions';
 import { changeTheme } from '../../state/Profile/actions';
 import mgr from '../AuthConnect/userManager';
-import '../../style/light/index.scss';
 
 import appPropTypes from '../../state/App/propTypes';
 import authPropTypes from '../../state/Auth/propTypes';

@@ -23,7 +23,7 @@ function NavOperator() {
           <span className="fas fa-history fa-2x"></span>
           <FormattedMessage {...messages.history} />
         </NavLink>
-        <NavLink to="/livewall">
+        <NavLink to="/private">
           <span className="fas fa-cogs fa-2x"></span>
           <FormattedMessage {...messages.config} />
         </NavLink>

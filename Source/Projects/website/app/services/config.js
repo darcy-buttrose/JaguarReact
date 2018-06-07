@@ -1,3 +1,6 @@
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
+
 export function getConfig() {
   return new Promise((resolve: Function, reject: Function): void => {
     fetch('/config', {

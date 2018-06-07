@@ -8,7 +8,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-
 import AppRoute from '../AppRoute/index';
 import PublicLayout from '../../layouts/PublicLayout/index';
 import MainLayout from '../../layouts/MainLayout/index';
@@ -21,10 +20,10 @@ import LiveWallPage from '../LiveWallPage/Loadable';
 import LoginPage from '../DjangoLoginPage/Loadable';
 import LogoutPage from '../DjangoLogoutPage/Loadable';
 import AdminPage from '../AdminPage/Loadable';
-import '../../style/index.scss';
 import HistoryPage from '../HistoryPage/Loadable';
 import PlaybackWallPage from '../PlaybackWallPage/Loadable';
 import PlaybackPage from '../PlaybackPage/Loadable';
+import '../../style/index.scss';
 
 function Router() {
   return (

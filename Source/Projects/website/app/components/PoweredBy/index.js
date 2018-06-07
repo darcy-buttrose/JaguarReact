@@ -6,7 +6,8 @@ import messages from './messages';
 function PoweredBy() {
   return (
     <span className="app-powered-by">
-      <FormattedMessage {...messages.powered} /> <img src={logo} alt="" />
+      <FormattedMessage {...messages.powered} />
+      <img src={logo} alt="" />
     </span>
   );
 }
