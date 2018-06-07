@@ -23,6 +23,7 @@ import AdminPage from '../AdminPage/Loadable';
 import HistoryPage from '../HistoryPage/Loadable';
 import PlaybackWallPage from '../PlaybackWallPage/Loadable';
 import PlaybackPage from '../PlaybackPage/Loadable';
+import ConfigPage from '../ConfigPage/Loadable';
 import '../../style/index.scss';
 
 function Router() {
@@ -44,6 +45,7 @@ function Router() {
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
         <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />
+        <AppRoute exact path="/config" layout={MainLayout} component={ConfigPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />
         <Route path="/popupcallback" component={PopupCallback} />
