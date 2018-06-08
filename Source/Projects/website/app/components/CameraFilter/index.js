@@ -9,7 +9,7 @@ class CameraFilter extends PureComponent {
     const renderFilter = (el) => (
       <li
         key={el.id}
-        className={(currentFilter === el) ? 'app-profile-menu-selected' : 'app-profile-menu-item'}
+        className={(currentFilter === el) ? 'app-camerafilter-menu-selected' : 'app-camerafilter-menu-item'}
         onClick={() => {
           this.props.onChangeFilter(el.id);
         }}
@@ -20,12 +20,12 @@ class CameraFilter extends PureComponent {
     );
 
     return (
-      <span className="app-profile">
+      <span className="app-camerafilter">
         <span
           className="fas fa-filter fa-2x"
           role="presentation"
         />
-        <ul className="app-profile-menu">
+        <ul className="app-camerafilter-menu">
           {this.props.filters.map(renderFilter)}
         </ul>
       </span>
