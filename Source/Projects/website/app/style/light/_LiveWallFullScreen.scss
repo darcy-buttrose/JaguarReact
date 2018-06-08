@@ -1,0 +1,52 @@
+@import 'Variables';
+
+ /* The Modal (background) */
+ .Modal {
+    display: block;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+.Modal-content {
+    background-color: #fefefe;
+    margin: 10px auto;
+    /* 15% from the top and centered */
+    /* padding: 20px; */
+    border: 1px solid #888;
+    width: 99%;
+    min-height: 99%;
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+
+.Close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.Close:hover,
+.Close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
