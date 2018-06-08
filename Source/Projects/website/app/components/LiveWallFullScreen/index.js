@@ -1,15 +1,33 @@
-import React, { PureComponent } from 'react';
-import liveWallFullScreenButton from '../LiveWallFullScreenButton';
+import React, { Component } from 'react';
 
 
-class LiveWallFullScreen extends PureComponent {
+class LiveWallFullScreen extends Component {
+  state = {
+    fullScreen: true,
+  }
+
+  toggleFullScreenHandler = () => this.setState({ fullScreen: !this.state.fullScreen });
 
   render() {
+    let fullScreen = null;
+    if (this.state.fullScreen) {
+      fullScreen = (
+        <object
+          className="Modal"
+          src="http://10.1.1.73:8000/portal/ui/livewall/react/"
+          title="livewallfullscreen"
+        ></object>
+    );
+    }
+
     return (
       <span>
-        <liveWallFullScreenButton />
-        <iframe src="https://www.w3schools.com" title="livewallfullscreen">
-        </iframe>
+        <span
+          className="fas fa-expand-arrows-alt fa-2x"
+          role="presentation"
+          onClick={this.toggleFullScreenHandler}
+        ></span>
+        {fullScreen}
       </span>
     );
   }
