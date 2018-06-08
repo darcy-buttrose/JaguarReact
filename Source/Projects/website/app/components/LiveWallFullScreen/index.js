@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class LiveWallFullScreen extends Component {
   state = {
-    fullScreen: true,
+    fullScreen: false,
   }
 
   toggleFullScreenHandler = () => this.setState({ fullScreen: !this.state.fullScreen });
@@ -12,16 +12,24 @@ class LiveWallFullScreen extends Component {
     let fullScreen = null;
     if (this.state.fullScreen) {
       fullScreen = (
-        <object
-          className="Modal"
-          src="http://10.1.1.73:8000/portal/ui/livewall/react/"
-          title="livewallfullscreen"
-        ></object>
-    );
+        <span>
+          <object
+            className="LiveWallModal"
+            src="http://portal-dev:8000/portal/ui/livewall/react/"
+            title="livewallfullscreen"
+          >
+          </object>
+          <span
+            className="LiveWallModalClose fas fa-times-circle fa-2x"
+            role="presentation"
+            onClick={this.toggleFullScreenHandler}
+          ></span>
+        </span>
+      );
     }
 
     return (
-      <span>
+      <span className="app-header-item">
         <span
           className="fas fa-expand-arrows-alt fa-2x"
           role="presentation"
