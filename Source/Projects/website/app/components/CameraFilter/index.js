@@ -19,8 +19,9 @@ class CameraFilter extends PureComponent {
       </li>
     );
 
-    return (
-      <span className="app-camerafilter">
+
+    let cameraFilter = (
+      <span>
         <span
           className="fas fa-filter fa-2x"
           role="presentation"
@@ -28,6 +29,25 @@ class CameraFilter extends PureComponent {
         <ul className="app-camerafilter-menu">
           {this.props.filters.map(renderFilter)}
         </ul>
+      </span>
+    );
+    if (this.props.position === 'footer' && !this.props.liveWallFullScreen) {
+      cameraFilter = (
+        <span>
+          <span
+            className="fas fa-filter fa-lg"
+            role="presentation"
+          />
+          <ul className="app-camerafilter-menu-dropup">
+            {this.props.filters.map(renderFilter)}
+          </ul>
+        </span>
+      );
+    }
+
+    return (
+      <span className="app-camerafilter">
+        {cameraFilter}
       </span>
     );
   }
@@ -41,6 +61,8 @@ CameraFilter.propTypes = {
     name: PropTypes.string,
   })),
   onChangeFilter: PropTypes.func,
+  position: PropTypes.string,
+  liveWallFullScreen: PropTypes.bool,
 };
 
 

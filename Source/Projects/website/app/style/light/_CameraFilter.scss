@@ -13,8 +13,13 @@
       color: lighten($icetana-blue, 20%);
     }
 
-    .app-camerafilter-menu, .app-camerafilter-menu-popup {
+    .app-camerafilter-menu {
       display:inline-block;
+    }
+    .app-camerafilter-menu-dropup {
+      display: inline-block;
+      bottom: .5rem;
+      right: 14.5rem;
     }
   }
 
@@ -72,10 +77,10 @@
 
 
 
-  .app-camerafilter-menu-popup {
+  .app-camerafilter-menu-dropup {
     position: absolute;
-    top: $app-header-height;
-    right: 11rem;
+    bottom: $app-statusbar-height;
+    right: 2rem;
     display: none;
     border-color: $border-color;
     border-style: solid;
@@ -89,13 +94,13 @@
     &:after {
       position: absolute;
       right: 0.3rem;
-      top: -0.8rem;
+      bottom: -0.8rem;
       width: 0;
       height: 0;
       content: '';
       border-left: 0.8rem solid transparent;
       border-right: 0.8rem solid transparent;
-      border-bottom: 0.8rem solid $icetana-blue;
+      border-top: 0.8rem solid $icetana-blue;
     }
     li {
       padding-left: 2.5rem;

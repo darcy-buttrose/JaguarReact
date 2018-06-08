@@ -16,7 +16,7 @@
     float:right;
     display:inline-block;
     margin-right: 0.5rem;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
     img {
       max-width: 8rem;
       vertical-align:sub;
@@ -26,7 +26,16 @@
       font-size: 1.2rem;
       font-style: italic;
       vertical-align: super;
-    }
+    }  
+  }
+
+  .app-item {
+    font-size: 1.2rem;
+    font-style: italic;
+    vertical-align: super;
+    float:right;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
   }
 
 }

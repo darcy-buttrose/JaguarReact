@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 
 class LiveWallFullScreen extends Component {
@@ -7,6 +8,7 @@ class LiveWallFullScreen extends Component {
   }
 
   toggleFullScreenHandler = () => this.setState({ fullScreen: !this.state.fullScreen });
+
 
   render() {
     let fullScreen = null;
@@ -28,18 +30,27 @@ class LiveWallFullScreen extends Component {
       );
     }
 
+    let fullScreenButton = (
+      <span
+        className="fas fa-expand-arrows-alt fa-2x"
+        role="presentation"
+        onClick={this.toggleFullScreenHandler}
+      ></span>
+    );
+    if (this.props.position === 'footer') fullScreenButton = null;
+
     return (
       <span className="app-header-item">
-        <span
-          className="fas fa-expand-arrows-alt fa-2x"
-          role="presentation"
-          onClick={this.toggleFullScreenHandler}
-        ></span>
+        {fullScreenButton}
         {fullScreen}
       </span>
     );
   }
 }
 
+
+LiveWallFullScreen.propTypes = {
+  position: PropTypes.string,
+};
 
 export default LiveWallFullScreen;

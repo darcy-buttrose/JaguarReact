@@ -18,6 +18,7 @@ import LiveWallFullScreen from '../../components/LiveWallFullScreen/index';
 
 
 class DjangoButtons extends React.PureComponent {
+
   render() {
     let renderCameraFilter = null;
     if (this.props.route.location.pathname === '/livewall') {
@@ -27,8 +28,10 @@ class DjangoButtons extends React.PureComponent {
             filter={this.props.liveWall.filter}
             filters={this.props.app.cameraFilters}
             onChangeFilter={this.props.onSetLiveWallFilter}
+            position={this.props.position}
+            liveWallFullScreen={this.props.liveWallFullScreen}
           />
-          <LiveWallFullScreen />
+          <LiveWallFullScreen position={this.props.position} />
         </span>
       );
     }
@@ -50,6 +53,8 @@ DjangoButtons.propTypes = {
   auth: PropTypes.shape(authPropTypes),
   liveWall: PropTypes.shape(liveWallPropTypes),
   onSetLiveWallFilter: PropTypes.func,
+  position: PropTypes.string,
+  liveWallFullScreen: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
