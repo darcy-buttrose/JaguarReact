@@ -1,43 +1,44 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import connect from 'react-redux/lib/connect/connect';
+
+import { createStructuredSelector } from 'reselect';
+import liveWallFullScreenPropTypes from './propTypes';
+import makeSelectLiveWallFullScreen from './selectors';
+import { LIVEWALL_FULLSCREEN } from './actions';
 
 
-class LiveWallFullScreen extends Component {
-  state = {
-    fullScreen: false,
-  }
-
-  toggleFullScreenHandler = () => this.setState({ fullScreen: !this.state.fullScreen });
-
-
+class LiveWallFullScreen extends PureComponent {
   render() {
+    console.log('LiveWallFullScreen::liveWallFullScreen:: ', this.props.liveWallFullScreen.fullScreen);
     let fullScreen = null;
-    if (this.state.fullScreen) {
+    if (this.props.liveWallFullScreen.fullScreen) {
       fullScreen = (
         <span>
-          <object
-            className="LiveWallModal"
-            src="http://portal-dev:8000/portal/ui/livewall/react/"
-            title="livewallfullscreen"
-          >
-          </object>
-          <span
-            className="LiveWallModalClose fas fa-times-circle fa-2x"
-            role="presentation"
-            onClick={this.toggleFullScreenHandler}
-          ></span>
+          <div className="LiveWallModal">
+            <span
+              className="LiveWallModalClose fas fa-times-circle fa-2x"
+              role="presentation"
+              onClick={this.props.onToggleLiveWallFullScreen}
+            ></span>
+            <object
+              className="LiveWallModal"
+              src="http://localhost:8000/portal/ui/livewall/react/"
+              title="livewallfullscreen"
+            >
+            </object>
+          </div>
         </span>
       );
     }
 
-    let fullScreenButton = (
+    const fullScreenButton = (
       <span
         className="fas fa-expand-arrows-alt fa-2x"
         role="presentation"
-        onClick={this.toggleFullScreenHandler}
+        onClick={this.props.onToggleLiveWallFullScreen}
       ></span>
     );
-    if (this.props.position === 'footer') fullScreenButton = null;
 
     return (
       <span className="app-header-item">
@@ -50,7 +51,22 @@ class LiveWallFullScreen extends Component {
 
 
 LiveWallFullScreen.propTypes = {
-  position: PropTypes.string,
+  // position: PropTypes.string,
+  liveWallFullScreen: PropTypes.shape(liveWallFullScreenPropTypes),
+  onToggleLiveWallFullScreen: PropTypes.func,
 };
 
-export default LiveWallFullScreen;
+
+// const mapStateToProps = (state) => ({
+//   fullScreen: this.props.fullScreen,
+// });
+const mapStateToProps = createStructuredSelector({
+  liveWallFullScreen: makeSelectLiveWallFullScreen(),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onToggleLiveWallFullScreen: () => dispatch({ type: LIVEWALL_FULLSCREEN }),
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LiveWallFullScreen);

@@ -29,9 +29,10 @@ class DjangoButtons extends React.PureComponent {
             filters={this.props.app.cameraFilters}
             onChangeFilter={this.props.onSetLiveWallFilter}
             position={this.props.position}
-            liveWallFullScreen={this.props.liveWallFullScreen}
           />
-          <LiveWallFullScreen position={this.props.position} />
+          <LiveWallFullScreen
+            position={this.props.position}
+          />
         </span>
       );
     }
@@ -54,7 +55,6 @@ DjangoButtons.propTypes = {
   liveWall: PropTypes.shape(liveWallPropTypes),
   onSetLiveWallFilter: PropTypes.func,
   position: PropTypes.string,
-  liveWallFullScreen: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
