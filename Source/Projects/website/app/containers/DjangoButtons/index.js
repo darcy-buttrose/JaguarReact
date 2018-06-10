@@ -14,7 +14,6 @@ import makeSelectLiveWall from '../../containers/LiveWallPage/selectors';
 import makeSelectApp from '../../state/App/selectors';
 import appPropTypes from '../../state/App/propTypes';
 import routePropTypes from '../../state/Route/propTypes';
-import LiveWallFullScreen from '../../components/LiveWallFullScreen/index';
 
 
 class DjangoButtons extends React.PureComponent {
@@ -28,9 +27,6 @@ class DjangoButtons extends React.PureComponent {
             filter={this.props.liveWall.filter}
             filters={this.props.app.cameraFilters}
             onChangeFilter={this.props.onSetLiveWallFilter}
-            position={this.props.position}
-          />
-          <LiveWallFullScreen
             position={this.props.position}
           />
         </span>

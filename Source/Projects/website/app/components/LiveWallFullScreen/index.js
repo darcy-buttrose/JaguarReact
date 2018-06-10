@@ -4,15 +4,20 @@ import connect from 'react-redux/lib/connect/connect';
 
 import { createStructuredSelector } from 'reselect';
 import liveWallFullScreenPropTypes from './propTypes';
+import routePropTypes from '../../state/Route/propTypes';
+import makeSelectRoute from '../../state/Route/selectors';
 import makeSelectLiveWallFullScreen from './selectors';
 import { LIVEWALL_FULLSCREEN } from './actions';
+import StatusBar from '../StatusBar';
 
 
 class LiveWallFullScreen extends PureComponent {
   render() {
-    console.log('LiveWallFullScreen::liveWallFullScreen:: ', this.props.liveWallFullScreen.fullScreen);
+    let isLiveWall = false;
+    if (this.props.route.location.pathname === '/livewall') isLiveWall = true;
+
     let fullScreen = null;
-    if (this.props.liveWallFullScreen.fullScreen) {
+    if (this.props.liveWallFullScreen.fullScreen && isLiveWall) {
       fullScreen = (
         <span>
           <div className="LiveWallModal">
@@ -22,23 +27,25 @@ class LiveWallFullScreen extends PureComponent {
               onClick={this.props.onToggleLiveWallFullScreen}
             ></span>
             <object
-              className="LiveWallModal"
-              src="http://localhost:8000/portal/ui/livewall/react/"
+              className="LiveWallModal-content"
+              data="http://localhost:8000/portal/ui/livewall/react/"
               title="livewallfullscreen"
             >
             </object>
+            <StatusBar />
           </div>
         </span>
       );
     }
 
-    const fullScreenButton = (
+    let fullScreenButton = (
       <span
         className="fas fa-expand-arrows-alt fa-2x"
         role="presentation"
         onClick={this.props.onToggleLiveWallFullScreen}
       ></span>
     );
+    if (!isLiveWall || this.props.liveWallFullScreen.fullScreen) fullScreenButton = null;
 
     return (
       <span className="app-header-item">
@@ -51,7 +58,7 @@ class LiveWallFullScreen extends PureComponent {
 
 
 LiveWallFullScreen.propTypes = {
-  // position: PropTypes.string,
+  route: PropTypes.shape(routePropTypes),
   liveWallFullScreen: PropTypes.shape(liveWallFullScreenPropTypes),
   onToggleLiveWallFullScreen: PropTypes.func,
 };
@@ -61,11 +68,13 @@ LiveWallFullScreen.propTypes = {
 //   fullScreen: this.props.fullScreen,
 // });
 const mapStateToProps = createStructuredSelector({
+  route: makeSelectRoute(),
   liveWallFullScreen: makeSelectLiveWallFullScreen(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onToggleLiveWallFullScreen: () => dispatch({ type: LIVEWALL_FULLSCREEN }),
+  dispatch,
 });
 
 
