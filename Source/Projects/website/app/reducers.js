@@ -10,7 +10,7 @@ import appReducer from 'state/App/reducer';
 import authReducer from 'state/Auth/reducer';
 import profileReducer from 'state/Profile/reducer';
 import liveWallReducer from './containers/LiveWallPage/reducer';
-import liveWallFullScreenReducer from './components/LiveWallFullScreen/reducer';
+
 
 /*
  * routeReducer
@@ -51,7 +51,6 @@ export default function createReducer(injectedReducers) {
     auth: authReducer,
     profile: profileReducer,
     liveWall: liveWallReducer,
-    liveWallFullScreen: liveWallFullScreenReducer,
     ...injectedReducers,
   });
 }

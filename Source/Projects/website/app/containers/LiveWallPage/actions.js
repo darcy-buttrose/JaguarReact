@@ -7,7 +7,9 @@
 import {
   LIVEWALL_UPDATE_CAMERAFILTER,
   LIVEWALL_CLEAR_CAMERAFILTER,
+  LIVEWALL_TOGGLE_FULLSCREEN,
 } from './constants';
+
 
 /**
  * [loginStart description]
@@ -28,5 +30,16 @@ export function setFilter(filter) {
 export function clearFilter() {
   return {
     type: LIVEWALL_CLEAR_CAMERAFILTER,
+  };
+}
+
+
+/**
+ * [LiveWallFullScreen description]
+ *
+ */
+export function toggleFullScreen() {
+  return {
+    type: LIVEWALL_TOGGLE_FULLSCREEN,
   };
 }
