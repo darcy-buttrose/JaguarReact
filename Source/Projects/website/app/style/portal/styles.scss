@@ -1,0 +1,315 @@
+@import 'variables';
+@import 'mixins';
+
+// Livewall and Video Panels ----------------------------------------------------------------------
+video {
+  display: block; // prevents 'white borders' on <video> elements
+}
+
+@keyframes scalePulse {
+    0% { transform: scale(0.1, 0.1) rotateY(0deg) rotateZ(0deg); opacity: 1.0; }
+    12% { transform: scale(0.33, 0.33); }
+    25% { transform: scale(0.33, 0.33); }
+    37% { transform: scale(0.66, 0.66); }
+    50% { transform: scale(0.66, 0.66); }
+    62% { transform: scale(1.0, 1.0); }
+    75% { transform: scale(1.0, 1.0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
+    87% { transform: scale(1.5, 1.5) rotateY(180deg) rotateX(45deg) rotateZ(60deg); }
+    100% { transform: scale(0.1, 0.1) rotateY(360deg) rotateX(0deg) rotateZ(0deg); opacity: 1.0; }
+}
+@-webkit-keyframes scalePulse {
+    0% { -webkit-transform: scale(0.1, 0.1) rotateY(0deg) rotateZ(0deg); opacity: 1.0; }
+    12% { -webkit-transform: scale(0.33, 0.33); }
+    25% { -webkit-transform: scale(0.33, 0.33); }
+    37% { -webkit-transform: scale(0.66, 0.66); }
+    50% { -webkit-transform: scale(0.66, 0.66); }
+    62% { -webkit-transform: scale(1.0, 1.0); }
+    75% { -webkit-transform: scale(1.0, 1.0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
+    87% { -webkit-transform: scale(1.5, 1.5) rotateY(180deg) rotateX(45deg) rotateZ(60deg); }
+    100% { -webkit-transform: scale(0.1, 0.1) rotateY(360deg) rotateX(0deg) rotateZ(0deg); opacity: 1.0; }
+}
+
+@keyframes pulsate {
+    0% {transform: scale(0.0, 0.0); opacity: 0.0;}
+    33% {opacity: 1.0;}
+    66% {opacity: 0.0;}
+    100% {transform: scale(2.0, 2.0); opacity: 0.0;}
+}
+@-webkit-keyframes pulsate {
+    0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}
+
+// Spec and IE10+
+@keyframes opacityPulse {
+    0% {opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {opacity: 0.0;}
+}
+// WebKit
+@-webkit-keyframes opacityPulse {
+    0% {opacity: 0.0;}
+    50% {opacity: 1.0;}
+    100% {opacity: 0.0;}
+}
+
+.videowall-container {
+  height:87%;
+  width:100%;
+  .connection-indicator{
+    animation: pulsate 4s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0.0;
+    height: 1em;
+    width: 1em;
+    position: relative;
+    display: inline-block;
+    margin:0.5em;
+    box-shadow: 0 0 4px rgba(0,255,0,1), inset 0 0 4px rgba(0,255,0,1);
+    border-radius: 30px;
+    text-align: center;
+    &.working {
+      border: 1px solid rgba(0,192,255,1);
+      box-shadow: 0 0 4px rgba(0,128,255,1), inset 0 0 4px rgba(0,128,255,1);
+      animation: scalePulse 4s ease-in-out;
+      animation-iteration-count: infinite;
+    }
+    &.warning {
+      border: 1px solid rgba(255,192,0,1);
+      box-shadow: 0 0 4px rgba(255,128,0,1), inset 0 0 4px rgba(255,128,0,1);
+      animation: opacityPulse 2s ease-out;
+      animation-iteration-count: infinite;
+    }
+    &.error {
+      border: 1px solid rgba(255,64,128,1);
+      box-shadow: 0 0 4px rgba(255,0,0,1), inset 0 0 4px rgba(255,0,0,1);
+      animation: opacityPulse 1s ease-out;
+      animation-iteration-count: infinite;
+    }
+  }
+  .videowall-title {
+    background: transparent;
+  }
+  .videowall-footer{
+    height:0;
+    display:none;
+  }
+  .video-wall {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    .video-wall-cell {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      display: inline-block;
+      align-self: auto;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      box-shadow: $videowall-cell-boxshadow;
+      background: $videowall-cell-background-image;
+      background-color: $videowall-cell-background-color;
+      background-size: 66%;
+      .video-panel {
+        .feed-detail {
+          -webkit-transition: background-color 0.333s; /* Safari */
+          transition: background-color 0.333s;
+          font-family:monospace;
+          color:white;
+          background-color:darkslategray;
+          width:100%;
+          padding-left:.5em;
+          padding-right:.5em;
+          height:1.5em;
+          display: inline-block;
+          overflow:hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          .feed-playback-rate {
+            max-width:5%;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+            .ffwd-indictator {
+              display:none;
+            }
+            .play-indictator {
+              display: inline-block;
+              animation: opacityPulse 2s ease-out;
+              animation-iteration-count: infinite;
+              opacity: 1;
+            }
+          }
+          .feed-name, .feed-timestamp {
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .feed-name{
+            min-width: 10%;
+          }
+          .feed-dismiss {
+            cursor:pointer;
+          }
+        }
+        .speed-up {
+          background-color: darkred;
+          .ffwd-indictator {
+            display:inline-block;
+            animation: opacityPulse 0.5s ease-out;
+            animation-iteration-count: infinite;
+            opacity: 1;
+          }
+          .play-indictator {
+            display:none;
+          }
+        }
+        .feed-video {
+          box-shadow: $videowall-cell-boxshadow;
+          background-color: $videowall-cell-background-color;
+          video {
+            margin: auto;
+            // width: 100%;
+            height: 100%;
+            max-width: 100%;
+            // max-height: 100%;
+            display: block;
+            vertical-align: middle;          }
+        }
+      }
+    }
+  }
+}
+
+.tortoise, .hare{
+  background: no-repeat center;
+  display:inline-block;
+  width:1em;
+  height:1em;
+}
+.tortoise{
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MC4w
+MDEgOTAuMDAxIj48cGF0aCBkPSJNNzQuODY3IDM4LjI5MWMtNC41NiAyLjYzNC00LjQxNyA5LjA3
+LTE1LjU4MiAxNy42ODYtMi43MTggMi4wOTcgMi44NzcgMTMuMTAzLjQ1NCAxNS41NTYtMi40Njgg
+Mi41LTEyLjM1IDIuNjIzLTE0Ljc0IDEuMjYtMy41MTYtMi4wMDctLjc2LTcuMjQzLjAyOC0xNC44
+ODYtNy4yMDYuNzM1LTkuNTQuNjE1LTE2Ljc4My4zMTMgMS4xMDQgNS43OTggMi43MiAxMi4yNDUu
+Mzc3IDE0LjM3LTEuOTEgMS43My0xMS4xOTggMS45MTgtMTQuMTAzLjAyLTMuNjM1LTIuMzczIDIu
+NjM0LTE1Ljg3NC41MS0xNi4wOTItMi40NDYtLjI1LTE3LjM1NC4zMzQtMTQuNzE3LTE1Ljg0MiAy
+Ljc5IDQuMDc2IDcuNTYgNy45MTIgMTMuMDMyIDYuMTg4Ljc0Ni0xMy43MjMgOS4wNy0yNi4wNjgg
+MjIuMzU4LTI2LjA2OHMyMi42ODQgMTAuMzA3IDIyLjc1NCAyMy4wOGM3Ljg2Ny01LjkxIDIuMDg0
+LTIwLjQyNyAxMS41MTQtMjUuODU4IDYuNzEyLTMuODY2IDE0LjU2My0xLjg3IDE4LjMwNyA0LjI1
+NyAxLjk1NSAzLjIgMi41NjUgOC44NC4xNCAxMS45MzgtMy42MDYgNC42MS0xMC40MiAyLjI2OC0x
+My41NSA0LjA3NnoiLz48L3N2Zz4=');
+}
+.hare{
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5OSA5
+OSI+PHBhdGggZD0iTTg4IDQyLjA3OXMxMSA2IDExIDExYy0yIDgtMTEgMy0xMyA4LTIgMTQtMTMg
+MTctMTMgMTdzMCAyIDEgMyA5IDkgMyA5Yy03IDAtOS0xMC0xNS04LTMgMS01IDItOCAzaDJjNyAz
+IDUgNSA1IDVIMjBjLTEtMS0xLTMgMC00LTMtMi03LTYtOC0xMC03IDAtMTItNS0xMi0xMSAwLTUg
+NS0xMCAxMi0xMCAxIDAgMSAwIDIgMSAwLTEgMS0xIDEtMSAxNy0yOCA0Ny04IDQ3LThzOCAzIDEx
+LTNjLTE4LTE4LTIxLTMzLTE4LTMzIDUgMCAxOCAxOCAxOCAxOHMtMTctMjgtMy0xOGMxNCAxMSAx
+OCAzMSAxOCAzMXoiLz48L3N2Zz4=');
+}
+
+// Video Canvas Panels --------------------------------------------------------------------------------
+.videocanvas-container {
+  height: 87%;
+
+  canvas {
+    background: $videocanvas-background-image;
+    background-color: $videocanvas-background-color;
+    background-size: $videocanvas-background-size;
+  }
+}
+
+// Video Mask Panels ----------------------------------------------------------------------------------
+.videomask-baselayer {
+  &.dirty {
+    border-color:$input-border-dirty;
+    @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px $input-border-dirty-shadow);
+  }
+}
+
+// Monitoring - Live-------------------------------------------------------------------------------
+.live_filter {
+  .installation-list {
+    .cameraset-list {
+      padding-left: 2em;
+    }
+  }
+}
+
+.live-view {
+  dl {
+    margin-bottom: 0px;
+  }
+
+  .live {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    text-align: center;
+
+    .live-cell {
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: auto;
+      display: inline-block;
+      align-self: auto;
+
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+
+      box-shadow: $videowall-cell-boxshadow;
+      background: $videowall-cell-background-image;
+      background-color: $videowall-cell-background-color;
+      background-size: 66%;
+
+      .live-cell-header {
+        color: white;
+        background-color: darkslategray;
+
+        width: 100%;
+        float: left;
+        clear: both;
+        padding: 0em 0.5em 0em 0.5em;
+
+        text-align: left;
+
+        .name, .time {
+          max-width: 50%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .name {
+          float: left;
+        }
+        .time {
+          float: right;
+          text-align: right;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+// Variables --------------------------------------------------------------------------------------
+// Static URL for retrieval of images, fonts etc
+$static-url:'/static/portal';
+
+// Colors
+$portal-background:                #212121 !default; /* the dark grey of the VMS interface */
+$portal-foreground:                #dddddd !default; /* the primary text color for the VMS interface */
+// Brand colors (as sourced from web site)
+$brand-blue          : rgb(54, 82, 241);
+$brand-light-blue    : rgb(115, 134, 246);
+$brand-black         : rgb(30, 30, 30); // note - not actually "black"
+$brand-dark-gray     : rgb(55, 55, 55);
+$brand-med-dark-gray : rgb(115, 115, 115);
+$brand-medium-gray   : rgb(160, 160, 160);
+$brand-light-gray    : rgb(235, 235, 235);
+$brand-white         : rgb(253, 253, 253);
+// other colors - key off the "blue" feature/brand colour from the web site,
+//                and modify the hue (ideally without changing saturation or
+//                brightness) to obtain other colours as required
+$key-color             : $brand-blue;
+$brand-red           : adjust_hue($key-color, 125);
+$brand-yellow        : adjust_hue($key-color, 180);
+$brand-sky-blue      : adjust_hue($key-color, 330);
+// pale variants
+$brand-pale-blue     : lighten($brand-sky-blue, 15%);
+$brand-pale-yellow   : lighten($brand-yellow, 15%);
+// dark variants
+$brand-dark-blue     : darken($brand-blue, 50%);
+
+$primary-color         : $brand-blue;
+$bg-body               : $brand-white;
+
+// color
+$gray80          : #999;
+$white           : $brand-white;
+$yellow          : #f0dd00;
+
+
+// Chart colors
+$secondary-color-main  : $brand-pale-blue;
+$secondary-color-three : $brand-pale-yellow;
+$warning-color         : $yellow;
+
+$input-border-dirty: $brand-pale-yellow;
+$input-border-dirty-shadow: rgba(red($input-border-dirty), green($input-border-dirty), blue($input-border-dirty), .6);
+$input-border-error: $brand-red;
+$input-border-error-shadow: rgba(red($input-border-error), green($input-border-error), blue($input-border-error), .6);
+
+// Padding & Margin
+$padding : 20px;
+$margin  : 20px;
+
+$padding-base  : $padding;
+$padding-small : $padding - 5;
+$padding-large : $padding + 5;
+$padding-10    : $padding - 10;
+
+$margin-base  : $margin;
+$margin-small : $margin - 5;
+$margin-large : $margin + 5;
+$margin-10    : $margin - 10;
+
+// custom screen
+$screen-cs : 640px;
+
+$branding-background-image: url($static_url + '/images/logos/icetana-logo-with-tagline-black.svg') center no-repeat;
+
+// VideoWall -----------------------------------------------------------------------------------------
+$videowall-cell-boxshadow: inset 0 0 1em rgba(0, 0, 0, 0.25), inset 0 0 0.1em rgba(0, 0, 0, 0.25);
+$videowall-cell-background-color: $portal-background;
+$videowall-cell-background-image: url($static_url + '/images/logos/icetana-logo-white.svg') center no-repeat;
+
+// LiveFeed -----------------------------------------------------------------------------------------
+$videocanvas-background-color: $portal-background;
+$videocanvas-background-image: url($static_url + '/images/logos/icetana-logo-white.svg') center no-repeat;
+$videocanvas-background-size: 85%;
+
+/* Quick fade-out/fade-in transition effects */
+$fade-duration: 0.333s;
+$fade-transition: ease;
+
+
+$btn-default-color:              #333 !default;

@@ -1,0 +1,35 @@
+// Mixins -----------------------------------------------------------------------------------------
+@mixin font-smoothing() {
+  // better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin arrow-top($color, $size, $left-offset:0) {
+  // adds an "arrow" above the element
+  // $color - the color of the arrow
+  // $size - the size of the arrow
+  // $left-offset - the offset from the left hand side of the element
+  &::before{
+    content: '';
+    position: absolute;
+    top: -$size;
+    left: $left-offset;
+    width: 0;
+    height: 0;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+  }
+}
+
+// Drop shadows
+//
+// Note: Deprecated `.box-shadow()` as of v3.1.0 since all of Bootstrap's
+// supported browsers that have box shadow capabilities now support it.
+
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+  box-shadow: $shadow;
+}
+

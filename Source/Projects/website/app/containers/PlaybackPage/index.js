@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import '../../jQueryComponents/portal-timeline';
+import './styles.scss';
 
 class PlaybackPage extends React.PureComponent {
   componentDidMount() {
@@ -25,22 +26,22 @@ class PlaybackPage extends React.PureComponent {
     return (
       <div>
         <h1>LiveWaLL</h1>
-        <div>
-          <div className="container">
+        <div id="videowall-container" className="videowall-container">
+          <div className="container videowall">
             <div className="row">
-              <div className="four columns" id="0x0" >0x0</div>
-              <div className="four columns" id="1x0" >1x0</div>
-              <div className="four columns" id="2x0" >2x0</div>
+              <div className="four columns video-wall-cell" id="0x0" >0x0</div>
+              <div className="four columns video-wall-cell" id="1x0" >1x0</div>
+              <div className="four columns video-wall-cell" id="2x0" >2x0</div>
             </div>
             <div className="row">
-              <div className="four columns" id="0x1" >0x1</div>
-              <div className="four columns" id="1x1" >1x1</div>
-              <div className="four columns" id="2x1" >2x1</div>
+              <div className="four columns video-wall-cell" id="0x1" >0x1</div>
+              <div className="four columns video-wall-cell" id="1x1" >1x1</div>
+              <div className="four columns video-wall-cell" id="2x1" >2x1</div>
             </div>
             <div className="row">
-              <div className="four columns" id="0x2" >0x2</div>
-              <div className="four columns" id="1x2" >1x2</div>
-              <div className="four columns" id="2x2" >2x2</div>
+              <div className="four columns video-wall-cell" id="0x2" >0x2</div>
+              <div className="four columns video-wall-cell" id="1x2" >1x2</div>
+              <div className="four columns video-wall-cell" id="2x2" >2x2</div>
             </div>
           </div>
         </div>
