@@ -24,7 +24,7 @@ class PlaybackPage extends React.PureComponent {
 
   render() {
     return (
-      <div>
+      <div className="playback-page">
         <h1>LiveWaLL</h1>
         <div id="videowall-container" className="videowall-container">
           <div className="container videowall">

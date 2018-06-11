@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
-import AppHeader from 'containers/AppHeader';
-import StatusBar from 'components/StatusBar';
-
 import 'react-toastify/dist/ReactToastify.min.css';
+
 import SideBar from '../../components/SideBar';
 import AppHeader from '../../containers/AppHeader';
 import StatusBar from '../../components/StatusBar';

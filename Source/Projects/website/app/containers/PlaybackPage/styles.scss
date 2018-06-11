@@ -1,3 +1,24 @@
 .video-wall-cell {
-  background: red;
+  background: url('../../assets/icetana-logo-white.svg');
+  background-color: black;
+  background-size: 66%;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+.videowall-container {
+  height: 70%;
+}
+.playback-page {
+  height: 100%;
+}
+.videowall {
+  height: 100%;
+}
+.row {
+  height:33%;
+}
+.jaguar-page {
+  height:100%;
 }
