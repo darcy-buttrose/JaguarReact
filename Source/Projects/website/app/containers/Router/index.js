@@ -26,6 +26,7 @@ import HistoryPage from '../HistoryPage/Loadable';
 import PlaybackWallPage from '../PlaybackWallPage/Loadable';
 import PlaybackPage from '../PlaybackPage/Loadable';
 import ConfigPage from '../ConfigPage/Loadable';
+import HomePage from '../HomePage';
 
 function Router() {
   return (
@@ -37,7 +38,7 @@ function Router() {
         <meta name="Jaguar" content="." />
       </Helmet>
       <Switch>
-        <AppRoute exact path="/" layout={PublicLayout} component={LoginPage} />
+        <AppRoute exact path="/" layout={MainLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
         <AppRoute exact path="/playbackwall" layout={MainLayout} component={PlaybackWallPage} />
         <AppRoute exact path="/playback" layout={MainLayout} component={PlaybackPage} />

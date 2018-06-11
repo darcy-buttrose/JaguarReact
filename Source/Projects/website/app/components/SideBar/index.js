@@ -1,5 +1,5 @@
 import React from 'react';
-import NavOperator from 'components/NavOperator';
+import NavOperator from '../NavOperator';
 
 function SideBar() {
   return (

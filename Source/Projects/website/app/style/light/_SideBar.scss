@@ -1,9 +1,13 @@
 @import 'Variables';
 
 .jaguar-sidebar {
-  float:left;
+  // float:left;
+  position: fixed;
+  top: $app-header-height;
+  left: 0;
+  overflow-x: hidden;
   height: 100vh;
-  width: 6rem;
+  width: $app-sidebar-width;
   margin-right: 1rem;
   border-width: 0.1rem;
   border-style: solid;

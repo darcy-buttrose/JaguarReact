@@ -32,7 +32,6 @@ function mapDispatchToProps(dispatch) {
   return {
     onStart: () => {
       dispatch(startLoadConfig());
-      dispatch(push('/'));
     },
     dispatch,
   };
