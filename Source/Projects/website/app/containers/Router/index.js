@@ -8,7 +8,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-
 import AppRoute from '../AppRoute/index';
 import PublicLayout from '../../layouts/PublicLayout/index';
 import MainLayout from '../../layouts/MainLayout/index';
@@ -21,10 +20,11 @@ import LiveWallPage from '../LiveWallPage/Loadable';
 import LoginPage from '../DjangoLoginPage/Loadable';
 import LogoutPage from '../DjangoLogoutPage/Loadable';
 import AdminPage from '../AdminPage/Loadable';
-import '../../style/index.scss';
 import HistoryPage from '../HistoryPage/Loadable';
 import PlaybackWallPage from '../PlaybackWallPage/Loadable';
 import PlaybackPage from '../PlaybackPage/Loadable';
+import ConfigPage from '../ConfigPage/Loadable';
+import '../../style/index.scss';
 
 function Router() {
   return (
@@ -45,6 +45,7 @@ function Router() {
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
         <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />
+        <AppRoute exact path="/config" layout={MainLayout} component={ConfigPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />
         <Route path="/popupcallback" component={PopupCallback} />

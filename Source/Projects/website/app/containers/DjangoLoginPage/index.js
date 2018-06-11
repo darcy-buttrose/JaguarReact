@@ -10,20 +10,20 @@ import makeSelectApp from '../../state/App/selectors';
 import { startUpdateCameraFilters } from '../../state/App/actions';
 import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
+// import authPropTypes from '../../state/Auth/propTypes';
 
-class DjangoLoginPage extends React.PureComponent {
-  constructor(props) {
-    super(props);
+class DjangoLoginPage extends React.Component {
 
+  componentWillMount() {
     this.state = {
       showIframe: true,
     };
 
     this.channelHandler = this.channelHandler.bind(this);
 
-    const { config } = props.app;
+    const { config } = this.props.app;
     this.channel = frameChannels.create(config.clientAppSettings.channel, { target: '#django-login-iframe' });
-    props.onLogin();
+    this.props.onLogin();
     this.channel.subscribe(this.channelHandler);
   }
 
@@ -81,6 +81,7 @@ class DjangoLoginPage extends React.PureComponent {
 
 DjangoLoginPage.propTypes = {
   app: PropTypes.shape(appPropTypes),
+  // auth: PropTypes.shape(authPropTypes),
   onLogout: PropTypes.func,
   onLogin: PropTypes.func,
   onLoginSuccess: PropTypes.func,

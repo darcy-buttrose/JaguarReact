@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SideBar from 'components/SideBar';
 import { ToastContainer } from 'react-toastify';
+import AppHeader from 'containers/AppHeader';
+import StatusBar from 'components/StatusBar';
+
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import SideBar from '../../components/SideBar';
-import AppHeader from '../../containers/AppHeader';
-import StatusBar from '../../components/StatusBar';
 function MainLayout(props) {
   return (
     <div className="connect-main-layout">

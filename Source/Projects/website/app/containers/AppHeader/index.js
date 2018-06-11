@@ -1,7 +1,6 @@
 import React from 'react';
 import AppHeaderLogo from 'components/AppHeaderLogo';
 import ProfileButtonContainer from 'containers/ProfileButtonContainer';
-
 import DjangoButtons from '../DjangoButtons';
 
 function AppHeader() {
