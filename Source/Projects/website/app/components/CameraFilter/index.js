@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class CameraFilter extends PureComponent {
   render() {
     const currentFilter = this.props.filters.find((f) => f.id === this.props.filter);
-
+    const totalNumOfCameras = this.props.filters.length > 1 ? this.props.filters[1].total_num_cameras : 0;
     const renderFilter = (el) => (
       <li
         key={el.id}
@@ -15,7 +15,7 @@ class CameraFilter extends PureComponent {
         }}
         role="presentation"
       >
-        {el.name}
+        {el.name} ({el.id === 0 ? totalNumOfCameras : el.view_num_cameras })
       </li>
     );
 
@@ -59,6 +59,8 @@ CameraFilter.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
+    total_num_cameras: PropTypes.number,
+    view_num_cameras: PropTypes.number,
   })),
   onChangeFilter: PropTypes.func,
   position: PropTypes.string,
