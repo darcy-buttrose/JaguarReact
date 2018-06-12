@@ -9,3 +9,12 @@ services:
     image: dregistry.icetana.com.au/djreact-portal
     ports:
      - "8000:8000"
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+    entrypoint: redis-server --appendonly yes
+    restart: always
