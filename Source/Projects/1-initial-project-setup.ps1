@@ -22,7 +22,6 @@ function Get-IpAddress {
 $HOSTIP = Get-IpAddress
 
 # update configs with Host Machine IP
-(get-content ".\membership\appsettings.json.orig") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\membership\appsettings.Development.json"
 (get-content ".\website\app\static\appConfig.orig.json") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\website\app\static\appConfig.json"
 (get-content ".\auth-server\app\config\config.orig.json") | foreach-object {$_ -replace "REPLACE_WITH_HOSTIP", $HOSTIP} | set-content ".\auth-server\app\config\config.json"
 
