@@ -1,20 +1,20 @@
 version: '2'
 services:
-  mariadb-server:
-    image: mariadb
+  mysql-portal:
+    image: dregistry.icetana.com.au/mysql-portal
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: Maria
-      MYSQL_DATABASE: JaguarMembership
-      MYSQL_USER: jaguar
-      MYSQL_PASSWORD: Pa55word
     ports:
       - 3306:3306
-  membership:
-    build:
-      context: ./membership
+  djreact-portal:
+    image: dregistry.icetana.com.au/djreact-portal
     ports:
-     - "22530:22530"
-    environment:
-     -  ASPNETCORE_ENVIRONMENT=Development
-     -  Application_STS_URL=http://0.0.0.0:22530
+     - "8000:8000"
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/data:/data
+    entrypoint: redis-server --appendonly yes
+    restart: always
