@@ -3,6 +3,8 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
+/* eslint-disable */
+
 // ensure that namespaces exist, create if not
 
 /**

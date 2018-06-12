@@ -6,10 +6,7 @@ import './styles.scss';
 
 class LiveWallPage extends React.PureComponent {
   componentDidMount() {
-    console.log('componentDidMount');
     $(document).ready(() => {
-      console.log('READY');
-
       const livewallContainer = document.getElementById('videowall-container');
       livewallContainer.style.height = '100%';
       $(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange', () => {
@@ -56,7 +53,7 @@ class LiveWallPage extends React.PureComponent {
         'milestone\u002Dpta': { 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true },
         Glitchy: { 363: true, 364: true, 365: true, 366: true, 367: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
         'milestone\u002Dswinburne': { 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true },
-        'milestone\u002Dall': { 344: true, 345: true, 346: true, 347: true, 348: true, 349: true, 350: true, 351: true, 352: true, 353: true, 354: true, 355: true, 356: true, 357: true, 358: true, 359: true, 360: true, 361: true, 362: true, 363: true, 364: true, 365: true, 366: true, 367: true, 368: true, 369: true, 370: true, 371: true, 372: true, 373: true, 374: true, 375: true, 376: true, 377: true, 378: true, 379: true, 380: true, 381: true, 382: true, 383: true, 384: true, 385: true, 386: true, 387: true, 388: true, 389: true, 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true, 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true,},
+        'milestone\u002Dall': { 344: true, 345: true, 346: true, 347: true, 348: true, 349: true, 350: true, 351: true, 352: true, 353: true, 354: true, 355: true, 356: true, 357: true, 358: true, 359: true, 360: true, 361: true, 362: true, 363: true, 364: true, 365: true, 366: true, 367: true, 368: true, 369: true, 370: true, 371: true, 372: true, 373: true, 374: true, 375: true, 376: true, 377: true, 378: true, 379: true, 380: true, 381: true, 382: true, 383: true, 384: true, 385: true, 386: true, 387: true, 388: true, 389: true, 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true, 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
       };
 
       videoPaneManager.clearCameraFilter();
@@ -111,23 +108,21 @@ class LiveWallPage extends React.PureComponent {
     });
   }
 
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
-  }
-
   renderVideoRow(row, cells) {
     const rows = [];
+    const cellWidth = 100 / cells;
     for (let cell = 0; cell < cells; cell += 1) {
       const id = `${row}x${cell}`;
-      rows.push(<div key={id} className="four columns video-wall-cell" id={id} >{`${id}`}</div>);
+      rows.push(<div key={id} className="video-wall-cell" style={{ width: `${cellWidth}%` }} id={id} >{`${id}`}</div>);
     }
     return rows;
   }
 
   renderVideoGrid(rows, cells) {
     const grid = [];
+    const rowHeight = 100 / rows;
     for (let row = 0; row < rows; row += 1) {
-      grid.push(<div key={row} className="row">{this.renderVideoRow(row, cells)}</div>);
+      grid.push(<div key={row} className="row" style={{ height: `${rowHeight}%` }}>{this.renderVideoRow(row, cells)}</div>);
     }
     return grid;
   }
@@ -136,7 +131,7 @@ class LiveWallPage extends React.PureComponent {
     return (
       <div className="livewall-page">
         <div id="videowall-container" className="videowall-container">
-          <div className="container video-wall">
+          <div className="video-wall">
             {this.renderVideoGrid(3, 3)}
           </div>
         </div>

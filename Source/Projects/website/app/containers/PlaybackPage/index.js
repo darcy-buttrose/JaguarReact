@@ -4,9 +4,7 @@ import '../../jQueryComponents/portal-timeline';
 
 class PlaybackPage extends React.PureComponent {
   componentDidMount() {
-    console.log('componentDidMount');
     $(document).ready(() => {
-      console.log('READY');
       const timeLineOptions = {
         // we only encode the first 3 mins of video, so restrict the rendered duration to
         // that amount
@@ -15,10 +13,6 @@ class PlaybackPage extends React.PureComponent {
       };
       this.timelineWidget = new window.portal.Timeline(document.getElementById('timeline-container'), timeLineOptions);
     });
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnmount');
   }
 
   render() {

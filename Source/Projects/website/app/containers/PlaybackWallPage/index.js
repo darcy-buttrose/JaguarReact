@@ -26,7 +26,7 @@ class PlaybackWallPage extends React.PureComponent {
   }
 
   channelHandler(msg) {
-    console.log('playback channel message', msg);
+    console.log('playback channel message', msg); // eslist-disable
   }
 
   render() {

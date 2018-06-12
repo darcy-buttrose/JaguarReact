@@ -3,7 +3,7 @@ import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
 
-/*jshint esversion: 6 */
+/* eslint-disable */
 
 /**
  * A Collection of name spaced utility functions for the Portal UI.

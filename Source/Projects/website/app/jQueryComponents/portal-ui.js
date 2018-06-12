@@ -7,7 +7,7 @@ window.$ = $;
 window.jQuery = $;
 window.NProgress = NProgress;
 
-/*jshint esversion: 6 */
+/* eslint-disable */
 
 /**
  * A Collection of namespaced utility functions for the Portal UI
