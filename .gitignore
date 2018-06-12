@@ -6,3 +6,9 @@ Projects/.DS_Store
 Source/Projects/membership/appsettings\.Development\.json
 
 Source/Projects/website/app/static/appConfig\.json
+
+Source/Projects/website/package-lock\.json
+
+Source/Projects/auth-server/app/config/config\.js
+
+Source/Projects/redis/data/appendonly\.aof
