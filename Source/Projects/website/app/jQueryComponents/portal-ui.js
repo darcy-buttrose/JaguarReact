@@ -1,7 +1,11 @@
 import $ from 'jquery';
+import swal from 'sweetalert2';
+import toastr from 'toastr';
+import NProgress from 'nprogress';
 
 window.$ = $;
 window.jQuery = $;
+window.NProgress = NProgress;
 
 /*jshint esversion: 6 */
 

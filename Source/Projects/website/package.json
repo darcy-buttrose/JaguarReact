@@ -242,6 +242,7 @@
     "lodash": "4.17.4",
     "minimist": "1.2.0",
     "namor": "^1.0.1",
+    "nprogress": "^0.2.0",
     "oidc-client": "^1.4.1",
     "prop-types": "15.5.10",
     "react": "15.6.1",
@@ -267,6 +268,8 @@
     "reselect": "3.0.1",
     "sanitize.css": "4.1.0",
     "styled-components": "2.0.0",
+    "sweetalert2": "^7.22.2",
+    "toastr": "^2.1.4",
     "warning": "3.0.0"
   },
   "devDependencies": {
