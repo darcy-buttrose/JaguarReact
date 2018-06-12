@@ -115,27 +115,29 @@ class LiveWallPage extends React.PureComponent {
     console.log('componentWillUnmount');
   }
 
+  renderVideoRow(row, cells) {
+    const rows = [];
+    for (let cell = 0; cell < cells; cell += 1) {
+      const id = `${row}x${cell}`;
+      rows.push(<div key={id} className="four columns video-wall-cell" id={id} >{`${id}`}</div>);
+    }
+    return rows;
+  }
+
+  renderVideoGrid(rows, cells) {
+    const grid = [];
+    for (let row = 0; row < rows; row += 1) {
+      grid.push(<div key={row} className="row">{this.renderVideoRow(row, cells)}</div>);
+    }
+    return grid;
+  }
+
   render() {
     return (
       <div className="livewall-page">
-        <h1>LiveWaLL</h1>
         <div id="videowall-container" className="videowall-container">
-          <div className="container videowall">
-            <div className="row">
-              <div className="four columns video-wall-cell" id="0x0" >0x0</div>
-              <div className="four columns video-wall-cell" id="1x0" >1x0</div>
-              <div className="four columns video-wall-cell" id="2x0" >2x0</div>
-            </div>
-            <div className="row">
-              <div className="four columns video-wall-cell" id="0x1" >0x1</div>
-              <div className="four columns video-wall-cell" id="1x1" >1x1</div>
-              <div className="four columns video-wall-cell" id="2x1" >2x1</div>
-            </div>
-            <div className="row">
-              <div className="four columns video-wall-cell" id="0x2" >0x2</div>
-              <div className="four columns video-wall-cell" id="1x2" >1x2</div>
-              <div className="four columns video-wall-cell" id="2x2" >2x2</div>
-            </div>
+          <div className="container video-wall">
+            {this.renderVideoGrid(3, 3)}
           </div>
         </div>
       </div>
