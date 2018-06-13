@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { getConfig } from '../../services/config';
 import {
   loadConfigSuccess,
@@ -19,13 +19,10 @@ function* fetchConfig() {
 }
 
 
-function* fetchCameraFilters(cameraFilterApi) {
+function* fetchCameraFilters(cameraFilterApi, apiUrlProvider, authTokenProvider) {
   try {
-    const state = yield select();
-    const app = state.get('app').toJS();
-    const auth = state.get('auth').toJS();
-    const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
-    const idToken = auth.user.id_token;
+    const apiUrl = yield apiUrlProvider();
+    const idToken = yield authTokenProvider();
     const cameraFilterData = cameraFilterApi.create(apiUrl, idToken);
     const cameraFilters = yield call(cameraFilterData.getCameraFilter);
     yield put(updateCameraFiltersSuccess(cameraFilters));
@@ -34,10 +31,10 @@ function* fetchCameraFilters(cameraFilterApi) {
   }
 }
 
-function appSagaBuilder(cameraFilterApi) {
+function appSagaBuilder(cameraFilterApi, apiUrlProvider, authTokenProvider) {
   return function* appSaga() {
     yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
-    yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, cameraFilterApi);
+    yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, cameraFilterApi, apiUrlProvider, authTokenProvider);
   };
 }
 

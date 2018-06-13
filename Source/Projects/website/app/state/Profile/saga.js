@@ -1,22 +1,20 @@
-import { call, select, takeLatest } from 'redux-saga/effects';
-import profileApi from '../../services/profile';
+import { call, takeLatest } from 'redux-saga/effects';
 import { CHANGE_THEME } from './constants';
 
-function* saveTheme(action) {
+function* saveTheme(profileApi, apiUrlProvider, authTokenProvider, action) {
   const { options } = action;
-  const state = yield select();
-  const app = state.get('app').toJS();
-  const auth = state.get('auth').toJS();
-  const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
-  const idToken = auth.user.id_token;
+  const apiUrl = yield apiUrlProvider();
+  const idToken = yield authTokenProvider();
   const profileData = profileApi.create(apiUrl, idToken);
   if (options.save) {
     yield call(profileData.saveProfile, { theme: action.item });
   }
 }
 
-function* profileButtonSaga() {
-  yield takeLatest(CHANGE_THEME, saveTheme);
+function profileSagaBuilder(profileApi, apiUrlProvider, authTokenProvider) {
+  return function* profileButtonSaga() {
+    yield takeLatest(CHANGE_THEME, saveTheme, profileApi, apiUrlProvider, authTokenProvider);
+  };
 }
 
-export default profileButtonSaga;
+export default profileSagaBuilder;

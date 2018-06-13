@@ -1,6 +1,5 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import profileApi from '../../services/profile';
 
 import { updateProfileSuccess, updateProfileFailure } from './actions';
 import { changeTheme } from '../Profile/actions';
@@ -29,14 +28,11 @@ function* updateTheme(profile) {
   }
 }
 
-function* fetchProfile(action) {
+function* fetchProfile(profileApi, apiUrlProvider, authTokenProvider, action) {
   try {
     const { options } = action;
-    const state = yield select();
-    const app = state.get('app').toJS();
-    const auth = state.get('auth').toJS();
-    const apiUrl = app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
-    const idToken = auth.user.id_token;
+    const apiUrl = yield apiUrlProvider();
+    const idToken = yield authTokenProvider();
     const profileData = profileApi.create(apiUrl, idToken);
     const profile = yield call(profileData.getProfile);
     yield put(updateProfileSuccess(Object.assign({}, profile, { name: profile.username })));
@@ -51,9 +47,10 @@ function* fetchProfile(action) {
   }
 }
 
-
-function* authSaga() {
-  yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile);
+function authSagaBuilder(profileApi, apiUrlProvider, authTokenProvider) {
+  return function* authSaga() {
+    yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile, profileApi, apiUrlProvider, authTokenProvider);
+  };
 }
 
-export default authSaga;
+export default authSagaBuilder;
