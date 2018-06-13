@@ -26,7 +26,7 @@ class LiveWallFullScreen extends PureComponent {
     }
 
     let fullScreenButton = null;
-    if (!this.props.fullScreen || !this.props.position === 'footer') {
+    if (this.props.position !== 'footer') {
       fullScreenButton = (
         <span
           className="fas fa-expand-arrows-alt fa-2x"
