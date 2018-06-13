@@ -35,7 +35,7 @@ function* fetchCameraFilters(cameraFilterApi) {
 }
 
 function appSagaBuilder(cameraFilterApi) {
-  return function* () {
+  return function* appSaga() {
     yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
     yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, cameraFilterApi);
   };
