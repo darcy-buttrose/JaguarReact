@@ -25,14 +25,16 @@ class LiveWallFullScreen extends PureComponent {
       );
     }
 
-    let fullScreenButton = (
-      <span
-        className="fas fa-expand-arrows-alt fa-2x"
-        role="presentation"
-        onClick={this.props.onToggleLiveWallFullScreen}
-      ></span>
-    );
-    if (this.props.fullScreen || this.props.position === 'footer') fullScreenButton = null;
+    let fullScreenButton = null;
+    if (!this.props.fullScreen || !this.props.position === 'footer') {
+      fullScreenButton = (
+        <span
+          className="fas fa-expand-arrows-alt fa-2x"
+          role="presentation"
+          onClick={this.props.onToggleLiveWallFullScreen}
+        ></span>
+      );
+    }
 
     return (
       <span className="app-header-item">

@@ -6,7 +6,6 @@ import {
   CAMERA_FILTERS_UPDATE_INIT,
   CAMERA_FILTERS_UPDATE_SUCCESS,
   CAMERA_FILTERS_UPDATE_FAILURE,
-  LIVEWALL_FULLSCREEN,
 } from './constants';
 
 const initialState = fromJS({
@@ -54,9 +53,6 @@ const appReducer = (state = initialState, action) => {
       return state
         .set('showError', true)
         .set('errorMessage', action.error);
-    case LIVEWALL_FULLSCREEN:
-      return state
-        .set('liveWallFullScreen', true);
     default:
       return state;
   }

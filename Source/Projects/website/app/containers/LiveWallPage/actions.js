@@ -35,7 +35,7 @@ export function clearFilter() {
 
 
 /**
- * [LiveWallFullScreen description]
+ * [toggleFullScreen allow the user to see the LiveWall in full screen mode or dismiss it]
  *
  */
 export function toggleFullScreen() {

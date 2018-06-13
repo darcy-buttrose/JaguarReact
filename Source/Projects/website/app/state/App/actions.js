@@ -5,7 +5,6 @@ import {
   CAMERA_FILTERS_UPDATE_INIT,
   CAMERA_FILTERS_UPDATE_SUCCESS,
   CAMERA_FILTERS_UPDATE_FAILURE,
-  LIVEWALL_FULLSCREEN,
 } from './constants';
 
 export function startLoadConfig() {
@@ -33,8 +32,4 @@ export function startUpdateCameraFilters() {
   return {
     type: CAMERA_FILTERS_UPDATE_INIT,
   };
-}
-
-export function toggleLiveWallFullScreen(status) {
-  return { type: LIVEWALL_FULLSCREEN, status };
 }
