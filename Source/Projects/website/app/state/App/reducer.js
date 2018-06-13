@@ -20,7 +20,6 @@ const initialState = fromJS({
       name: 'All Cameras',
     },
   ],
-  liveWallFullScreen: false,
 });
 
 const appReducer = (state = initialState, action) => {
