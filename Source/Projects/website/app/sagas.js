@@ -17,7 +17,7 @@ function* apiUrlProvider() {
   return app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
 }
 
-const appSaga = appSagaBuilder(cameraFilterApi, apiUrlProvider, authTokenProvider);
+const appSaga = appSagaBuilder({ cameraFilterApi }, apiUrlProvider, authTokenProvider);
 const authSaga = authSagaBuilder(profileApi, apiUrlProvider, authTokenProvider);
 const profileSaga = profileSagaBuilder(profileApi, apiUrlProvider, authTokenProvider);
 

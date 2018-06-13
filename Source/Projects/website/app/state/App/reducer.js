@@ -6,9 +6,12 @@ import {
   CAMERA_FILTERS_UPDATE_INIT,
   CAMERA_FILTERS_UPDATE_SUCCESS,
   CAMERA_FILTERS_UPDATE_FAILURE,
+  WEBSOCKET_URLS_UPDATE_INIT,
+  WEBSOCKET_URLS_UPDATE_SUCCESS,
+  WEBSOCKET_URLS_UPDATE_FAILURE,
 } from './constants';
 
-const initialState = fromJS({
+export const initialState = fromJS({
   config: null,
   isReady: false,
   isInitialising: false,
@@ -20,6 +23,7 @@ const initialState = fromJS({
       name: 'All Cameras',
     },
   ],
+  anomalyWebSocketUrls: [],
 });
 
 const appReducer = (state = initialState, action) => {
@@ -49,6 +53,17 @@ const appReducer = (state = initialState, action) => {
       return state
         .set('cameraFilters', action.filters);
     case CAMERA_FILTERS_UPDATE_FAILURE:
+      return state
+        .set('showError', true)
+        .set('errorMessage', action.error);
+    case WEBSOCKET_URLS_UPDATE_INIT:
+      return state
+        .set('showError', false)
+        .set('errorMessage', null);
+    case WEBSOCKET_URLS_UPDATE_SUCCESS:
+      return state
+        .set('anomalyWebSocketUrls', action.urls);
+    case WEBSOCKET_URLS_UPDATE_FAILURE:
       return state
         .set('showError', true)
         .set('errorMessage', action.error);
