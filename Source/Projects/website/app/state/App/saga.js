@@ -7,7 +7,6 @@ import {
   updateCameraFiltersFailure,
 } from './actions';
 import { CONFIG_REQUEST_INIT, CAMERA_FILTERS_UPDATE_INIT } from './constants';
-import cameraFilterApi from '../../services/cameraFilter';
 
 
 function* fetchConfig() {
@@ -20,7 +19,7 @@ function* fetchConfig() {
 }
 
 
-function* fetchCameraFilters() {
+function* fetchCameraFilters(cameraFilterApi) {
   try {
     const state = yield select();
     const app = state.get('app').toJS();
@@ -35,10 +34,11 @@ function* fetchCameraFilters() {
   }
 }
 
-
-function* appSaga() {
-  yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
-  yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters);
+function appSagaBuilder(cameraFilterApi) {
+  return function* () {
+    yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
+    yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, cameraFilterApi);
+  };
 }
 
-export default appSaga;
+export default appSagaBuilder;
