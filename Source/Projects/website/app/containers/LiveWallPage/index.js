@@ -1,11 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import $ from 'jquery';
+
+import appPropTypes from '../../state/App/propTypes';
+import authPropTypes from '../../state/Auth/propTypes';
+import makeSelectApp from '../../state/App/selectors';
+import makeSelectAuth from '../../state/Auth/selectors';
+
 import '../../jQueryComponents/portal-ui';
 import '../../jQueryComponents/portal-websockets';
 import './styles.scss';
 
 class LiveWallPage extends React.PureComponent {
   componentDidMount() {
+    const sessionKey = this.props.auth.user.id_token;
+
     $(document).ready(() => {
       const livewallContainer = document.getElementById('videowall-container');
       livewallContainer.style.height = '100%';
@@ -49,12 +61,22 @@ class LiveWallPage extends React.PureComponent {
         videoPaneManager.refreshSizes();
       }, 150);
       $(window).on('resize', debouncedResizeHandler);
-      const cameraviewMapping = {
-        'milestone\u002Dpta': { 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true },
-        Glitchy: { 363: true, 364: true, 365: true, 366: true, 367: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
-        'milestone\u002Dswinburne': { 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true },
-        'milestone\u002Dall': { 344: true, 345: true, 346: true, 347: true, 348: true, 349: true, 350: true, 351: true, 352: true, 353: true, 354: true, 355: true, 356: true, 357: true, 358: true, 359: true, 360: true, 361: true, 362: true, 363: true, 364: true, 365: true, 366: true, 367: true, 368: true, 369: true, 370: true, 371: true, 372: true, 373: true, 374: true, 375: true, 376: true, 377: true, 378: true, 379: true, 380: true, 381: true, 382: true, 383: true, 384: true, 385: true, 386: true, 387: true, 388: true, 389: true, 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true, 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
-      };
+
+      const cameraviewMapping = {};
+      this.props.app.cameraFilters.forEach((filter) => {
+        const cameraList = {};
+        filter.cameraList.forEach((cameraNumber) => {
+          cameraList[cameraNumber] = true;
+        });
+        cameraviewMapping[filter.name] = cameraList;
+      });
+
+      // {
+      //   'milestone\u002Dpta': { 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true },
+      //   Glitchy: { 363: true, 364: true, 365: true, 366: true, 367: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
+      //   'milestone\u002Dswinburne': { 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true },
+      //   'milestone\u002Dall': { 344: true, 345: true, 346: true, 347: true, 348: true, 349: true, 350: true, 351: true, 352: true, 353: true, 354: true, 355: true, 356: true, 357: true, 358: true, 359: true, 360: true, 361: true, 362: true, 363: true, 364: true, 365: true, 366: true, 367: true, 368: true, 369: true, 370: true, 371: true, 372: true, 373: true, 374: true, 375: true, 376: true, 377: true, 378: true, 379: true, 380: true, 381: true, 382: true, 383: true, 384: true, 385: true, 386: true, 387: true, 388: true, 389: true, 390: true, 391: true, 392: true, 393: true, 394: true, 395: true, 396: true, 397: true, 398: true, 399: true, 400: true, 401: true, 402: true, 403: true, 404: true, 405: true, 406: true, 407: true, 408: true, 409: true, 410: true, 411: true, 412: true, 413: true, 414: true, 415: true, 416: true, 417: true, 418: true, 419: true, 420: true, 421: true, 422: true, 423: true, 424: true, 489: true, 490: true, 491: true, 492: true, 493: true, 494: true, 495: true, 496: true, 497: true, 498: true, 499: true, 500: true, 501: true },
+      // };
 
       videoPaneManager.clearCameraFilter();
       const $noFilterIndicator = $('.no-filter-indicator');
@@ -80,31 +102,13 @@ class LiveWallPage extends React.PureComponent {
         },
       }).change();
 
-      new window.portal.WebSockets.LiveWallWebSocket(
-        'wss://trillian/websocket/events/?session_key=xgfn7j1ss34qcjpsph5qfj1v545je4op',
-        '/portal/streaming/soap_stream/',
-        videoPaneManager
-      ).connect();
-      new window.portal.WebSockets.LiveWallWebSocket(
-        'wss://regression1/websocket/events/?session_key=xgfn7j1ss34qcjpsph5qfj1v545je4op',
-        '/portal/streaming/soap_stream/',
-        videoPaneManager
-      ).connect();
-      new window.portal.WebSockets.LiveWallWebSocket(
-        'wss://trillian/websocket/events/?session_key=xgfn7j1ss34qcjpsph5qfj1v545je4op',
-        '/portal/streaming/soap_stream/',
-        videoPaneManager
-      ).connect();
-      new window.portal.WebSockets.LiveWallWebSocket(
-        'wss://regression1/websocket/events/?session_key=xgfn7j1ss34qcjpsph5qfj1v545je4op',
-        '/portal/streaming/soap_stream/',
-        videoPaneManager
-      ).connect();
-      new window.portal.WebSockets.LiveWallWebSocket(
-        'wss://trillian/websocket/events/?session_key=xgfn7j1ss34qcjpsph5qfj1v545je4op',
-        '/portal/streaming/soap_stream/',
-        videoPaneManager
-      ).connect();
+      this.props.app.anomalyWebSocketUrls.forEach((anomalyUrl) => {
+        new window.portal.WebSockets.LiveWallWebSocket(
+          `${anomalyUrl.url}?session_key=${sessionKey}`,
+          anomalyUrl.streamBase,
+          videoPaneManager
+        ).connect();
+      });
     });
   }
 
@@ -140,4 +144,18 @@ class LiveWallPage extends React.PureComponent {
   }
 }
 
-export default LiveWallPage;
+LiveWallPage.propTypes = {
+  app: PropTypes.shape(appPropTypes),
+  auth: PropTypes.shape(authPropTypes),
+};
+
+const mapStateToProps = createStructuredSelector({
+  app: makeSelectApp(),
+  auth: makeSelectAuth(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(
+  withConnect,
+)(LiveWallPage);

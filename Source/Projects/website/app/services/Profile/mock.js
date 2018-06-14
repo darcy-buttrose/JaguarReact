@@ -21,7 +21,7 @@ function parseJwt(token) {
 }
 
 // Create a base for API.
-const create = (token) => {
+const create = (baseURL, token) => {
   const getUser = () => parseJwt(token);
 
   const getProfile = () => new Promise((resolve: Function): void => {

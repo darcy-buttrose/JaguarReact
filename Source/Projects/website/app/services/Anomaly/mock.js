@@ -21,11 +21,14 @@ export const mockData = [
   },
 ];
 
-const create = () => ({
-  getWebSocketUrls: () => new Promise((resolve: Function): void => {
-    resolve(mockData);
-  }),
-});
+const create = (baseURL, token) => {
+  console.log(`Anomaly API create: baseURL(${baseURL}) token(${token})`);
+  return {
+    getWebSocketUrls: () => new Promise((resolve: Function): void => {
+      resolve(mockData);
+    }),
+  };
+};
 
 export default {
   create,
