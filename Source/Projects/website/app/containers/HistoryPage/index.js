@@ -1,5 +1,5 @@
 import React from 'react';
-import userIsAuthenticated from 'utils/userIsAuthenticated';
+// import userIsAuthenticated from 'utils/userIsAuthenticated';
 
 export class HistoryPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -10,4 +10,5 @@ export class HistoryPage extends React.PureComponent { // eslint-disable-line re
   }
 }
 
-export default userIsAuthenticated(HistoryPage);
+// export default userIsAuthenticated(HistoryPage);
+export default HistoryPage;

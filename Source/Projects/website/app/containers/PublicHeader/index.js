@@ -1,7 +1,6 @@
 import React from 'react';
-import AuthConnect from '../AuthConnect/index';
-import DjangoButtons from '../DjangoButtons/index';
-import AppHeaderLogo from '../../components/AppHeaderLogo/index';
+import AuthConnect from 'containers/AuthConnect/index';
+import AppHeaderLogo from 'components/AppHeaderLogo/index';
 
 class PublicHeader extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -11,7 +10,6 @@ class PublicHeader extends React.Component { // eslint-disable-line react/prefer
           <AppHeaderLogo />
         </span>
         <span className="app-header-profile">
-          <DjangoButtons />
           <AuthConnect />
         </span>
       </header>
