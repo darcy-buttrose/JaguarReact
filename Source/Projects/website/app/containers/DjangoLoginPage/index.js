@@ -7,10 +7,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import makeSelectApp from '../../state/App/selectors';
-import { startUpdateCameraFilters } from '../../state/App/actions';
-import { loginStart, loginSuccess, loginFailure, logout, startUpdateProfile } from '../../state/Auth/actions';
+import { loginStart, loginSuccess, loginFailure, logout } from '../../state/Auth/actions';
 import appPropTypes from '../../state/App/propTypes';
-// import authPropTypes from '../../state/Auth/propTypes';
 
 class DjangoLoginPage extends React.Component {
 

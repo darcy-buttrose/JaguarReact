@@ -28,8 +28,7 @@ export const mockData = [
   },
 ];
 
-const create = (baseURL, token) => {
-  console.log(`CameraFilter Api Mock: baseUrl(${baseURL}) token(${token})`)
+const create = () => {
   const getCameraFilter = (): Promise<Array<ICameraFilter>> => new Promise((resolve: Function) => {
     resolve(mockData);
   });

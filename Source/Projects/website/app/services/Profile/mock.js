@@ -21,8 +21,7 @@ function parseJwt(token) {
 }
 
 // Create a base for API.
-const create = (baseURL, token) => {
-  console.log(`Profile Api Mock: baseUrl(${baseURL}) token(${token})`)
+const create = (token) => {
   const getUser = () => parseJwt(token);
 
   const getProfile = () => new Promise((resolve: Function): void => {
