@@ -2,6 +2,8 @@
 Source/.DS_Store
 Projects/.DS_Store
 
+.idea
+
 Source/Projects/membership/appsettings\.Development\.json
 
 Source/Projects/website/app/static/appConfig\.json
