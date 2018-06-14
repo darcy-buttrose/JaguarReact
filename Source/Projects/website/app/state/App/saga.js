@@ -25,11 +25,9 @@ function* fetchConfig() {
 }
 
 
-function* fetchCameraFilters(cameraFilterApi, apiUrlProvider, authTokenProvider) {
+function* fetchCameraFilters(cameraFilterApi) {
   try {
-    const apiUrl = yield apiUrlProvider();
-    const idToken = yield authTokenProvider();
-    const cameraFilterData = cameraFilterApi.create(apiUrl, idToken);
+    const cameraFilterData = yield cameraFilterApi.create();
     const cameraFilters = yield call(cameraFilterData.getCameraFilter);
     yield put(updateCameraFiltersSuccess(cameraFilters));
   } catch (e) {
@@ -37,11 +35,9 @@ function* fetchCameraFilters(cameraFilterApi, apiUrlProvider, authTokenProvider)
   }
 }
 
-function* fetchWebSocketUrls(anomalyApi, apiUrlProvider, authTokenProvider) {
+function* fetchWebSocketUrls(anomalyApi) {
   try {
-    const apiUrl = yield apiUrlProvider();
-    const idToken = yield authTokenProvider();
-    const anomalyData = anomalyApi.create(apiUrl, idToken);
+    const anomalyData = yield anomalyApi.create();
     const webSocketUrls = yield call(anomalyData.getWebSocketUrls);
     yield put(updateWebSocketUrlsSuccess(webSocketUrls));
   } catch (e) {
@@ -49,11 +45,11 @@ function* fetchWebSocketUrls(anomalyApi, apiUrlProvider, authTokenProvider) {
   }
 }
 
-function appSagaBuilder(apis, apiUrlProvider, authTokenProvider) {
+function appSagaBuilder(apis) {
   return function* appSaga() {
     yield takeLatest(CONFIG_REQUEST_INIT, fetchConfig);
-    yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, apis.cameraFilterApi, apiUrlProvider, authTokenProvider);
-    yield takeLatest(WEBSOCKET_URLS_UPDATE_INIT, fetchWebSocketUrls, apis.anomalyApi, apiUrlProvider, authTokenProvider);
+    yield takeLatest(CAMERA_FILTERS_UPDATE_INIT, fetchCameraFilters, apis.cameraFilterApi);
+    yield takeLatest(WEBSOCKET_URLS_UPDATE_INIT, fetchWebSocketUrls, apis.anomalyApi);
   };
 }
 

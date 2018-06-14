@@ -1,11 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 
-import { updateProfileSuccess, updateProfileFailure } from './actions';
+import { updateProfileSuccess, updateProfileFailure, startUpdateProfile } from './actions';
 import { changeTheme } from '../Profile/actions';
-import { UPDATE_PROFILE_INIT } from './constants';
-// import { selectAppDomain } from '../App/selectors';
-// import { selectAuthDomain } from './selectors';
+import {
+  UPDATE_PROFILE_INIT,
+  LOGIN_REQUEST_SUCCESS,
+} from './constants';
+import { startUpdateCameraFilters, startUpdateWebSocketUrls } from '../App/actions';
 
 function* redirectToHome(profile) {
   let redirect = '/private';
@@ -28,12 +30,10 @@ function* updateTheme(profile) {
   }
 }
 
-function* fetchProfile(profileApi, apiUrlProvider, authTokenProvider, action) {
+function* fetchProfile(profileApi, action) {
   try {
     const { options } = action;
-    const apiUrl = yield apiUrlProvider();
-    const idToken = yield authTokenProvider();
-    const profileData = profileApi.create(apiUrl, idToken);
+    const profileData = yield profileApi.create();
     const profile = yield call(profileData.getProfile);
     yield put(updateProfileSuccess(Object.assign({}, profile, { name: profile.username })));
     if (options && options.redirectToHome) {
@@ -47,9 +47,16 @@ function* fetchProfile(profileApi, apiUrlProvider, authTokenProvider, action) {
   }
 }
 
-function authSagaBuilder(profileApi, apiUrlProvider, authTokenProvider) {
+function* performLoginSuccessSideAffects() {
+  yield put(startUpdateProfile({ redirectToHome: true, updateTheme: true }));
+  yield put(startUpdateCameraFilters());
+  yield put(startUpdateWebSocketUrls());
+}
+
+function authSagaBuilder(apis) {
   return function* authSaga() {
-    yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile, profileApi, apiUrlProvider, authTokenProvider);
+    yield takeLatest(UPDATE_PROFILE_INIT, fetchProfile, apis.profileApi);
+    yield takeLatest(LOGIN_REQUEST_SUCCESS, performLoginSuccessSideAffects);
   };
 }
 

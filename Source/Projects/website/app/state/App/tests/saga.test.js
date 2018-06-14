@@ -1,7 +1,7 @@
 import SagaTester from 'redux-saga-tester';
 import appSagaBuilder from '../saga';
-import mockCameraFilterApi, { mockData as mockCameraFilterData } from '../../../services/CameraFilter/mock';
-import mockAnomalyApi, { mockData as mockWebSocketUrlData } from '../../../services/Anomaly/mock';
+import cameraFilterApi, { mockData as mockCameraFilterData } from '../../../services/CameraFilter/mock';
+import anomalyApi, { mockData as mockWebSocketUrlData } from '../../../services/Anomaly/mock';
 import {
   startUpdateCameraFilters,
   startUpdateWebSocketUrls,
@@ -21,7 +21,7 @@ function* authTokenProvider() {
 
 describe('appSage', () => {
   it('should listen for CAMERA_FILTERS_UPDATE_INIT and return camera filter list', async () => {
-    const appSaga = appSagaBuilder({ cameraFilterApi: mockCameraFilterApi }, apiUrlProvider, authTokenProvider);
+    const appSaga = appSagaBuilder({ cameraFilterApi }, apiUrlProvider, authTokenProvider);
     const sagaTester = new SagaTester({});
 
     sagaTester.start(appSaga);
@@ -36,7 +36,7 @@ describe('appSage', () => {
   });
 
   it('should listen for WEBSOCKET_URLS_UPDATE_INIT and return webSocket url list', async () => {
-    const appSaga = appSagaBuilder({ anomalyApi: mockAnomalyApi }, apiUrlProvider, authTokenProvider);
+    const appSaga = appSagaBuilder({ anomalyApi }, apiUrlProvider, authTokenProvider);
     const sagaTester = new SagaTester({});
 
     sagaTester.start(appSaga);
