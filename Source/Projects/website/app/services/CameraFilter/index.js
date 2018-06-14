@@ -27,7 +27,7 @@ const create = (baseURL, token) => {
       .then((response) => {
         if (response.status === 200) {
           let cameraFilters = response.data.results || [];
-          cameraFilters = [{ id: 0, name: 'No Filter' }, ...cameraFilters];
+          cameraFilters = [{ id: 0, name: 'All Cameras' }, ...cameraFilters];
           resolve(cameraFilters);
         } else {
           reject('get cameraFilter failed');
