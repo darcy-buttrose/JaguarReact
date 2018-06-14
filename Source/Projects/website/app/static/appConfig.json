@@ -1,0 +1,12 @@
+{
+  "clientAppSettings": {
+    "apiUrl": "localhost:8000/portal/webapi/",
+    "identityUrl": "10.1.1.77:22530/",
+    "thisUrl": "10.1.1.77:3000/",
+    "djangoUrl": "localhost:8000/",
+    "authMode": "other",
+    "apiScheme": "http://",
+    "trackMetrics": false,
+    "channel": "icetana-portal-channel"
+  }
+}

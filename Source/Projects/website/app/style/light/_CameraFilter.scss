@@ -1,0 +1,131 @@
+@import 'Variables';
+
+.app-camerafilter {
+  color: $icetana-blue;
+  cursor: pointer;
+  z-index: 200;
+  padding: 1rem;
+
+  &:hover {
+
+    >span {
+      color: lighten($icetana-blue, 20%);
+    }
+
+    .app-camerafilter-menu {
+      display:inline-block;
+    }
+    .app-camerafilter-menu-dropup {
+      display: inline-block;
+      bottom: 0.8rem;
+      right: 15.75rem;
+      z-index: 200;
+    }
+  }
+
+  .app-camerafilter-menu {
+    position: absolute;
+    top: $app-header-height;
+    right: 11rem;
+    display: none;
+    border-color: $border-color;
+    border-style: solid;
+    border-width: 1px;
+    list-style: none;
+    background-color: $menu-background;
+    -webkit-box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+    -moz-box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+    box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+    
+
+    &:after {
+      position: absolute;
+      right: 1.5rem;
+      top: -0.8rem;
+      width: 0;
+      height: 0;
+      content: '';
+      border-left: 0.8rem solid transparent;
+      border-right: 0.8rem solid transparent;
+      border-bottom: 0.8rem solid $icetana-blue;
+    }
+    li {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      margin-bottom: 0;
+
+      &:hover {
+        background-color: lighten($icetana-blue, 50%);
+      }
+    }
+    .app-camerafilter-menu-item {
+      &:before {
+        content: "";
+        font-weight: 900;
+        margin-right: 2.5rem;
+      }
+    }
+    .app-camerafilter-menu-selected {
+      &:before {
+        font-family: 'Font Awesome 5 Free';
+        content: "\f00c";
+        font-weight: 900;
+        margin-right: 1rem;
+      }
+    }
+  }
+
+
+
+
+  .app-camerafilter-menu-dropup {
+    position: absolute;
+    bottom: $app-statusbar-height;
+    right: 2rem;
+    display: none;
+    border-color: $border-color;
+    border-style: solid;
+    border-width: 1px;
+    list-style: none;
+    background-color: $menu-background;
+    -webkit-box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+    -moz-box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+    box-shadow: 0.3rem 0.2rem 0.5rem 0 $app-shadow;
+
+    &:after {
+      position: absolute;
+      right: 0.3rem;
+      bottom: -0.8rem;
+      width: 0;
+      height: 0;
+      content: '';
+      border-left: 0.8rem solid transparent;
+      border-right: 0.8rem solid transparent;
+      border-top: 0.8rem solid $icetana-blue;
+    }
+    li {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      margin-bottom: 0;
+
+      &:hover {
+        background-color: lighten($icetana-blue, 50%);
+      }
+    }
+    .app-camerafilter-menu-item {
+      &:before {
+        content: "";
+        font-weight: 900;
+        margin-right: 2.5rem;
+      }
+    }
+    .app-camerafilter-menu-selected {
+      &:before {
+        font-family: 'Font Awesome 5 Free';
+        content: "\f00c";
+        font-weight: 900;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
