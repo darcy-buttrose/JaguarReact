@@ -13,7 +13,7 @@ import {
 
 describe('appSage', () => {
   it('should listen for CAMERA_FILTERS_UPDATE_INIT and return camera filter list', async () => {
-    const appSaga = appSagaBuilder({ cameraFilterApi });
+    const appSaga = appSagaBuilder({ cameraFilterApi, anomalyApi });
     const sagaTester = new SagaTester({});
 
     sagaTester.start(appSaga);
@@ -28,7 +28,7 @@ describe('appSage', () => {
   });
 
   it('should listen for WEBSOCKET_URLS_UPDATE_INIT and return webSocket url list', async () => {
-    const appSaga = appSagaBuilder({ anomalyApi });
+    const appSaga = appSagaBuilder({ cameraFilterApi, anomalyApi });
     const sagaTester = new SagaTester({});
 
     sagaTester.start(appSaga);

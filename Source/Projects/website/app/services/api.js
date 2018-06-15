@@ -5,7 +5,7 @@ import apisauce from 'apisauce';
  */
 
 // Create a base for API.
-const create = (baseURL, token) => {
+const create = (baseURL, user) => {
   const api = apisauce.create({
     // base URL is read from the "constructor"
     baseURL,
@@ -18,7 +18,7 @@ const create = (baseURL, token) => {
       'Cache-Control': 'no-cache',
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}` };
+      Authorization: `iCetana ${user.session_key}` };
     return headers;
   };
 

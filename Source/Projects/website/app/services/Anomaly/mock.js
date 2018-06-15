@@ -21,8 +21,8 @@ export const mockData = [
   },
 ];
 
-const create = (baseURL, token) => {
-  console.log(`Anomaly API create: baseURL(${baseURL}) token(${token})`);
+const create = (baseURL, user) => {
+  console.log(`Anomaly API create: baseURL(${baseURL}) user(${JSON.stringify(user)})`);
   return {
     getWebSocketUrls: () => new Promise((resolve: Function): void => {
       resolve(mockData);

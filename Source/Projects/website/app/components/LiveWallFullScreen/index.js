@@ -13,13 +13,8 @@ class LiveWallFullScreen extends PureComponent {
               className="LiveWallModalClose fas fa-times-circle"
               role="presentation"
               onClick={this.props.onToggleLiveWallFullScreen}
-            ></span>
-            <object
-              className="LiveWallModal-content"
-              data="http://localhost:8000/portal/ui/livewall/react/"
-              title="livewallfullscreen"
-            >
-            </object>
+            />
+            <h1>FullScreen</h1>
           </div>
         </span>
       );
@@ -32,7 +27,7 @@ class LiveWallFullScreen extends PureComponent {
           className="fas fa-expand-arrows-alt fa-2x"
           role="presentation"
           onClick={this.props.onToggleLiveWallFullScreen}
-        ></span>
+        />
       );
     }
 

@@ -2,10 +2,12 @@ import $ from 'jquery';
 import swal from 'sweetalert2';
 import toastr from 'toastr';
 import NProgress from 'nprogress';
+import moment from 'moment';
 
 window.$ = $;
 window.jQuery = $;
 window.NProgress = NProgress;
+window.moment = moment;
 
 /* eslint-disable */
 

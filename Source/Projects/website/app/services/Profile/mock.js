@@ -9,29 +9,19 @@ const profiles = {
 
 function resolveProfile(user) {
   const profile = {
-    name: user.username,
+    name: user.profile.name,
   };
   return Object.assign({}, profile, profiles[profile.name] || { role: ['other'] });
 }
 
-function parseJwt(token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace('-', '+').replace('_', '/');
-  return JSON.parse(window.atob(base64));
-}
-
 // Create a base for API.
-const create = (baseURL, token) => {
-  const getUser = () => parseJwt(token);
-
+const create = (baseURL, user) => {
   const getProfile = () => new Promise((resolve: Function): void => {
-    const user = getUser();
     const outProfile = resolveProfile(user);
     resolve(outProfile);
   });
 
   const saveProfile = (profile) => new Promise((resolve: Function): void => {
-    const user = getUser();
     const existingProfile = resolveProfile(user);
     profiles[user.username] = Object.assign({}, existingProfile, profile);
     const outProfile = resolveProfile(user);

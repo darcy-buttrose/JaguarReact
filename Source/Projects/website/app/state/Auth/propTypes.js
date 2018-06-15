@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const authPropTypes = {
   user: PropTypes.shape({
-    id_token: PropTypes.string,
+    session_key: PropTypes.string,
     session_state: PropTypes.string,
     access_token: PropTypes.string,
     token_type: PropTypes.string,

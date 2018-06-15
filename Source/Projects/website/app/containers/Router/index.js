@@ -18,8 +18,7 @@ import PopupCallback from '../PopupCallback/index';
 import NotFoundPage from '../NotFoundPage/Loadable';
 import NotAuthorisedPage from '../NotAuthorisedPage/Loadable';
 import LiveWallPage from '../LiveWallPage/Loadable';
-import LoginPage from '../DjangoLoginPage/Loadable';
-import LogoutPage from '../DjangoLogoutPage/Loadable';
+import LoginPage from '../LoginPage/Loadable';
 import AdminPage from '../AdminPage/Loadable';
 import '../../style/index.scss';
 import HistoryPage from '../HistoryPage/Loadable';
@@ -38,7 +37,7 @@ function Router() {
         <meta name="Jaguar" content="." />
       </Helmet>
       <Switch>
-        <AppRoute exact path="/" layout={MainLayout} component={HomePage} />
+        <AppRoute exact path="/" layout={PublicLayout} component={HomePage} />
         <AppRoute exact path="/private" layout={MainLayout} component={PrivatePage} />
         <AppRoute exact path="/playbackwall" layout={MainLayout} component={PlaybackWallPage} />
         <AppRoute exact path="/playback" layout={MainLayout} component={PlaybackPage} />
@@ -46,7 +45,6 @@ function Router() {
         <AppRoute exact path="/admin" layout={MainLayout} component={AdminPage} />
         <AppRoute exact path="/livewall" layout={MainLayout} component={LiveWallPage} />
         <AppRoute exact path="/login" layout={PublicLayout} component={LoginPage} />
-        <AppRoute exact path="/logout" layout={PublicLayout} component={LogoutPage} />
         <AppRoute exact path="/config" layout={MainLayout} component={ConfigPage} />
         <AppRoute path="/noauth" layout={PublicLayout} component={NotAuthorisedPage} />
         <Route path="/callback" component={CallbackPage} />

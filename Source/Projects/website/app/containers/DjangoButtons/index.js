@@ -39,7 +39,7 @@ class DjangoButtons extends React.PureComponent {
       );
     }
 
-    if (this.props.auth && this.props.auth.user && this.props.auth.user.id_token && this.props.auth.user.id_token.length > 0) {
+    if (this.props.auth && this.props.auth.user && this.props.auth.user.session_key && this.props.auth.user.session_key.length > 0) {
       return (
         <span>
           {renderCameraFilter}

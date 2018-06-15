@@ -4,13 +4,13 @@ import authSagaBuilder from './state/Auth/saga';
 import profileSagaBuilder from './state/Profile/saga';
 import cameraFilterApi from './services/CameraFilter/mock';
 import profileApi from './services/Profile/mock';
-import anomalyApi from './services/Anomaly/mock';
+import anomalyApi from './services/Anomaly';
 import secureApiGenerator from './services/secureApiGenerator';
 
-function* authTokenProvider() {
+function* authUserProvider() {
   const state = yield select();
   const auth = state.get('auth').toJS();
-  return auth.user.id_token;
+  return auth.user;
 }
 
 function* apiUrlProvider() {
@@ -19,9 +19,9 @@ function* apiUrlProvider() {
   return app.config.clientAppSettings.apiScheme + app.config.clientAppSettings.apiUrl;
 }
 
-const secureCameraFilterApi = secureApiGenerator(cameraFilterApi, authTokenProvider, apiUrlProvider);
-const secureProfileApi = secureApiGenerator(profileApi, authTokenProvider, apiUrlProvider);
-const secureAnomalyApi = secureApiGenerator(anomalyApi, authTokenProvider, apiUrlProvider);
+const secureCameraFilterApi = secureApiGenerator(cameraFilterApi, authUserProvider, apiUrlProvider);
+const secureProfileApi = secureApiGenerator(profileApi, authUserProvider, apiUrlProvider);
+const secureAnomalyApi = secureApiGenerator(anomalyApi, authUserProvider, apiUrlProvider);
 
 const appSaga = appSagaBuilder({ cameraFilterApi: secureCameraFilterApi, anomalyApi: secureAnomalyApi });
 const authSaga = authSagaBuilder({ profileApi: secureProfileApi });

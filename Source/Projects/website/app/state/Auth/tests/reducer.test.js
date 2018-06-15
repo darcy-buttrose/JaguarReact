@@ -12,7 +12,7 @@ describe('authReducer', () => {
     const logedInState = authReducer(undefined, {
       type: LOGIN_REQUEST_SUCCESS,
       user: {
-        id_token: 'token',
+        session_key: 'session',
         profile: {
           name: 'ops',
         },
@@ -21,7 +21,7 @@ describe('authReducer', () => {
 
     expect(logedInState).toEqual(fromJS({
       user: {
-        id_token: 'token',
+        session_key: 'session',
         profile: {
           name: 'ops',
         },
@@ -38,7 +38,7 @@ describe('authReducer', () => {
     const logedInState = authReducer(undefined, {
       type: LOGIN_REQUEST_SUCCESS,
       user: {
-        id_token: 'token',
+        session_key: 'session',
         profile: {
           name: 'ops',
         },
@@ -54,7 +54,7 @@ describe('authReducer', () => {
 
     expect(updatedState).toEqual(fromJS({
       user: {
-        id_token: 'token',
+        session_key: 'session',
         profile: {
           name: 'admin',
         },

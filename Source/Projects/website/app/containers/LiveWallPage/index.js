@@ -16,7 +16,7 @@ import './styles.scss';
 
 class LiveWallPage extends React.PureComponent {
   componentDidMount() {
-    const sessionKey = this.props.auth.user.id_token;
+    const sessionKey = this.props.auth.user.session_key;
 
     $(document).ready(() => {
       const livewallContainer = document.getElementById('videowall-container');

@@ -1,8 +1,8 @@
-const secureApiGenerator = (apiToWrap, authTokenProvider, apiUrlProvider) => Object.assign({}, apiToWrap, {
+const secureApiGenerator = (apiToWrap, authUserProvider, apiUrlProvider) => Object.assign({}, apiToWrap, {
   create: function* newCreate() {
     const apiUrl = yield apiUrlProvider();
-    const idToken = yield authTokenProvider();
-    return apiToWrap.create(apiUrl, idToken);
+    const user = yield authUserProvider();
+    return apiToWrap.create(apiUrl, user);
   },
 });
 
