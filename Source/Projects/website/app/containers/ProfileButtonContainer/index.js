@@ -30,11 +30,9 @@ export class ProfileButtonContainer extends React.PureComponent { // eslint-disa
     const { config } = this.props.app;
     if (config.clientAppSettings.authMode === 'identity') {
       mgr.removeUser();
-      this.props.onLogout();
-      this.props.onRedirect();
-    } else {
-      this.props.onLogoutRedirect();
     }
+    this.props.onLogout();
+    this.props.onRedirect();
   }
 
   render() {
@@ -57,7 +55,6 @@ ProfileButtonContainer.propTypes = {
   app: PropTypes.shape(appPropTypes),
   onLogout: PropTypes.func,
   onRedirect: PropTypes.func,
-  onLogoutRedirect: PropTypes.func,
   onChangeTheme: PropTypes.func,
   auth: PropTypes.shape(authPropTypes),
   profile: PropTypes.shape(profilePropTypes),
@@ -73,10 +70,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onLogout: () => dispatch(logout()),
     onRedirect: () => dispatch(push('/')),
-    onLogoutRedirect: () => dispatch(push('/logout')),
     onChangeTheme: (item) => dispatch(changeTheme(item)),
-    onGoLiveWall: () => dispatch(push('/livewall')),
-    onGoLogin: () => dispatch(push('/login')),
     dispatch,
   };
 }
