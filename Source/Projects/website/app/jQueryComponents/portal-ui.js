@@ -1802,6 +1802,11 @@ window.portal.debounce = function debounce(func, wait, immediate) {
          */
         populateVideoPane(paneId, title, timestamp, installation_timestamp, streams) {
             // find somewhere to put the panel in the grid
+          console.log('portal-ui populateVideoPane', { paneId, title, timestamp, installation_timestamp, streams });
+          const adjStreams = streams.map((stream) => Object.assign({}, stream, {
+            url: `${this.options.feedBaseUrl}${stream.url}&session_key=${this.options.sessionKey}`,
+          }));
+          console.log('portal-ui populateVideoPane',{adjStreams});
             let gridCell = this.getNextAvailable();
             if (gridCell !== null) {
                 // create the video panel
@@ -1831,7 +1836,7 @@ window.portal.debounce = function debounce(func, wait, immediate) {
                 videoPane.initialize({onClick:this.options.onFeedClick});
                 videoPane.setHeight(gridCell.height());
                 videoPane.setMuted(true);
-                videoPane.setFeed(title, timestamp, streams);
+                videoPane.setFeed(title, timestamp, adjStreams);
                 videoPane.setFeedTickCallback(this.onFeedTicked.bind(this));
                 videoPane.setFeedEndCallback(this.onFeedEnded.bind(this));
                 videoPane.setPlaybackSpeed(speedUpFactor);
@@ -2131,6 +2136,7 @@ window.portal.debounce = function debounce(func, wait, immediate) {
          *        ]
          */
         setFeed(title, timestamp, streams) {
+          console.log('portal-ui setFeed', {title, timestamp, streams})
             if (this.isInitialized) {
                 this.feedDetails = {title: title, timestamp: timestamp, streams: streams};
 
@@ -2257,6 +2263,7 @@ window.portal.debounce = function debounce(func, wait, immediate) {
         play() {
             if (this.isInitialized && this.videoElm.paused) {
                 this.periodicFeedDetailUpdater(500);
+                console.log('portal-ui play', this.videoElm);
                 this.videoElm.play();
             }
         }

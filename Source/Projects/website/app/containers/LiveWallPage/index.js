@@ -17,6 +17,7 @@ import './styles.scss';
 class LiveWallPage extends React.PureComponent {
   componentDidMount() {
     const sessionKey = this.props.auth.user.session_key;
+    const feedBaseUrl = `${this.props.app.config.clientAppSettings.apiScheme}${this.props.app.config.clientAppSettings.djangoUrl.replace(/\/$/, '')}`;
 
     $(document).ready(() => {
       const livewallContainer = document.getElementById('videowall-container');
@@ -55,6 +56,8 @@ class LiveWallPage extends React.PureComponent {
             // head on over to the camera playback view
             document.location = url;
           },
+          feedBaseUrl,
+          sessionKey,
         }
       );
       const debouncedResizeHandler = window.portal.debounce(() => {
